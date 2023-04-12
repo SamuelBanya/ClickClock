@@ -61,8 +61,13 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
+*** TODO Check Vue.js docs page
+<2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
+*** TODO Work on Figma wireframe for application
+<2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
 ** In Progress
-*** IN-PROGRESS Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
+** Completed
+*** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
 - https://github.com/IsraelDCastro/rails-vite-tailwindcss-template
 
@@ -113,4 +118,4 @@ I was able to then successfully be able to get the related command working witho
 sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
 #+end_src
 
-** Completed
+<2023-04-11 Tue 19:38>: I was able to run 'rails s' without an issue, so I would say this portion is complete. The next item is to actually check out Vue's related docs.
