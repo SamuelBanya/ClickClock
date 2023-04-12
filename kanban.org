@@ -1,0 +1,116 @@
+#+TODO: TODO(t) IN-PROGRESS (p) | DONE(d) CANCELLED(c)
+#+PRIORITIES: 1 5 3
+* Notes
+** General Notes
+<2023-04-10 Mon 17:13>: These are my previous notes for this Vue based app:
+
+<2023-04-09 Sun 01:49>: App idea:
+- Kitchen timer, metronome, stopwatch all in one page or app
+- It could be based in Vue.js to make it a super easy app to use to deliberately learn Vue but not make it TOO simple either to have people shrug the app idea off
+- Vue Kitchen timer app where it's all peach gold pixel art themed, similar to the Mario Advance 2 stage select screen on GBA but more emphasized. Need to ask online how to create scalable pixel art in that scenario or if it's better to start with assets that are scalable in Gimp etc
+
+** App Name Ideas
+<2023-04-10 Mon 17:18>: This has to be some kind of app that incorporates the following 3 ideas:
+- Stopwatch (Quick stopwatch)
+- Kitchen Timer (Just like a microwave with easy to access minute panels)
+- Metronome (Set the BPM, sound of the click itself, and time signature)
+
+With this in mind, this is what I can think of:
+- Times 3: A 3-in-1 timer app that incorporates a stopwatch, kitchen timer, and metronome for all of those times when you wish you had each of these available to you
+
+Idea brainstorm:
+#+begin_src text
+Metronomes set the motion in pace for beautiful music to be set in the sequence of time and space.
+Kitchen timers help you prepare wonderful recipes and food, and prevent ruining food
+Stopwatches allow you to easily time yourself on tasks for athletic or even everyday tasks
+
+Ideas for names: Timer, Timed, Timez, "Time To Get A Watch", Stroke, Clock Stroke, Grandfather Clock Swings,
+#+end_src
+
+<2023-04-10 Mon 19:12>: Name Ideas:
+- Click, Clock, Tick
+- Ticker
+- Click Clock
+
+<2023-04-10 Mon 19:19>: Final name:
+- Click Clock
+
+** Related Learning Links
+Decent looking guide on how to use Rails and Vue JS:
+- https://www.engineyard.com/blog/rails-and-vue-js-part-1/
+
+Guide on how to make a Vue app for mobile:
+- https://www.sam-solutions.com/blog/vue-js-mobile-development/
+
+Guide on how to use React as a frontend, and C# (.NET) for the backend for an application:
+- https://www.freecodecamp.org/news/create-a-react-app-with-a-dot-net-backend/
+
+<2023-04-10 Mon 18:42>: I confirmed that the version of Rails I am currently using is Version 7.0.4.3 via the following command:
+#+begin_src bash
+sam@notestation ~/Downloads $ rails --version
+Rails 7.0.4.3
+#+end_src
+
+I then found a related Rails + Vue + Vite template here from GitHub:
+- https://github.com/IsraelDCastro/rails-vite-tailwindcss-template
+
+This is great because I can just use this command to quickly build the Rails app without having to worry about making sure all the connections work so that I can just focus on learning Vue accordingly:
+#+begin_src bash
+rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want> -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+* Jira Tickets
+** Todo
+** In Progress
+*** IN-PROGRESS Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
+<2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
+- https://github.com/IsraelDCastro/rails-vite-tailwindcss-template
+
+More specifically I need to implement this by using the following command:
+#+begin_src bash
+rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want> -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+<2023-04-11 Tue 18:57>: I used the following command which was the 'From GitHub with vue' command on the related README  for the main GitHub repo of the template itself (https://github.com/IsraelDCastro/rails-vite-tailwindcss-template):
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+I then received the following error:
+#+begin_src bash
+/usr/share/rvm/gems/ruby-2.7.4/gems/ffi-1.15.5/lib/ffi/library.rb:145:in `block in ffi_lib': Could not open library 'vips.so.42': vips.so.42: cannot open shared object file: No such file or directory. (LoadError)
+Could not open library 'libvips.so.42': libvips.so.42: cannot open shared object file: No such file or directory
+#+end_src
+
+I found this particular GitHub thread on the 'libvips' library with a very similar error, most people in this thread said it has deal with an issue of 'vips' not being installed (of which I have no idea what that is):
+- https://github.com/libvips/ruby-vips/issues/219
+
+I then tried to refer to the related 'libvips' GitHub README, and just flat out installed 'ruby-vips' via this command:
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ gem install ruby-vips
+Successfully installed ruby-vips-2.1.4
+Parsing documentation for ruby-vips-2.1.4
+Installing ri documentation for ruby-vips-2.1.4
+Done installing documentation for ruby-vips after 1 seconds
+1 gem installed
+#+end_src
+
+I then tried the same command as before again but received the same error as before:
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+<2023-04-11 Tue 19:21>: I then did more research and found this particular GitHub issues thread on the same error as shown above:
+- https://github.com/loomio/loomio/issues/9492
+
+Within that thread, one of the commenters said to literally install the affected dependency, so I tried to via this command:
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ sudo apt-get install libvips libvips-dev
+#+end_src
+
+I was able to then successfully be able to get the related command working without a problem:
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+** Completed
