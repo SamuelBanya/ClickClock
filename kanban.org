@@ -63,6 +63,11 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 ** Todo
 *** TODO Check Vue.js docs page
 <2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
+*** TODO Watch related intro videos on Vue.js for refresher purposes
+<2023-04-12 Wed 21:12>: I'm in the process of watching a few Vue.js tutorials just to get a feel for it so far.
+
+From the looks of it, it seems just like React where it is its own self contained framework where you can build out repeatable components easily. The interpolation aspect seems very similar to React, and also the whole idea of binding to a div tag for the entire application itself is just like React as well.
+
 *** TODO Work on Figma wireframe for application
 <2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
 ** In Progress
