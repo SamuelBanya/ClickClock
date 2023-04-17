@@ -71,17 +71,12 @@ From the looks of it, it seems just like React where it is its own self containe
 *** TODO Work on Figma wireframe for application
 <2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
 ** In Progress
-*** IN-PROGRESS Ensure that the actual Vue.js related template actually installed Vue.js components
-<2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
+*** IN-PROGRESS Modify actual 'Hello World' Vue app to display a few other items so that I get the hang of actually editing the project
+<2023-04-17 Mon 11:51>: I would like to figure out how to actually edit their 'Hello World' project so that I can figure out how to build more components for the application itself.
 
-I went through the related process a few times but still noticed that only the '' directory contains anything Vue.js related.
+<2023-04-17 Mon 11:52>: As per the main homepage from the 'Hello World' app itself, it asked me to modify the 'components/HelloWorld.vue' file in order to modify it accordingly.
 
-I don't see any major 'package.json' manifest file for the project itself.
-
-Here is the related GitHub issues bug I opened up for that template itself:
-- https://github.com/IsraelDCastro/rails-vite-tailwindcss-template/issues/13
-
-I might go ahead and just try with a basic Vue.js app going forward to be honest since this is really just a 3-part timer application anyway. I will think about this and debate this honestly.
+It seems like it does components in a similar way to how React does it, so it shouldn't take too much brain power to figure out how to add more components as I go along.
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -135,3 +130,40 @@ sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install -
 #+end_src
 
 <2023-04-11 Tue 19:38>: I was able to run 'rails s' without an issue, so I would say this portion is complete. The next item is to actually check out Vue's related docs.
+*** DONE Install Vue + Vite since they go hand in hand with each other to get the basic 'Hello World' app working in 'dev' mode
+<2023-04-17 Mon 11:44>: After a bit of thinking on this topic, I realized that my previous route of hoping some random Rails template would work is kind of silly. Plus, it didn't even install the package.json needed for Vue so clearly something is messed up with that guy's project, and he didn't bother to reply to my GitHub isuses page bug report, so it's whatever. I need to move on anyway.
+
+With this in mind, I tried using this particular video as a guide:
+- Creating Your First Vue 3 App with Vite - A Beginner's Tutorial (https://www.youtube.com/watch?v=JLt3GrDZDvQ)
+
+I also used the related 'Vite' docs in tandem:
+- https://vitejs.dev/guide/
+
+I used this command accordingly:
+#+begin_src bash
+npm create vite@latest
+#+end_src
+
+I then followed the prompts accordingly.
+
+I then proceeded to do the following commands:
+#+begin_src bash
+npm install
+npm run dev
+#+end_src
+
+<2023-04-17 Mon 11:50> With that in mind, I was able to get the 'Hello World' type Vue app to work as intended.
+** Cancelled
+*** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
+<2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
+
+I went through the related process a few times but still noticed that only the '' directory contains anything Vue.js related.
+
+I don't see any major 'package.json' manifest file for the project itself.
+
+Here is the related GitHub issues bug I opened up for that template itself:
+- https://github.com/IsraelDCastro/rails-vite-tailwindcss-template/issues/13
+
+I might go ahead and just try with a basic Vue.js app going forward to be honest since this is really just a 3-part timer application anyway. I will think about this and debate this honestly.
+
+<2023-04-17 Mon 11:42>: I went ahead and nuked the idea of having to learn Vue and to hook it up with Rails. It's way better to just use the tools that were meant for that framework, so I decided to forgo this and to just use Vue on its own with Vite and to get a Minimum Viable Product (MVP) going with a framework + wireframe before ever proceeding on anything else.
