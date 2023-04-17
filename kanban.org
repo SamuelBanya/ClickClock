@@ -68,15 +68,19 @@ From the looks of it, it seems just like React where it is its own self containe
 
 *** TODO Check Vue.js docs page
 <2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
-*** TODO Work on Figma wireframe for application
-<2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
+*** TODO Create modified buttons using gold style pixel art
+<2023-04-17 Mon 15:27>: My goal for the overall look and design for this project is to emulate the Super Mario Advance 2 / Super Mario All-Stars 'peach gold' menu color scheme look. It has a really unique look, and would be really cool to apply for an app like this one.
+*** TODO Research flashy looking animations that appear when each component page is loaded
+<2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 ** In Progress
-*** IN-PROGRESS Modify actual 'Hello World' Vue app to display a few other items so that I get the hang of actually editing the project
-<2023-04-17 Mon 11:51>: I would like to figure out how to actually edit their 'Hello World' project so that I can figure out how to build more components for the application itself.
+*** IN-PROGRESS Work on Figma wireframe for application, and actually create a wireframe to plan out what I want on each component page
+<2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
 
-<2023-04-17 Mon 11:52>: As per the main homepage from the 'Hello World' app itself, it asked me to modify the 'components/HelloWorld.vue' file in order to modify it accordingly.
+<2023-04-17 Mon 15:25>: This should be my next step as I really should be wireframing out the overall look and feel of the app.
 
-It seems like it does components in a similar way to how React does it, so it shouldn't take too much brain power to figure out how to add more components as I go along.
+Afterwards, I will translate it to Vue based components.
+
+Once the basic components are then present, I can proceed with making flashy looking buttons, and looking into cool animations.
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -153,6 +157,30 @@ npm run dev
 #+end_src
 
 <2023-04-17 Mon 11:50> With that in mind, I was able to get the 'Hello World' type Vue app to work as intended.
+*** DONE Modify actual 'Hello World' Vue app to display a few other items so that I get the hang of actually editing the project
+<2023-04-17 Mon 11:51>: I would like to figure out how to actually edit their 'Hello World' project so that I can figure out how to build more components for the application itself.
+
+<2023-04-17 Mon 11:52>: As per the main homepage from the 'Hello World' app itself, it asked me to modify the 'components/HelloWorld.vue' file in order to modify it accordingly.
+
+It seems like it does components in a similar way to how React does it, so it shouldn't take too much brain power to figure out how to add more components as I go along.
+
+<2023-04-17 Mon 14:21>: I used the following video as a reference ontop of the existing Docs since I just wanted to add components as I went along and multiple 'Views' to add different pages. This guy basically uses Vue + Vite + Vue-Router, which is exactly what I'm using in my scenario:
+- How to Setup a Basic Vite + Vue Project (+ Vue Router) 2022 (https://www.youtube.com/watch?v=PciUq6HcUNc)
+
+I also used the 'Vue Router' docs as well:
+- https://router.vuejs.org/installation.html
+
+I used the following command to install version 4 of 'Vue-Router':
+#+begin_src bash
+npm install vue-router@4
+#+end_src
+
+I then proceeded to follow the guide, and overall, I got a working app with multiple 'views' for separate pages.
+
+I was a bit confused on what was the difference between 'components' and 'views' for the Vue.js framework, but after a bit of research, I found this particular answer on StackOverflow which helped elucidate this process for me:
+- https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
+
+Basically, its just a matter of preference. From my understanding, you place the individual 'View' pages in the 'views' directory
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
