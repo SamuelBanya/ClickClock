@@ -181,6 +181,11 @@ I was a bit confused on what was the difference between 'components' and 'views'
 - https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
 
 Basically, its just a matter of preference. From my understanding, you place the individual 'View' pages in the 'views' directory
+*** DONE Record related command to run application in 'dev' mode
+<2023-04-17 Mon 15:32>: Just wanted to include this for future reference, aka if you want to just run this application in 'dev' mode, just use the following command:
+#+begin_src bash
+npm run dev
+#+end_src
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
