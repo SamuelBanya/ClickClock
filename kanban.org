@@ -73,14 +73,34 @@ From the looks of it, it seems just like React where it is its own self containe
 *** TODO Research flashy looking animations that appear when each component page is loaded
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 ** In Progress
-*** IN-PROGRESS Work on Figma wireframe for application, and actually create a wireframe to plan out what I want on each component page
-<2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
+*** IN-PROGRESS Figure out how to actually translate Figma wireframe site into actual useable web components
+<2023-04-18 Tue 14:41>: My next goal is to translate what I created for the wireframe and into an actual Vue app itself.
 
-<2023-04-17 Mon 15:25>: This should be my next step as I really should be wireframing out the overall look and feel of the app.
+Related links I researched:
+- This is a somewhat long-winded React centered tutorial on how to translate Figma components into a React component. Though it's useful, I really just need to export what I created into HTML components or at least buttons etc to be placed onto a page so I don't think this is the best route honestly at the moment:
+- Figma To React JS | Build A Modern Responsive Website - Project Set Up (https://www.youtube.com/watch?v=zwj4x2q_HcE)
 
-Afterwards, I will translate it to Vue based components.
+<2023-04-18 Tue 15:16>: After doing some research, most of what's present is just "Use this plugin" --> followed by "Oh wow, this plugin doesn't even translate the page correctly" / "Oh wow, it's not even letting me export the buttons as intended"
 
-Once the basic components are then present, I can proceed with making flashy looking buttons, and looking into cool animations.
+What's pretty ironic is that I might have to just go ahead and implement this by hand manually since there's no really easy way to do this...
+
+You would think... for a tool like Figma that they didn't think to help facilitate the process of exporting the designs themselves into translatable web pages... It makes no sense to me why they have to piggyback off of rando 'plugin' creators...
+
+Either way, I guess I have to make these components manually for now, but at least I have a very good sense of what I actually want to do.
+
+What I will probably do in the truest sense / easiest route is to just make a literal mockup of the current design with div tags and buttons, scale it up to look close to what I planned, and go from there.
+
+This beats having to figure out which plugin ACTUALLY works from Figma. I will admit though, it is a really nice tool but its exporting functionality is God awful though.
+
+<2023-04-18 Tue 15:35>: The goal for the workflow going forward involves the following (if I do this all manually):
+- Create a component for the top 30% half of the screen called 'TopFrame.vue'
+- Create a component for the bottom 70% half of the screen called 'BottomFrame.vue'
+- For each of these components, literally create rectangle based div tags that look similar to what is present on the Figma template which shouldn't be hard at all
+- The buttons could easily be exported and brought into something else like GIMP to be further designed and chromed up so that 'hover' and 'click' actions are very obvious
+- Once the design is actually present and each page is accessible, it's just a matter of literally rigging up each of the buttons to separate functions in the Vue components
+- Once the buttons are actually working in their basic state, I can then explore various NPM packages that handle timers and metronome clicks as well as muting capabilities
+- After that, the app should be pretty much done and ready for testing on multiple devices including mobile and desktop screens
+- The only thing after that would include deploying it to something like Render.com
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -186,6 +206,35 @@ Basically, its just a matter of preference. From my understanding, you place the
 #+begin_src bash
 npm run dev
 #+end_src
+*** DONE Work on creating a Figma wireframe for the application to plan out what I want on each component page
+<2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
+
+<2023-04-17 Mon 15:25>: This should be my next step as I really should be wireframing out the overall look and feel of the app.
+
+Afterwards, I will translate it to Vue based components.
+
+Once the basic components are then present, I can proceed with making flashy looking buttons, and looking into cool animations.
+
+<2023-04-18 Tue 14:14>: I was able to watch this video to learn more of the basics of Figma, and honestly, it's not too hard. I think before when I tried using it, I was under pressure of trying to do that stupid test for that one shill ass job.
+
+Most of these YouTubers in this realm are a bit grifty, but this video was good to learn the basics:
+- Figma UI Design Tutorial: Get Started in Just 24 Minutes! (https://www.youtube.com/watch?v=FTFaQWZBqQ8)
+
+Also, the only site that was worthwhile for icons with a related account was this one:
+- https://freeicons.io/
+
+Here's a useful site to obtain related Figma templats for reference to see what other people have done for mobile app designs:
+- https://figmaresource.com/category/ui-kits/page/5/
+
+Here was a cool Half Life themed one I found that had a really really cool looking center button I would love to replicate sometime:
+- https://www.figma.com/file/oIAQW5RLtTgVqBAH73TeMi/Half-Life?node-id=30-3075&t=09r6OM5YsT0Cb84H-0
+
+<2023-04-18 Tue 14:39>: Overall, the design is complete here:
+- https://www.figma.com/file/45qGh4g17WCbewzEaZX70s/ClickClock-Figma-Template
+
+I really like what I did so far and I think it's pretty good for what I did so far. Simple yet effective. Honestly, it looks good.
+
+Now I have to figure out how to pull all of this out of Figma, and into an actual website that I can play with.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
