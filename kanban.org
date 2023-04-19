@@ -61,46 +61,38 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Watch related intro videos on Vue.js for refresher purposes
+*** TODO Create the individual buttons necessary for the bottom nav bar in GIMP or through CSS manipulation of the basic 'button' HTML tag itself
+*** TODO Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
+*** TODO Look into NPM packages that provide timer functionality (for counting up and down) as well as metronome and volume packages
+*** TODO Make the individual buttons actually work to provide changes on screen
+*** TODO Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
+<2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
+
 <2023-04-12 Wed 21:12>: I'm in the process of watching a few Vue.js tutorials just to get a feel for it so far.
 
 From the looks of it, it seems just like React where it is its own self contained framework where you can build out repeatable components easily. The interpolation aspect seems very similar to React, and also the whole idea of binding to a div tag for the entire application itself is just like React as well.
 
-*** TODO Check Vue.js docs page
 <2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
+*** TODO Test the resulting app in different screen sizes
 *** TODO Create modified buttons using gold style pixel art
 <2023-04-17 Mon 15:27>: My goal for the overall look and design for this project is to emulate the Super Mario Advance 2 / Super Mario All-Stars 'peach gold' menu color scheme look. It has a really unique look, and would be really cool to apply for an app like this one.
 *** TODO Research flashy looking animations that appear when each component page is loaded
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
+*** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Figure out how to actually translate Figma wireframe site into actual useable web components
-<2023-04-18 Tue 14:41>: My next goal is to translate what I created for the wireframe and into an actual Vue app itself.
+*** IN-PROGRESS Figure out the basic CSS styling for each component so that it closely matches the actual wireframed app itself
+<2023-04-19 Wed 15:19>: I am slowly trying ot figure it out, but it has becoming a bit hard to really match the wireframe itself.
 
-Related links I researched:
-- This is a somewhat long-winded React centered tutorial on how to translate Figma components into a React component. Though it's useful, I really just need to export what I created into HTML components or at least buttons etc to be placed onto a page so I don't think this is the best route honestly at the moment:
-- Figma To React JS | Build A Modern Responsive Website - Project Set Up (https://www.youtube.com/watch?v=zwj4x2q_HcE)
+Again, I just wish Figma gave you the basics to work with, but alas, it isn't as good as Dreamweaver used to be in that respect.
 
-<2023-04-18 Tue 15:16>: After doing some research, most of what's present is just "Use this plugin" --> followed by "Oh wow, this plugin doesn't even translate the page correctly" / "Oh wow, it's not even letting me export the buttons as intended"
+My opinion aside, I will continue to just try to manipulate the CSS further to match it. The results are like 60% of the way there, but definitely need tweaking.
 
-What's pretty ironic is that I might have to just go ahead and implement this by hand manually since there's no really easy way to do this...
+<2023-04-19 Wed 16:13>: I removed a lot of the CSS involved in the base Vue app, but am struggling with getting the height to actually cooperate with me.
 
-You would think... for a tool like Figma that they didn't think to help facilitate the process of exporting the designs themselves into translatable web pages... It makes no sense to me why they have to piggyback off of rando 'plugin' creators...
+I used the 'background-repeat' option to make the buttons appear with the specific flat icons.
 
-Either way, I guess I have to make these components manually for now, but at least I have a very good sense of what I actually want to do.
+I will do some more research as to why the CSS is acting so weird.
 
-What I will probably do in the truest sense / easiest route is to just make a literal mockup of the current design with div tags and buttons, scale it up to look close to what I planned, and go from there.
-
-This beats having to figure out which plugin ACTUALLY works from Figma. I will admit though, it is a really nice tool but its exporting functionality is God awful though.
-
-<2023-04-18 Tue 15:35>: The goal for the workflow going forward involves the following (if I do this all manually):
-- Create a component for the top 30% half of the screen called 'TopFrame.vue'
-- Create a component for the bottom 70% half of the screen called 'BottomFrame.vue'
-- For each of these components, literally create rectangle based div tags that look similar to what is present on the Figma template which shouldn't be hard at all
-- The buttons could easily be exported and brought into something else like GIMP to be further designed and chromed up so that 'hover' and 'click' actions are very obvious
-- Once the design is actually present and each page is accessible, it's just a matter of literally rigging up each of the buttons to separate functions in the Vue components
-- Once the buttons are actually working in their basic state, I can then explore various NPM packages that handle timers and metronome clicks as well as muting capabilities
-- After that, the app should be pretty much done and ready for testing on multiple devices including mobile and desktop screens
-- The only thing after that would include deploying it to something like Render.com
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -235,6 +227,53 @@ Here was a cool Half Life themed one I found that had a really really cool looki
 I really like what I did so far and I think it's pretty good for what I did so far. Simple yet effective. Honestly, it looks good.
 
 Now I have to figure out how to pull all of this out of Figma, and into an actual website that I can play with.
+*** DONE Figure out a gameplan to translate Figma wireframe site components into actual useable Vue basd web components
+<2023-04-18 Tue 14:41>: My next goal is to translate what I created for the wireframe and into an actual Vue app itself.
+
+Related links I researched:
+- This is a somewhat long-winded React centered tutorial on how to translate Figma components into a React component. Though it's useful, I really just need to export what I created into HTML components or at least buttons etc to be placed onto a page so I don't think this is the best route honestly at the moment:
+- Figma To React JS | Build A Modern Responsive Website - Project Set Up (https://www.youtube.com/watch?v=zwj4x2q_HcE)
+
+<2023-04-18 Tue 15:16>: After doing some research, most of what's present is just "Use this plugin" --> followed by "Oh wow, this plugin doesn't even translate the page correctly" / "Oh wow, it's not even letting me export the buttons as intended"
+
+What's pretty ironic is that I might have to just go ahead and implement this by hand manually since there's no really easy way to do this...
+
+You would think... for a tool like Figma that they didn't think to help facilitate the process of exporting the designs themselves into translatable web pages... It makes no sense to me why they have to piggyback off of rando 'plugin' creators...
+
+Either way, I guess I have to make these components manually for now, but at least I have a very good sense of what I actually want to do.
+
+What I will probably do in the truest sense / easiest route is to just make a literal mockup of the current design with div tags and buttons, scale it up to look close to what I planned, and go from there.
+
+This beats having to figure out which plugin ACTUALLY works from Figma. I will admit though, it is a really nice tool but its exporting functionality is God awful though.
+
+<2023-04-18 Tue 15:35>: The goal for the workflow going forward involves the following (if I do this all manually):
+- Create a component for the top 30% half of the screen called 'TopFrame.vue'
+- Create a component for the bottom 70% half of the screen called 'BottomFrame.vue'
+- For each of these components, literally create rectangle based div tags that look similar to what is present on the Figma template which shouldn't be hard at all
+- The buttons could easily be exported and brought into something else like GIMP to be further designed and chromed up so that 'hover' and 'click' actions are very obvious
+- Once the design is actually present and each page is accessible, it's just a matter of literally rigging up each of the buttons to separate functions in the Vue components
+- Once the buttons are actually working in their basic state, I can then explore various NPM packages that handle timers and metronome clicks as well as muting capabilities
+- After that, the app should be pretty much done and ready for testing on multiple devices including mobile and desktop screens
+- The only thing after that would include deploying it to something like Render.com
+
+<2023-04-19 Wed 15:10>: My revised version of this workflow goes as follows:
+- Create every individual component for the top half of the app minus the nav bar buttons at the top: even if it includes redundancy, this can be further refactored later so that if it works for now, great just use it and move on
+- Figure out the basic CSS styling for each component so that it closely matches the actual wireframed app itself
+- Create the individual buttons necessary for the bottom nav bar in GIMP or through CSS manipulation of the basic 'button' HTML tag itself
+- Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
+- Look into NPM packages that provide timer functionality (for counting up and down) as well as metronome and volume packages
+- Make the individual buttons actually work to provide changes on screen
+- Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
+- Test the resulting app in different screen sizes
+- Create modified buttons using gold style pixel art
+- Research flashy looking animations that appear when each component page is loaded
+- Deploy the app on Render.com
+
+<2023-04-19 Wed 15:15>: With this in mind, I am marking this task as complete
+*** DONE Create every individual component for the top half of the app minus the nav bar buttons at the top: even if it includes redundancy, this can be further refactored later so that if it works for now, great just use it and move on
+<2023-04-19 Wed 15:18>: This portion is complete as there are individual 'Vue' based 'views' present for each individual page.
+
+This can be further refactored later so that each page is a template with some provided components that are passed in via props via however which way that Vue does it, but for now, it works and is good for now.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
