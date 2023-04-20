@@ -5,7 +5,7 @@
         <!-- Medium Light Purple Rounded Square -->
         <div class="medium-purple-square">
             <!-- Page Title -->
-            <h1>About</h1>
+            <h1 id="title">About</h1>
         </div>
     </div>
     <!-- Bottom Half Div -->
@@ -14,6 +14,8 @@
         <div>
             <!-- Click Clock Title -->
             <Logo />
+            <p>ClickClock is a timer, stopwatch, and metronome!</p>
+            <p>Developed with Vue.js + Vite + Vue-Router by Samuel Banya</p> 
             <!-- Middle Screen Buttons -->
         </div>
     </div>

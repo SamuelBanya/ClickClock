@@ -1,4 +1,4 @@
 <template>
-    <h1>ClickClock</h1>
+    <h1 id="logo">Click ⏰</h1>
 </template>
 <script setup></script>

@@ -1,54 +1,179 @@
 /* Custom CSS For Application: */
+/* Google Custom Fonts:*/
+/* Used this Stack Overflow post to figure out how to import custom Google fonts into existing stylesheet: */
+/* https://stackoverflow.com/questions/51516084/how-do-i-add-a-google-font-to-a-vuejs-component */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+
 #app {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: #FFFFFF;
   text-align: center;
-  height: 500px;
+}
+
+#title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 80px;
+}
+
+#logo {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 60px;
 }
 
 .top {
-  background-color: #26001f;
+  position: absolute;
+  width: 390px;
+  height: 341px;
+  left: 0px;
+  top: 0px;
+  background-color: #26001F;
 }
 
 .medium-purple-square {
-  background-color: #71105f;
+  box-sizing: border-box;
+  position: absolute;
+  width: 345px;
+  height: 251px;
+  left: 22px;
+  top: 27px;
+  background: #71105F;
   border-radius: 15px;
-  margin-left: 25px;
-  margin-right: 25px;
-  height: 125px;
 }
 
-/* Control the right side */
 .bottom {
-  background-color: #c222a4;
+  position: absolute;
+  width: 390px;
+  height: 541px;
+  left: 0px;
+  top: 303px;
+  background: #C222A4;
+  border-radius: 15px;
 }
 
 #about-button {
-  background-color: #d9d9d9;
-  background-image: url(assets/Info.png);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 26px;
+  top: 732px;
+  border-radius: 15px;
+  background-image: url("assets/AboutButton.png");
 }
 
 #timer-button {
-  background-color: #d9d9d9;
-  background-image: url(assets/Clock.png);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 116px;
+  top: 732px;
+  border-radius: 15px;
+  background-image: url("assets/ClockButton.png");
 }
 
 #stopwatch-button {
-  background-color: #d9d9d9;
-  background-image: url(assets/Stopwatch.png);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 206px;
+  top: 732px;
+  border-radius: 15px;
+  background-image: url("assets/StopwatchButton.png");
 }
 
 #metronome-button {
-  background-color: #d9d9d9;
-  background-image: url(assets/Metronome.png);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 296px;
+  top: 732px;
+  border-radius: 15px;
+  background-image: url("assets/MetronomeButton.png");
+}
+
+.timer-counter-div {
+  position: absolute;
+  width: 233px;
+  height: 82px;
+  left: 69px;
+  background: #D9D9D9;
+  border-radius: 15px;
+}
+
+.timer-counter-input {
+  margin-top: 10px;
+  width: 200px;
+  height: 50px;
+  border-radius: 15px;
+  font-family: 'Fredoka One';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
+}
+
+.start-button {
+  background: #00FF38;
+  border-radius: 15px;
+  position: absolute;
+  width: 108px;
+  height: 61px;
+  left: 67px;
+  top: 260px;
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
+}
+
+.stop-button {
+  background: #FF0404;
+  border-radius: 15px;
+  position: absolute;
+  width: 108px;
+  height: 61px;
+  left: 194px;
+  top: 260px;
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
+}
+
+.clear-mute-button {
+  background: #FFE600;
+  border-radius: 15px;
+  position: absolute;
+  width: 108px;
+  height: 61px;
+  left: 132px;
+  top: 340px;
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
 }
 
 h1 {
   color: white;
+}
+
+p {
+  color: white;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 25px;
+  margin-left: 50px;
+  margin-right: 50px;
 }

@@ -93,6 +93,22 @@ I used the 'background-repeat' option to make the buttons appear with the specif
 
 I will do some more research as to why the CSS is acting so weird.
 
+<2023-04-20 Thu 17:11>: I got really really close to the Figma template with must deliberation. I figured out the CSS styling IS available in Figma, so that helped a ton.
+
+I found this particular font that matched my Figma design's font:
+- https://fonts.google.com/specimen/Fredoka
+
+I then used this Stack Overflow post as a reference for how to insert custom fonts into the CSS stylesheet for a Vue app itself:
+- https://stackoverflow.com/questions/51516084/how-do-i-add-a-google-font-to-a-vuejs-component
+
+<2023-04-20 Thu 17:23>: I am getting closer, but there is one big issue I see after making all of these custom buttons:
+- Without related text in the middle of the button, the action of switching 'View' pages on the fly doesn't work.
+- There is still a grey background for the buttons despite that not being present in the .png form of the buttons.
+- I would need to figure out how to resize the title for each page accordingly for longer words, probably will do so with more of an 'id' specific approach for styling on words like 'Stopwatch' or 'Metronome'.
+- I probably will need to borrow from MaterialUI just for the time input field to make it just nice by default.
+
+Getting there though :)
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
