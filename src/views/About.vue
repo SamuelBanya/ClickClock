@@ -5,7 +5,7 @@
         <!-- Medium Light Purple Rounded Square -->
         <div class="medium-purple-square">
             <!-- Page Title -->
-            <h1 id="title">About</h1>
+            <h1 class="title">About</h1>
         </div>
     </div>
     <!-- Bottom Half Div -->

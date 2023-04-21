@@ -1,10 +1,10 @@
 <template>
   <router-view />
   <!-- Bottom Navigation Buttons -->
-  <button id="about-button"><router-link :to="{name: 'about'}">ABOUT</router-link></button>
-  <button id="timer-button"><router-link :to="{name: 'timer'}">TEST</router-link></button>
-  <button id="stopwatch-button"><router-link :to="{name: 'stopwatch'}">STOPWATCH</router-link></button>
-  <button id="metronome-button"><router-link :to="{name: 'metronome'}">METRONOME</router-link></button>
+  <router-link id="about-link" :to="{name: 'about'}"></router-link>
+  <router-link id="timer-link" :to="{name: 'timer'}"></router-link>
+  <router-link id="stopwatch-link" :to="{name: 'stopwatch'}"></router-link>
+  <router-link id="metronome-link" :to="{name: 'metronome'}"></router-link>
 </template>
 
 <script setup>

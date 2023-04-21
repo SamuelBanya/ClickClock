@@ -109,6 +109,66 @@ I then used this Stack Overflow post as a reference for how to insert custom fon
 
 Getting there though :)
 
+<2023-04-21 Fri 13:12>: I did some manipulation, and basically, you don't even need a 'button' HTML tag for the 'router-link' tags from Vue anyway, so I just literally applied the same CSS styling as the previous buttons, and it works just fine.
+
+I changed the title tags to be smaller whenever necessary for the 'Stopwatch' and 'Metronome' sections.
+
+I also realized that I will actually need the top half of the app to display the output for the app itself because the bottom is used for input anyway and would be super jenky if I didn't make it too obvious.
+
+With this in mind, I have a better sense that I probably should just use something like MaterialUI to make input fields just easier from the get-go. I found a project that combines Vue and Material UI here:
+- https://www.creative-tim.com/vuematerial
+
+I then installed the related 'vue-material' component with the following command:
+#+begin_src bash
+npm install vue-material --save
+#+end_src
+
+More specifically, I am borrowing from the related docs page example for the Metronome input form itself:
+- https://www.creative-tim.com/vuematerial/components/form
+
+I also found a great example to utilize just for the ideas for the 'Stopwatch' view itself:
+- https://github.com/jinderbrar/Stopwatch-using-ReactJS-and-Material-UI
+
+It was from this example that I realized that the very top portion of the app needs to accommodate the output of the app, while the bottom of the app allows the user to input whatever they would like.
+
+<2023-04-21 Fri 13:19>: I looked more into this, and what sucks is that 'vue-material' does NOT support Vue 3, which I am using for my project.
+
+With that in mind, I will have to probably resort to using Bootstrap or maybe even Tailwind.
+
+<2023-04-21 Fri 13:21>: I did further research, and found the SAME exact issues in which even Bootstrap doesn't even support Vue 3:
+- https://github.com/bootstrap-vue/bootstrap-vue-next
+
+<2023-04-21 Fri 13:31>: Apparently, Tailwind DOES support Vue3, so I guess this is a reason to just flatout try Tailwind as well this time around. I literally only need like 2 separate input fields anyway, so it's worth a shot.
+
+With this in mind, I went ahead and used the following commands to install Tailwind components:
+#+begin_src bash
+npm install tailwindcss@latest
+npm install @headlessui/vue @heroicons/vue
+#+end_src
+
+<2023-04-21 Fri 13:39>: My next steps need to be to actually go over the related Tailwind docs in terms of how to add them to my existing Vue project:
+- https://tailwindui.com/documentation#vue-installing-dependencies
+
+I then need to actually pick a component and just put it into the project to see if it works:
+- https://tailwindui.com/components
+- https://tailwindui.com/components/application-ui/forms/input-groups
+
+<2023-04-21 Fri 15:33>: Apparently, "Tailwind UI" is NOT free. With this in mind, I will have to do more research on their site's docs pages to get more info about input fields I could use from their component library:
+- https://tailwindcss.com/
+
+Here are two related links of prebuilt components to use in my app as well that are Tailwind related:
+- https://tailwindcomponents.com/
+
+<2023-04-21 Fri 16:08>: This looks like a good Tailwind CSS based input field for the Metronome 'view' page:
+- https://tailwindcomponents.com/component/number-input-counter
+
+<2023-04-21 Fri 16:39>: I incorporated the related example in the Metronome page:
+- https://tailwindcomponents.com/component/number-input-counter
+
+I will have to decide on how I want to handle the time input for the 'Stopwatch' and 'Timer' pages.
+
+After that, I can finally rig up the buttons, and do further tasks along the workflow since the UI is looking almost what I want it to be at this point minus a few tweaks overall.
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -209,6 +269,7 @@ I was a bit confused on what was the difference between 'components' and 'views'
 - https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
 
 Basically, its just a matter of preference. From my understanding, you place the individual 'View' pages in the 'views' directory
+
 *** DONE Record related command to run application in 'dev' mode
 <2023-04-17 Mon 15:32>: Just wanted to include this for future reference, aka if you want to just run this application in 'dev' mode, just use the following command:
 #+begin_src bash

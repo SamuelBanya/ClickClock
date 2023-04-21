@@ -1,8 +1,7 @@
 /* Custom CSS For Application: */
 /* Google Custom Fonts:*/
-/* Used this Stack Overflow post to figure out how to import custom Google fonts into existing stylesheet: */
-/* https://stackoverflow.com/questions/51516084/how-do-i-add-a-google-font-to-a-vuejs-component */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+/* Importing fonts used for application including 'Fredoka' as well as 'Inter' for Tailwind components: */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 #app {
   position: relative;
@@ -12,12 +11,12 @@
   text-align: center;
 }
 
-#title {
+#logo {
   font-family: 'Fredoka', sans-serif;
-  font-size: 80px;
+  font-size: 60px;
 }
 
-#logo {
+.title {
   font-family: 'Fredoka', sans-serif;
   font-size: 60px;
 }
@@ -52,7 +51,7 @@
   border-radius: 15px;
 }
 
-#about-button {
+#about-link {
   position: absolute;
   width: 70px;
   height: 70px;
@@ -62,7 +61,7 @@
   background-image: url("assets/AboutButton.png");
 }
 
-#timer-button {
+#timer-link {
   position: absolute;
   width: 70px;
   height: 70px;
@@ -72,7 +71,7 @@
   background-image: url("assets/ClockButton.png");
 }
 
-#stopwatch-button {
+#stopwatch-link {
   position: absolute;
   width: 70px;
   height: 70px;
@@ -82,7 +81,7 @@
   background-image: url("assets/StopwatchButton.png");
 }
 
-#metronome-button {
+#metronome-link {
   position: absolute;
   width: 70px;
   height: 70px;
@@ -121,7 +120,7 @@
   position: absolute;
   width: 108px;
   height: 61px;
-  left: 67px;
+  left: 132px;
   top: 260px;
   font-family: 'Fredoka';
   font-style: normal;
@@ -132,13 +131,14 @@
   color: #000000;
 }
 
+/* NOTE: When the start button is pressed, the style of the button will change to this one instead: */
 .stop-button {
   background: #FF0404;
   border-radius: 15px;
   position: absolute;
   width: 108px;
   height: 61px;
-  left: 194px;
+  left: 132px;
   top: 260px;
   font-family: 'Fredoka';
   font-style: normal;
