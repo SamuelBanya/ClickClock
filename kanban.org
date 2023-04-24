@@ -169,6 +169,105 @@ I will have to decide on how I want to handle the time input for the 'Stopwatch'
 
 After that, I can finally rig up the buttons, and do further tasks along the workflow since the UI is looking almost what I want it to be at this point minus a few tweaks overall.
 
+<2023-04-24 Mon 11:45>: I found this particular resource to use 'router-link' in conjunction with a button. You basically have to wrap the 'router-link' around the button itself, and use the 'to', 'custom', and 'v-slot' attributes for the 'router-link' section, and then use the '@click' and 'role' attributes for the button itself:
+- https://codingbeautydev.com/blog/vue-router-link-button/
+
+I then used these two links as references for using 'font-awesome' style icons for the HTML buttons as well since I think doing the buttons via pure CSS will achieve flashier, and easier to manage effects instead of having to manually create the same types of buttons by hand even using GIMP:
+- https://www.w3schools.com/howto/howto_css_icon_buttons.asp
+- https://fontawesome.com/
+
+I also used this StackOverflow post to determine how to add the actual Font Awesome CSS based CDN stylesheet to the actual project itself:
+- https://stackoverflow.com/questions/51314997/how-to-add-cdn-css-file-to-vue-cli-3-project
+
+<2023-04-24 Mon 11:53>: I then used this reference page to be able to install the Font Awesome icons as well:
+- https://fontawesome.com/docs/web/use-with/vue/
+
+I then used this related NPM command to install the Font Awesome icons:
+#+begin_src bash
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons
+npm i --save @fortawesome/free-brands-svg-icons
+npm i --save @fortawesome/vue-fontawesome@latest-3
+#+end_src
+
+I then found a desired icon here:
+- https://fontawesome.com/icons/circle-info?f=classic&s=light
+
+I then tried to use the following syntax within the page itself to try to use the icon itself within my Vue project:
+#+begin_src js
+<font-awesome-icon :icon="['fal', 'circle-info']" />
+#+end_src
+
+<2023-04-24 Mon 12:05>: After failing with the above HTML syntax itself, I then used this page as a reference to add the Font-Awesome library as a 'component' to the 'main.js' file itself in the project:
+- https://fontawesome.com/docs/web/use-with/vue/add-icons
+
+<2023-04-24 Mon 16:02>: I used this video as a reference guide on how to really actually use Font Awesome with Vue 3, and even though it was from 2 years ago, the premise was pretty muc hthe same:
+- How to Add Font Awesome Icons in Vue 3 (https://www.youtube.com/watch?v=MoDIpTuRWfM)
+
+<2023-04-24 Mon 16:44>: I used this guide as a reference on how to make glossy buttons:
+- https://simplestepscode.com/css-glass-button-tutorial/#
+
+I then found this StackOverflow post for a solution on how to center the button's CSS styling as well to use "display:flex; justify-content:center" on the parent button's CSS styling:
+- https://stackoverflow.com/questions/61675732/vertically-center-font-awesome-icon-and-text-inside-an-a-tag-router-link
+
+<2023-04-24 Mon 17:04>: I also figured out that you can change the icon color for a Font Awesome icon by just adding color changing properties to the class via this StackOverflow post:
+- https://stackoverflow.com/questions/14474452/can-i-change-the-color-of-font-awesomes-cog-icon
+
+<2023-04-24 Mon 17:15>: I then focused on the Tailwind CSS side of the styling issue for the "Metronome" page as I really need a nice looking input field to carry that page effectively.
+
+I then installed the Tailwind CSS components by following this Vue + Vite + TailwindCSS related guide:
+- https://www.codingthesmartway.com/how-to-use-tailwind-css-with-vue-and-vite/
+
+I then used the following commands accordingly:
+#+begin_src bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+#+end_src
+
+I then added the following to the 'tailwind.config.js' file in the root directory:
+#+begin_src js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+#+end_src
+
+I then added the Tailwind directives to the 'style.css' stylesheet:
+#+begin_src css
+/* Adding Tailwind directives: */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+#+end_src
+
+I then ran the following command:
+#+begin_src
+sam@notestation ~/hub/ClickClock $ npx tailwindcss -i ./src/style.css -o ./dist/output.css --watch
+#+end_src
+
+<2023-04-24 Mon 17:41>: I had to restart the 'vterm' terminal running 'npm run dev' but after doing so, I was finally able to see the Tailwind CSS styling take place for the example I borrowed from 'TailwindComponents' site.
+
+<2023-04-24 Mon 17:45>: I did realize that with every single CSS change now that the whole project is based upon Tailwind, I will always have to re-run the following command to reprocess the CSS accordingly:
+#+begin_src bash
+npx tailwindcss -i ./src/style.css -o ./dist/output.css --watch
+#+end_src
+
+With this in mind, I still have to re-adjust the header styling to slightly better match the Figma template.
+
+I will also have to figure out how to rig the "Metronome" page's increment and decrement buttons accordingly to actually work to update the input field too since this is useful to give the user more of a choice in the matter of whatever button style they prefer.
+
+Past that, I probably have to figure out a good styled input field for the 'Timer' and 'Stopwatch' component pages.
+
+After that, I can finally rig up the buttons, and do the rest of the tasks for this project.
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:

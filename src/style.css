@@ -3,6 +3,11 @@
 /* Importing fonts used for application including 'Fredoka' as well as 'Inter' for Tailwind components: */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* Adding Tailwind directives: */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #app {
   position: relative;
   width: 390px;
@@ -14,6 +19,42 @@
 #logo {
   font-family: 'Fredoka', sans-serif;
   font-size: 60px;
+}
+
+#about-link {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 26px;
+  top: 732px;
+  border-radius: 15px;
+}
+
+#timer-link {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 116px;
+  top: 732px;
+  border-radius: 15px;
+}
+
+#stopwatch-link {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 206px;
+  top: 732px;
+  border-radius: 15px;
+}
+
+#metronome-link {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 296px;
+  top: 732px;
+  border-radius: 15px;
 }
 
 .title {
@@ -51,44 +92,49 @@
   border-radius: 15px;
 }
 
-#about-link {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  left: 26px;
-  top: 732px;
-  border-radius: 15px;
-  background-image: url("assets/AboutButton.png");
+.glossy-button {
+  /* background styles */
+	position: relative;
+	display: inline-block;
+	padding: 15px 25px;
+	background-color: green; /*for compatibility with older browsers*/
+  background-image: linear-gradient(#ff7b00, #fff018);
+
+	/* text styles */
+	text-decoration: none;
+	color: #fff;
+	font-size: 25px;
+	font-family: sans-serif;
+	font-weight: 100;
+
+  border-radius: 3px;
+  box-shadow: 0px 1px 4px -2px #333;
+  text-shadow: 0px -1px #333;
+  border: 5px solid black;
+
+  /* Added this to force te Font Awesome icons to be centered: */
+  display: flex;
+  justify-content: center;
 }
 
-#timer-link {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  left: 116px;
-  top: 732px;
-  border-radius: 15px;
-  background-image: url("assets/ClockButton.png");
+.font-awesome {
+  color: #250025;
 }
 
-#stopwatch-link {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  left: 206px;
-  top: 732px;
+.glossy-button:after {
   border-radius: 15px;
-  background-image: url("assets/StopwatchButton.png");
+
+  content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	height: 50%;
+	background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
 }
 
-#metronome-link {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  left: 296px;
-  top: 732px;
-  border-radius: 15px;
-  background-image: url("assets/MetronomeButton.png");
+.glossy-button:hover {
+  /* background: linear-gradient(#818181,#11c7ff); */
+	background: linear-gradient(green,lightgreen);
 }
 
 .timer-counter-div {
@@ -166,7 +212,23 @@
   color: #000000;
 }
 
+/* From Tailwind CSS example: */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-number-input input:focus {
+  outline: none !important;
+}
+
+.custom-number-input button:focus {
+  outline: none !important;
+}
+
 h1 {
+  font-family: 'Fredoka', sans-serif;
   color: white;
 }
 
