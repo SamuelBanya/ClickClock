@@ -57,6 +57,14 @@
   border-radius: 15px;
 }
 
+#bpm-div {
+  position: absolute;
+  background-color: red;
+  /* This is to ensure 32 pixels width, but 16 pixels on either side of the center point: */
+  left: 110px;
+  top: 130px;
+}
+
 .title {
   font-family: 'Fredoka', sans-serif;
   font-size: 60px;
@@ -76,7 +84,7 @@
   position: absolute;
   width: 345px;
   height: 251px;
-  left: 22px;
+  left: 20px;
   top: 27px;
   background: #71105F;
   border-radius: 15px;
@@ -195,7 +203,7 @@
   color: #000000;
 }
 
-.clear-mute-button {
+.reset-mute-button {
   background: #FFE600;
   border-radius: 15px;
   position: absolute;
@@ -212,19 +220,32 @@
   color: #000000;
 }
 
+.menu {
+  position: absolute;
+  left: 10px;
+  top: 125px;
+}
+
+.menu ul {
+  list-style-type: none;
+}
+.menu li {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+.metronome-circle {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  background: red;
+  margin-left: 25px;
+}
+
 /* From Tailwind CSS example: */
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.custom-number-input input:focus {
-  outline: none !important;
-}
-
-.custom-number-input button:focus {
-  outline: none !important;
+.output-header {
+  font-size: 60px;
 }
 
 h1 {
@@ -239,3 +260,4 @@ p {
   margin-left: 50px;
   margin-right: 50px;
 }
+

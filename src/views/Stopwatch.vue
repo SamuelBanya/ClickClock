@@ -16,11 +16,8 @@
             <!-- Click Clock Title -->
             <Logo />
             <!-- Middle Screen Buttons -->
-            <div class="timer-counter-div">
-                <input class="timer-counter-input"/>
-            </div>
             <button class="start-button">Start</button>
-            <button class="clear-mute-button">Clear</button>
+            <button class="reset-mute-button">Reset</button>
         </div>
     </div>
 </template>

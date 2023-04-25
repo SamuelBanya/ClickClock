@@ -6,7 +6,22 @@
         <div class="medium-purple-square">
             <!-- Page Title -->
             <h1 class="title">Timer</h1>
-            <h1 class="output-header">0:00:00</h1>
+            <div class="text-black-100">
+                <div class="text-6xl text-center flex w-full items-center justify-center">
+                    <div class="w-24 mx-1 p-2 bg-white text-black-500 rounded-lg">
+                        <div class="font-mono leading-none" x-text="minutes">00</div>
+                        <div class="font-mono uppercase text-sm leading-none">Hours</div>
+                    </div>
+                    <div class="w-24 mx-1 p-2 bg-white text-black-500 rounded-lg">
+                        <div class="font-mono leading-none" x-text="minutes">00</div>
+                        <div class="font-mono uppercase text-sm leading-none">Minutes</div>
+                    </div>
+                    <div class="w-24 mx-1 p-2 bg-white text-black-500 rounded-lg">
+                        <div class="font-mono leading-none" x-text="seconds">00</div>
+                        <div class="font-mono uppercase text-sm leading-none">Seconds</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
         <!-- Bottom Half Div -->
@@ -16,11 +31,20 @@
             <!-- Click Clock Title -->
             <Logo />
             <!-- Middle Screen Buttons -->
-            <div class="timer-counter-div">
-                <input class="timer-counter-input"/>
+            <div class="text-yellow-100">
+                <div class="text-6xl text-center flex w-full items-center justify-center">
+                    <label for="hr-input" class="block mb-2 text-lg font-medium text-black-900 dark:text-white">Hours</label>
+                    <input id="hr-input" class="h-16 w-16 text-black-600 text-lg"/>
+                    <label for="min-input" class="block mb-2 text-lg font-medium text-black-900 dark:text-white">Hours</label>
+                    <input id="min-input" class="h-16 w-16 text-black-600 text-lg"/>
+                    <label for="sec-input" class="block mb-2 text-lg font-medium text-black-900 dark:text-white">Hours</label>
+                    <input id="sec-input" class="h-16 w-16 text-black-600 text-lg"/>
+                </div>
             </div>
+
+
             <button class="start-button">Start</button>
-            <button class="clear-mute-button">Clear</button>
+            <button class="reset-mute-button">Reset</button>
         </div>
     </div>
 </template>

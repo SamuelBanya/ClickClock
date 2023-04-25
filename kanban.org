@@ -268,6 +268,54 @@ Past that, I probably have to figure out a good styled input field for the 'Time
 
 After that, I can finally rig up the buttons, and do the rest of the tasks for this project.
 
+<2023-04-25 Tue 13:40>: I borrowed from this StackOverflow post to remove the default increment buttons:
+- https://stackoverflow.com/questions/40690284/remove-increment-and-decrement-icon-from-input-field
+
+I also used this MDN page as a reference for 'min' and 'max' attributes:
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number
+
+<2023-04-25 Tue 14:52>: I used this StackOverflow post as a reference to make list item bulletpoints that are literally circle shapes which is kind of cool as well:
+- https://stackoverflow.com/questions/23580181/how-can-i-draw-four-circles-in-single-div-element
+
+I also borrowed the idea to make multiple red circles for a metronome app via this metronome app screenshot as well which makes sense to communicate the idea of time clicking away for a metronome on an app like this, specifically under the 'Tempo App Series' section:
+- https://www.lindebladpiano.com/blog/best-metronome-apps
+
+I plan on making each of the shapes change a different color as the click keeps happening in sequences of just 4/4 time since I just wanted to make a basic metronome.
+
+<2023-04-25 Tue 15:57>: I'm trying to figure out how exactly I want to implement the input and output fields for both the "Stopwatch" and "Timer" sections of the app.
+
+I found example apps that just are a stopwatch by default like this:
+- https://reacttailwindstopwatch.netlify.app/
+
+I also found Tailwind component libraries like "DaisyUI" that literally have 'Countdown' fields, but NOT 'Countup' fields which sucks because it's going to be super awkward to implement if I have it on one page but not the other:
+- https://daisyui.com/components/countdown/
+- https://daisyui.com/docs/install/
+
+I also realized that the 'Stopwatch' portion doesn't even need an input field either.
+
+<2023-04-25 Tue 16:12>: I did more research and found these three random similar examples:
+- Coming Soon Page with Countdown Timer using Tailwind CSS & Alpine JS (https://www.youtube.com/watch?v=XsSp0X1lrEU)
+- https://www.frontendmentor.io/solutions/countdown-timer-using-html-tailwind-css-and-some-javascript-EpjTileq5
+- https://tailwindcomponents.com/component/countdown-timer
+
+Their approach is to flat out display the 'Days', 'Hours', 'Minutes', and 'Seconds' into square blocks.
+
+I can probably just do the same approach for my own application since I really only wanted to create a kitchen timer with 3 choices for 'hr' (hours), 'min' (minutes), and 'sec' (seconds).
+
+I think the next approach I need to do is to create square input blocks with labels in a similar fashion for the 'Kitchen Timer' portion of my application.
+
+<2023-04-25 Tue 16:17>: I found this particular Tailwind Docs page on the topic of 'box-sizing' that might be useful since I can just box up inputs accordingly in 2 digit boxes for hours, mins, and seconds which actually fits the paradigm of using time inputs anyway:
+- https://tailwindcss.com/docs/box-sizing
+
+<2023-04-25 Tue 16:34>: This app has really cool fonts, and might be worthwhile to borrow the vibe from:
+- https://codepen.io/raphael_octau/pen/XxeqRJ
+
+<2023-04-25 Tue 16:46>: I also found this particular StackOverflow post useful as a reference as this allows you to have multiple input fields on the same line:
+- https://stackoverflow.com/questions/18470682/html-form-make-inputs-appear-on-the-same-line
+
+However, I might borrow heavily from this particular example as this has multiple inputs on the same line as well:
+- https://tailwindcomponents.com/component/countdown-timer
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
