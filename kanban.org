@@ -61,19 +61,6 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
-<2023-04-26 Wed 11:20>: Now that the Figma design template is pretty much set, it is time to rig the buttons accordingly so that I can use actual JS for once in this project :)
-
-Though I learned a lot from trying to match the wireframe, I learned that it is not easy to do this at all, but appreciate a good design that dictates everything going forward as it made the app look way better than I intended it to.
-
-With this in mind, I will explore the buttons themselves.
-
-<2023-04-26 Wed 11:41>: I can easily do event handling with basic JavaScript but I am also debating if I should also explore it with how Vue does it.
-
-I checked their Docs page on the subject, and they are just as bad as the React docs page in the sense that all of these examples have zero context behind them, meaning they leave a TON of information out and only provide small snippets, when they should really provide small self contained examples in codeblocks but with 'html', 'js' etc tabs instead:
-- https://vuejs.org/guide/essentials/event-handling.html#method-handlers
-
-I will try to see if there are any actual guides on how to actually use the 'methods' keyword in this context since their example sucks at explaining if this should be in the 'template' block or even just the 'script' block at the bottom of a particular .Vue file.
 *** TODO Look into NPM packages that provide timer functionality (for counting up and down) as well as metronome and volume packages
 *** TODO Make the individual buttons actually work to provide changes on screen
 *** TODO Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
@@ -91,6 +78,47 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
+*** IN-PROGRESS Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
+<2023-04-26 Wed 11:20>: Now that the Figma design template is pretty much set, it is time to rig the buttons accordingly so that I can use actual JS for once in this project :)
+
+Though I learned a lot from trying to match the wireframe, I learned that it is not easy to do this at all, but appreciate a good design that dictates everything going forward as it made the app look way better than I intended it to.
+
+With this in mind, I will explore the buttons themselves.
+
+<2023-04-26 Wed 11:41>: I can easily do event handling with basic JavaScript but I am also debating if I should also explore it with how Vue does it.
+
+I checked their Docs page on the subject, and they are just as bad as the React docs page in the sense that all of these examples have zero context behind them, meaning they leave a TON of information out and only provide small snippets, when they should really provide small self contained examples in codeblocks but with 'html', 'js' etc tabs instead:
+- https://vuejs.org/guide/essentials/event-handling.html#method-handlers
+
+I will try to see if there are any actual guides on how to actually use the 'methods' keyword in this context since their example sucks at explaining if this should be in the 'template' block or even just the 'script' block at the bottom of a particular .Vue file.
+
+<2023-04-26 Wed 15:36>: I tried referring to this video for reference to how Vue handles the concept of 'event handling':
+- #07 - Event Handling - Vue 3 Tutorial (https://www.youtube.com/watch?v=o41UaWgkf_4)
+
+<2023-04-26 Wed 15:44>: I found this particular reference page to be helpful from the Vue docs:
+- https://vuejs.org/guide/essentials/forms.html
+
+Basically, the way Vue handles event handling is by simplifying it to the 'v-model' directive which negates any need for using ':value' or '@input' attributes on an input tag.
+
+What I can probably do in my scenario is then add 'v-model' directives to the input tags for the 'hours', 'minutes', and 'seconds' input tags to then easily and dynamically use before the user presses the 'Start' button.
+
+<2023-04-26 Wed 15:56>: I noticed in the Vue Docs page example's sandbox that the 'return' statement allows for the variable you are trying to create to be accessed:
+- https://play.vuejs.org/#eNo9jdEKwjAMRX8l9EV90L2POvAD/IO+lDVqoetCmw6h9N/NmBuEJPeSc1PVg+i2FFS90nlMnngwEb80JwaHL1sCQzURwFm258u2AyTkkuKuACbM2b6xh9Nps9o6pEnp7ggWwThRsIyiADQNz40En3uodQ+C1nRHK8HaRyoMy3WaHYa7Uf8To0CCRvzMwWESH51n4cXvBNTd8Um1H0FuTq0=
+
+With this in mind, I applied it to my project and it works to actively output it to a paragraph element as a test which is great.
+
+The problem I am having currently is that the 'startTimer' function I am creating does not have access to the 'hrinput', 'mininput', and 'secinput' variables for just basic console.log statements.
+
+<2023-04-26 Wed 16:28>: I did some further research on the topic of using 'v-model' directives in conjunction with the 'methods' section of the 'script' tag in a Vue application, and found this particular article, especially the '3. "Powerful" computed property' section to be pretty helpful:
+- https://dev.to/vcpablo/vuejs-2-different-ways-to-implement-v-model-1mjf
+
+This article linked to this particular page on the topic of using 'getters and setters' in terms of Vue:
+- https://vuejs.org/guide/essentials/computed.html#basic-example
+
+After looking at their example, it was clear why I wasn't getting any info back as I wasn't using the object orientated idea of using 'this.' to access the specific instance variable.
+
+With this in mind, I was able to use 'this.' within the custom 'startTimer' method I created, and I am now easily seeing the values appear in console as expected.
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
