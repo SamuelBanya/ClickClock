@@ -80,7 +80,189 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Figure out the basic CSS styling for each component so that it closely matches the actual wireframed app itself
+** Completed
+*** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
+<2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
+- https://github.com/IsraelDCastro/rails-vite-tailwindcss-template
+
+More specifically I need to implement this by using the following command:
+#+begin_src bash
+rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want> -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+<2023-04-11 Tue 18:57>: I used the following command which was the 'From GitHub with vue' command on the related README  for the main GitHub repo of the template itself (https://github.com/IsraelDCastro/rails-vite-tailwindcss-template):
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+I then received the following error:
+#+begin_src bash
+/usr/share/rvm/gems/ruby-2.7.4/gems/ffi-1.15.5/lib/ffi/library.rb:145:in `block in ffi_lib': Could not open library 'vips.so.42': vips.so.42: cannot open shared object file: No such file or directory. (LoadError)
+Could not open library 'libvips.so.42': libvips.so.42: cannot open shared object file: No such file or directory
+#+end_src
+
+I found this particular GitHub thread on the 'libvips' library with a very similar error, most people in this thread said it has deal with an issue of 'vips' not being installed (of which I have no idea what that is):
+- https://github.com/libvips/ruby-vips/issues/219
+
+I then tried to refer to the related 'libvips' GitHub README, and just flat out installed 'ruby-vips' via this command:
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ gem install ruby-vips
+Successfully installed ruby-vips-2.1.4
+Parsing documentation for ruby-vips-2.1.4
+Installing ri documentation for ruby-vips-2.1.4
+Done installing documentation for ruby-vips after 1 seconds
+1 gem installed
+#+end_src
+
+I then tried the same command as before again but received the same error as before:
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+<2023-04-11 Tue 19:21>: I then did more research and found this particular GitHub issues thread on the same error as shown above:
+- https://github.com/loomio/loomio/issues/9492
+
+Within that thread, one of the commenters said to literally install the affected dependency, so I tried to via this command:
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ sudo apt-get install libvips libvips-dev
+#+end_src
+
+I was able to then successfully be able to get the related command working without a problem:
+#+begin_src bash
+sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
+#+end_src
+
+<2023-04-11 Tue 19:38>: I was able to run 'rails s' without an issue, so I would say this portion is complete. The next item is to actually check out Vue's related docs.
+*** DONE Install Vue + Vite since they go hand in hand with each other to get the basic 'Hello World' app working in 'dev' mode
+<2023-04-17 Mon 11:44>: After a bit of thinking on this topic, I realized that my previous route of hoping some random Rails template would work is kind of silly. Plus, it didn't even install the package.json needed for Vue so clearly something is messed up with that guy's project, and he didn't bother to reply to my GitHub isuses page bug report, so it's whatever. I need to move on anyway.
+
+With this in mind, I tried using this particular video as a guide:
+- Creating Your First Vue 3 App with Vite - A Beginner's Tutorial (https://www.youtube.com/watch?v=JLt3GrDZDvQ)
+
+I also used the related 'Vite' docs in tandem:
+- https://vitejs.dev/guide/
+
+I used this command accordingly:
+#+begin_src bash
+npm create vite@latest
+#+end_src
+
+I then followed the prompts accordingly.
+
+I then proceeded to do the following commands:
+#+begin_src bash
+npm install
+npm run dev
+#+end_src
+
+<2023-04-17 Mon 11:50> With that in mind, I was able to get the 'Hello World' type Vue app to work as intended.
+*** DONE Modify actual 'Hello World' Vue app to display a few other items so that I get the hang of actually editing the project
+<2023-04-17 Mon 11:51>: I would like to figure out how to actually edit their 'Hello World' project so that I can figure out how to build more components for the application itself.
+
+<2023-04-17 Mon 11:52>: As per the main homepage from the 'Hello World' app itself, it asked me to modify the 'components/HelloWorld.vue' file in order to modify it accordingly.
+
+It seems like it does components in a similar way to how React does it, so it shouldn't take too much brain power to figure out how to add more components as I go along.
+
+<2023-04-17 Mon 14:21>: I used the following video as a reference ontop of the existing Docs since I just wanted to add components as I went along and multiple 'Views' to add different pages. This guy basically uses Vue + Vite + Vue-Router, which is exactly what I'm using in my scenario:
+- How to Setup a Basic Vite + Vue Project (+ Vue Router) 2022 (https://www.youtube.com/watch?v=PciUq6HcUNc)
+
+I also used the 'Vue Router' docs as well:
+- https://router.vuejs.org/installation.html
+
+I used the following command to install version 4 of 'Vue-Router':
+#+begin_src bash
+npm install vue-router@4
+#+end_src
+
+I then proceeded to follow the guide, and overall, I got a working app with multiple 'views' for separate pages.
+
+I was a bit confused on what was the difference between 'components' and 'views' for the Vue.js framework, but after a bit of research, I found this particular answer on StackOverflow which helped elucidate this process for me:
+- https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
+
+Basically, its just a matter of preference. From my understanding, you place the individual 'View' pages in the 'views' directory
+
+*** DONE Record related command to run application in 'dev' mode
+<2023-04-17 Mon 15:32>: Just wanted to include this for future reference, aka if you want to just run this application in 'dev' mode, just use the following command:
+#+begin_src bash
+npm run dev
+#+end_src
+*** DONE Work on creating a Figma wireframe for the application to plan out what I want on each component page
+<2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
+
+<2023-04-17 Mon 15:25>: This should be my next step as I really should be wireframing out the overall look and feel of the app.
+
+Afterwards, I will translate it to Vue based components.
+
+Once the basic components are then present, I can proceed with making flashy looking buttons, and looking into cool animations.
+
+<2023-04-18 Tue 14:14>: I was able to watch this video to learn more of the basics of Figma, and honestly, it's not too hard. I think before when I tried using it, I was under pressure of trying to do that stupid test for that one shill ass job.
+
+Most of these YouTubers in this realm are a bit grifty, but this video was good to learn the basics:
+- Figma UI Design Tutorial: Get Started in Just 24 Minutes! (https://www.youtube.com/watch?v=FTFaQWZBqQ8)
+
+Also, the only site that was worthwhile for icons with a related account was this one:
+- https://freeicons.io/
+
+Here's a useful site to obtain related Figma templats for reference to see what other people have done for mobile app designs:
+- https://figmaresource.com/category/ui-kits/page/5/
+
+Here was a cool Half Life themed one I found that had a really really cool looking center button I would love to replicate sometime:
+- https://www.figma.com/file/oIAQW5RLtTgVqBAH73TeMi/Half-Life?node-id=30-3075&t=09r6OM5YsT0Cb84H-0
+
+<2023-04-18 Tue 14:39>: Overall, the design is complete here:
+- https://www.figma.com/file/45qGh4g17WCbewzEaZX70s/ClickClock-Figma-Template
+
+I really like what I did so far and I think it's pretty good for what I did so far. Simple yet effective. Honestly, it looks good.
+
+Now I have to figure out how to pull all of this out of Figma, and into an actual website that I can play with.
+*** DONE Figure out a gameplan to translate Figma wireframe site components into actual useable Vue basd web components
+<2023-04-18 Tue 14:41>: My next goal is to translate what I created for the wireframe and into an actual Vue app itself.
+
+Related links I researched:
+- This is a somewhat long-winded React centered tutorial on how to translate Figma components into a React component. Though it's useful, I really just need to export what I created into HTML components or at least buttons etc to be placed onto a page so I don't think this is the best route honestly at the moment:
+- Figma To React JS | Build A Modern Responsive Website - Project Set Up (https://www.youtube.com/watch?v=zwj4x2q_HcE)
+
+<2023-04-18 Tue 15:16>: After doing some research, most of what's present is just "Use this plugin" --> followed by "Oh wow, this plugin doesn't even translate the page correctly" / "Oh wow, it's not even letting me export the buttons as intended"
+
+What's pretty ironic is that I might have to just go ahead and implement this by hand manually since there's no really easy way to do this...
+
+You would think... for a tool like Figma that they didn't think to help facilitate the process of exporting the designs themselves into translatable web pages... It makes no sense to me why they have to piggyback off of rando 'plugin' creators...
+
+Either way, I guess I have to make these components manually for now, but at least I have a very good sense of what I actually want to do.
+
+What I will probably do in the truest sense / easiest route is to just make a literal mockup of the current design with div tags and buttons, scale it up to look close to what I planned, and go from there.
+
+This beats having to figure out which plugin ACTUALLY works from Figma. I will admit though, it is a really nice tool but its exporting functionality is God awful though.
+
+<2023-04-18 Tue 15:35>: The goal for the workflow going forward involves the following (if I do this all manually):
+- Create a component for the top 30% half of the screen called 'TopFrame.vue'
+- Create a component for the bottom 70% half of the screen called 'BottomFrame.vue'
+- For each of these components, literally create rectangle based div tags that look similar to what is present on the Figma template which shouldn't be hard at all
+- The buttons could easily be exported and brought into something else like GIMP to be further designed and chromed up so that 'hover' and 'click' actions are very obvious
+- Once the design is actually present and each page is accessible, it's just a matter of literally rigging up each of the buttons to separate functions in the Vue components
+- Once the buttons are actually working in their basic state, I can then explore various NPM packages that handle timers and metronome clicks as well as muting capabilities
+- After that, the app should be pretty much done and ready for testing on multiple devices including mobile and desktop screens
+- The only thing after that would include deploying it to something like Render.com
+
+<2023-04-19 Wed 15:10>: My revised version of this workflow goes as follows:
+- Create every individual component for the top half of the app minus the nav bar buttons at the top: even if it includes redundancy, this can be further refactored later so that if it works for now, great just use it and move on
+- Figure out the basic CSS styling for each component so that it closely matches the actual wireframed app itself
+- Create the individual buttons necessary for the bottom nav bar in GIMP or through CSS manipulation of the basic 'button' HTML tag itself
+- Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
+- Look into NPM packages that provide timer functionality (for counting up and down) as well as metronome and volume packages
+- Make the individual buttons actually work to provide changes on screen
+- Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
+- Test the resulting app in different screen sizes
+- Create modified buttons using gold style pixel art
+- Research flashy looking animations that appear when each component page is loaded
+- Deploy the app on Render.com
+
+<2023-04-19 Wed 15:15>: With this in mind, I am marking this task as complete
+*** DONE Create every individual component for the top half of the app minus the nav bar buttons at the top: even if it includes redundancy, this can be further refactored later so that if it works for now, great just use it and move on
+<2023-04-19 Wed 15:18>: This portion is complete as there are individual 'Vue' based 'views' present for each individual page.
+
+This can be further refactored later so that each page is a template with some provided components that are passed in via props via however which way that Vue does it, but for now, it works and is good for now.
+*** DONE Figure out the basic CSS styling for each component so that it closely matches the actual wireframed app itself
 <2023-04-19 Wed 15:19>: I am slowly trying ot figure it out, but it has becoming a bit hard to really match the wireframe itself.
 
 Again, I just wish Figma gave you the basics to work with, but alas, it isn't as good as Dreamweaver used to be in that respect.
@@ -316,188 +498,18 @@ I think the next approach I need to do is to create square input blocks with lab
 However, I might borrow heavily from this particular example as this has multiple inputs on the same line as well:
 - https://tailwindcomponents.com/component/countdown-timer
 
-** Completed
-*** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
-<2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
-- https://github.com/IsraelDCastro/rails-vite-tailwindcss-template
+<2023-04-26 Wed 11:08>: I used the 'Box Sizing' docs page to apply a 'box' div from Tailwind around each input:
+- https://tailwindcss.com/docs/box-sizing
 
-More specifically I need to implement this by using the following command:
-#+begin_src bash
-rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want> -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
-#+end_src
+I then used this StackOverflow example for the reminder to use 'display:block' for the 'input' and 'label' tag in a scenario like this where you want the label ABOVE the input tag:
+- https://stackoverflow.com/questions/6046110/styling-form-with-label-above-inputs
 
-<2023-04-11 Tue 18:57>: I used the following command which was the 'From GitHub with vue' command on the related README  for the main GitHub repo of the template itself (https://github.com/IsraelDCastro/rails-vite-tailwindcss-template):
-#+begin_src bash
-sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
-#+end_src
+I also referred to this Tailwind docs page for how to adjust the text sizing for the inputs as well:
+- https://tailwindcss.com/docs/font-size
 
-I then received the following error:
-#+begin_src bash
-/usr/share/rvm/gems/ruby-2.7.4/gems/ffi-1.15.5/lib/ffi/library.rb:145:in `block in ffi_lib': Could not open library 'vips.so.42': vips.so.42: cannot open shared object file: No such file or directory. (LoadError)
-Could not open library 'libvips.so.42': libvips.so.42: cannot open shared object file: No such file or directory
-#+end_src
+<2023-04-26 Wed 11:16>: I believe most of the latest styling changes now reflect the initial design template dictated by the Figma design template.
 
-I found this particular GitHub thread on the 'libvips' library with a very similar error, most people in this thread said it has deal with an issue of 'vips' not being installed (of which I have no idea what that is):
-- https://github.com/libvips/ruby-vips/issues/219
-
-I then tried to refer to the related 'libvips' GitHub README, and just flat out installed 'ruby-vips' via this command:
-#+begin_src bash
-sam@notestation ~/hub/ClickClock $ gem install ruby-vips
-Successfully installed ruby-vips-2.1.4
-Parsing documentation for ruby-vips-2.1.4
-Installing ri documentation for ruby-vips-2.1.4
-Done installing documentation for ruby-vips after 1 seconds
-1 gem installed
-#+end_src
-
-I then tried the same command as before again but received the same error as before:
-#+begin_src bash
-sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
-#+end_src
-
-<2023-04-11 Tue 19:21>: I then did more research and found this particular GitHub issues thread on the same error as shown above:
-- https://github.com/loomio/loomio/issues/9492
-
-Within that thread, one of the commenters said to literally install the affected dependency, so I tried to via this command:
-#+begin_src bash
-sam@notestation ~/hub/ClickClock $ sudo apt-get install libvips libvips-dev
-#+end_src
-
-I was able to then successfully be able to get the related command working without a problem:
-#+begin_src bash
-sam@notestation ~/hub/ClickClock $ rails new clickclock --skip-webpack-install --skip-javascript -d postgresql -m https://raw.githubusercontent.com/IsraelDCastro/rails-vite-tailwindcss-template/master/template.rb --vue
-#+end_src
-
-<2023-04-11 Tue 19:38>: I was able to run 'rails s' without an issue, so I would say this portion is complete. The next item is to actually check out Vue's related docs.
-*** DONE Install Vue + Vite since they go hand in hand with each other to get the basic 'Hello World' app working in 'dev' mode
-<2023-04-17 Mon 11:44>: After a bit of thinking on this topic, I realized that my previous route of hoping some random Rails template would work is kind of silly. Plus, it didn't even install the package.json needed for Vue so clearly something is messed up with that guy's project, and he didn't bother to reply to my GitHub isuses page bug report, so it's whatever. I need to move on anyway.
-
-With this in mind, I tried using this particular video as a guide:
-- Creating Your First Vue 3 App with Vite - A Beginner's Tutorial (https://www.youtube.com/watch?v=JLt3GrDZDvQ)
-
-I also used the related 'Vite' docs in tandem:
-- https://vitejs.dev/guide/
-
-I used this command accordingly:
-#+begin_src bash
-npm create vite@latest
-#+end_src
-
-I then followed the prompts accordingly.
-
-I then proceeded to do the following commands:
-#+begin_src bash
-npm install
-npm run dev
-#+end_src
-
-<2023-04-17 Mon 11:50> With that in mind, I was able to get the 'Hello World' type Vue app to work as intended.
-*** DONE Modify actual 'Hello World' Vue app to display a few other items so that I get the hang of actually editing the project
-<2023-04-17 Mon 11:51>: I would like to figure out how to actually edit their 'Hello World' project so that I can figure out how to build more components for the application itself.
-
-<2023-04-17 Mon 11:52>: As per the main homepage from the 'Hello World' app itself, it asked me to modify the 'components/HelloWorld.vue' file in order to modify it accordingly.
-
-It seems like it does components in a similar way to how React does it, so it shouldn't take too much brain power to figure out how to add more components as I go along.
-
-<2023-04-17 Mon 14:21>: I used the following video as a reference ontop of the existing Docs since I just wanted to add components as I went along and multiple 'Views' to add different pages. This guy basically uses Vue + Vite + Vue-Router, which is exactly what I'm using in my scenario:
-- How to Setup a Basic Vite + Vue Project (+ Vue Router) 2022 (https://www.youtube.com/watch?v=PciUq6HcUNc)
-
-I also used the 'Vue Router' docs as well:
-- https://router.vuejs.org/installation.html
-
-I used the following command to install version 4 of 'Vue-Router':
-#+begin_src bash
-npm install vue-router@4
-#+end_src
-
-I then proceeded to follow the guide, and overall, I got a working app with multiple 'views' for separate pages.
-
-I was a bit confused on what was the difference between 'components' and 'views' for the Vue.js framework, but after a bit of research, I found this particular answer on StackOverflow which helped elucidate this process for me:
-- https://stackoverflow.com/questions/50865828/what-is-the-difference-between-the-views-and-components-folders-in-a-vue-project
-
-Basically, its just a matter of preference. From my understanding, you place the individual 'View' pages in the 'views' directory
-
-*** DONE Record related command to run application in 'dev' mode
-<2023-04-17 Mon 15:32>: Just wanted to include this for future reference, aka if you want to just run this application in 'dev' mode, just use the following command:
-#+begin_src bash
-npm run dev
-#+end_src
-*** DONE Work on creating a Figma wireframe for the application to plan out what I want on each component page
-<2023-04-11 Tue 19:40>: I would like to revisit some basic Figma tutorials to get a good wireframe going for the application itself so I can plan out its features.
-
-<2023-04-17 Mon 15:25>: This should be my next step as I really should be wireframing out the overall look and feel of the app.
-
-Afterwards, I will translate it to Vue based components.
-
-Once the basic components are then present, I can proceed with making flashy looking buttons, and looking into cool animations.
-
-<2023-04-18 Tue 14:14>: I was able to watch this video to learn more of the basics of Figma, and honestly, it's not too hard. I think before when I tried using it, I was under pressure of trying to do that stupid test for that one shill ass job.
-
-Most of these YouTubers in this realm are a bit grifty, but this video was good to learn the basics:
-- Figma UI Design Tutorial: Get Started in Just 24 Minutes! (https://www.youtube.com/watch?v=FTFaQWZBqQ8)
-
-Also, the only site that was worthwhile for icons with a related account was this one:
-- https://freeicons.io/
-
-Here's a useful site to obtain related Figma templats for reference to see what other people have done for mobile app designs:
-- https://figmaresource.com/category/ui-kits/page/5/
-
-Here was a cool Half Life themed one I found that had a really really cool looking center button I would love to replicate sometime:
-- https://www.figma.com/file/oIAQW5RLtTgVqBAH73TeMi/Half-Life?node-id=30-3075&t=09r6OM5YsT0Cb84H-0
-
-<2023-04-18 Tue 14:39>: Overall, the design is complete here:
-- https://www.figma.com/file/45qGh4g17WCbewzEaZX70s/ClickClock-Figma-Template
-
-I really like what I did so far and I think it's pretty good for what I did so far. Simple yet effective. Honestly, it looks good.
-
-Now I have to figure out how to pull all of this out of Figma, and into an actual website that I can play with.
-*** DONE Figure out a gameplan to translate Figma wireframe site components into actual useable Vue basd web components
-<2023-04-18 Tue 14:41>: My next goal is to translate what I created for the wireframe and into an actual Vue app itself.
-
-Related links I researched:
-- This is a somewhat long-winded React centered tutorial on how to translate Figma components into a React component. Though it's useful, I really just need to export what I created into HTML components or at least buttons etc to be placed onto a page so I don't think this is the best route honestly at the moment:
-- Figma To React JS | Build A Modern Responsive Website - Project Set Up (https://www.youtube.com/watch?v=zwj4x2q_HcE)
-
-<2023-04-18 Tue 15:16>: After doing some research, most of what's present is just "Use this plugin" --> followed by "Oh wow, this plugin doesn't even translate the page correctly" / "Oh wow, it's not even letting me export the buttons as intended"
-
-What's pretty ironic is that I might have to just go ahead and implement this by hand manually since there's no really easy way to do this...
-
-You would think... for a tool like Figma that they didn't think to help facilitate the process of exporting the designs themselves into translatable web pages... It makes no sense to me why they have to piggyback off of rando 'plugin' creators...
-
-Either way, I guess I have to make these components manually for now, but at least I have a very good sense of what I actually want to do.
-
-What I will probably do in the truest sense / easiest route is to just make a literal mockup of the current design with div tags and buttons, scale it up to look close to what I planned, and go from there.
-
-This beats having to figure out which plugin ACTUALLY works from Figma. I will admit though, it is a really nice tool but its exporting functionality is God awful though.
-
-<2023-04-18 Tue 15:35>: The goal for the workflow going forward involves the following (if I do this all manually):
-- Create a component for the top 30% half of the screen called 'TopFrame.vue'
-- Create a component for the bottom 70% half of the screen called 'BottomFrame.vue'
-- For each of these components, literally create rectangle based div tags that look similar to what is present on the Figma template which shouldn't be hard at all
-- The buttons could easily be exported and brought into something else like GIMP to be further designed and chromed up so that 'hover' and 'click' actions are very obvious
-- Once the design is actually present and each page is accessible, it's just a matter of literally rigging up each of the buttons to separate functions in the Vue components
-- Once the buttons are actually working in their basic state, I can then explore various NPM packages that handle timers and metronome clicks as well as muting capabilities
-- After that, the app should be pretty much done and ready for testing on multiple devices including mobile and desktop screens
-- The only thing after that would include deploying it to something like Render.com
-
-<2023-04-19 Wed 15:10>: My revised version of this workflow goes as follows:
-- Create every individual component for the top half of the app minus the nav bar buttons at the top: even if it includes redundancy, this can be further refactored later so that if it works for now, great just use it and move on
-- Figure out the basic CSS styling for each component so that it closely matches the actual wireframed app itself
-- Create the individual buttons necessary for the bottom nav bar in GIMP or through CSS manipulation of the basic 'button' HTML tag itself
-- Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
-- Look into NPM packages that provide timer functionality (for counting up and down) as well as metronome and volume packages
-- Make the individual buttons actually work to provide changes on screen
-- Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
-- Test the resulting app in different screen sizes
-- Create modified buttons using gold style pixel art
-- Research flashy looking animations that appear when each component page is loaded
-- Deploy the app on Render.com
-
-<2023-04-19 Wed 15:15>: With this in mind, I am marking this task as complete
-*** DONE Create every individual component for the top half of the app minus the nav bar buttons at the top: even if it includes redundancy, this can be further refactored later so that if it works for now, great just use it and move on
-<2023-04-19 Wed 15:18>: This portion is complete as there are individual 'Vue' based 'views' present for each individual page.
-
-This can be further refactored later so that each page is a template with some provided components that are passed in via props via however which way that Vue does it, but for now, it works and is good for now.
+With this in mind, this task is complete.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

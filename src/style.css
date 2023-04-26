@@ -261,3 +261,12 @@ p {
   margin-right: 50px;
 }
 
+/* Forcing labels to appear above inputs for 'Timer' and 'Stopwatch' pages: */
+input, label {
+  display: block;
+}
+
+input {
+  color: black;
+  text-align: center;
+}

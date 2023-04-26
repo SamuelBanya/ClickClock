@@ -33,12 +33,18 @@
             <!-- Middle Screen Buttons -->
             <div class="text-yellow-100">
                 <div class="text-6xl text-center flex w-full items-center justify-center">
-                    <label for="hr-input" class="block mb-2 text-lg font-medium text-black-900 dark:text-white">Hours</label>
-                    <input id="hr-input" class="h-16 w-16 text-black-600 text-lg"/>
-                    <label for="min-input" class="block mb-2 text-lg font-medium text-black-900 dark:text-white">Hours</label>
-                    <input id="min-input" class="h-16 w-16 text-black-600 text-lg"/>
-                    <label for="sec-input" class="block mb-2 text-lg font-medium text-black-900 dark:text-white">Hours</label>
-                    <input id="sec-input" class="h-16 w-16 text-black-600 text-lg"/>
+                    <div class="box-border p-4">
+                        <label for="hr-input" class="block mb-2 text-xl font-medium text-black-900 dark:text-white">Hours</label>
+                        <input id="hr-input" class="h-16 w-16 text-black-600 text-xl"/>
+                    </div>
+                    <div class="box-border p-4">
+                        <label for="min-input" class="block mb-2 text-xl font-medium text-black-900 dark:text-white">Mins</label>
+                        <input id="min-input" class="h-16 w-16 text-black-600 text-lg"/>
+                    </div>
+                    <div class="box-border p-4">
+                        <label for="sec-input" class="block mb-2 text-xl font-medium text-black-900 dark:text-white">Secs</label>
+                        <input id="sec-input" class="h-16 w-16 text-black-600 text-lg"/>
+                    </div>
                 </div>
             </div>
 
