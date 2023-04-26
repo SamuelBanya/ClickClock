@@ -1,8 +1,5 @@
 # ClickClock
-A Vue.js + Ruby On Rails app that combines a kitchen timer, stopwatch, and metronome in a beautiful and easy-to-use package!
-
-* Ruby version
-ruby 2.7.4
+A Vue.js (Version 3) + Vite app that combines a kitchen timer, stopwatch, and metronome in a beautiful and easy-to-use package!
 
 * System dependencies
 Make sure you have 'libvips-dev' installed via the related package manager on your OS.

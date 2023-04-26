@@ -62,6 +62,18 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 * Jira Tickets
 ** Todo
 *** TODO Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
+<2023-04-26 Wed 11:20>: Now that the Figma design template is pretty much set, it is time to rig the buttons accordingly so that I can use actual JS for once in this project :)
+
+Though I learned a lot from trying to match the wireframe, I learned that it is not easy to do this at all, but appreciate a good design that dictates everything going forward as it made the app look way better than I intended it to.
+
+With this in mind, I will explore the buttons themselves.
+
+<2023-04-26 Wed 11:41>: I can easily do event handling with basic JavaScript but I am also debating if I should also explore it with how Vue does it.
+
+I checked their Docs page on the subject, and they are just as bad as the React docs page in the sense that all of these examples have zero context behind them, meaning they leave a TON of information out and only provide small snippets, when they should really provide small self contained examples in codeblocks but with 'html', 'js' etc tabs instead:
+- https://vuejs.org/guide/essentials/event-handling.html#method-handlers
+
+I will try to see if there are any actual guides on how to actually use the 'methods' keyword in this context since their example sucks at explaining if this should be in the 'template' block or even just the 'script' block at the bottom of a particular .Vue file.
 *** TODO Look into NPM packages that provide timer functionality (for counting up and down) as well as metronome and volume packages
 *** TODO Make the individual buttons actually work to provide changes on screen
 *** TODO Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
