@@ -61,7 +61,6 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Create the individual buttons necessary for the bottom nav bar in GIMP or through CSS manipulation of the basic 'button' HTML tag itself
 *** TODO Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
 *** TODO Look into NPM packages that provide timer functionality (for counting up and down) as well as metronome and volume packages
 *** TODO Make the individual buttons actually work to provide changes on screen
@@ -524,3 +523,5 @@ Here is the related GitHub issues bug I opened up for that template itself:
 I might go ahead and just try with a basic Vue.js app going forward to be honest since this is really just a 3-part timer application anyway. I will think about this and debate this honestly.
 
 <2023-04-17 Mon 11:42>: I went ahead and nuked the idea of having to learn Vue and to hook it up with Rails. It's way better to just use the tools that were meant for that framework, so I decided to forgo this and to just use Vue on its own with Vite and to get a Minimum Viable Product (MVP) going with a framework + wireframe before ever proceeding on anything else.
+*** CANCELLED Create the individual buttons necessary for the bottom nav bar in GIMP or through CSS manipulation of the basic 'button' HTML tag itself
+<2023-04-26 Wed 11:18>: I opted for designing the buttons via CSS as this allows for easier and more modern animations later. Though it is super fun to make glossy buttons, I think it's better to start with just pure CSS these days as HTML5/CSS3 allows for such easier effects for this kind of thing as opposed to the old days where you had to do these animations by hand.
