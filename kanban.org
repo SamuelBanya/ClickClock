@@ -119,6 +119,79 @@ After looking at their example, it was clear why I wasn't getting any info back 
 
 With this in mind, I was able to use 'this.' within the custom 'startTimer' method I created, and I am now easily seeing the values appear in console as expected.
 
+<2023-05-01 Mon 13:59>: I did more research into this, and 'Moment' package derivatives seem like a better approach than having to deal with the 'Date' object itself as such approaches sometimes utilize Unix timestamps in weird ways to the point where you're better off just using a library that is built to handle situations like mine.
+
+Basically, I need a date timestamp library that finds the current date time stamp, and adds to it to determine a new date timestamp in the future, and I would basically be counting down from the current date timestamp up until the new one.
+
+'Day.js' seems to fit the bill in my opinion:
+- https://day.js.org/en/
+
+The docs pages seem pretty decent as well for the intent that I have as well, especially their '.add' method to the 'dayjs' object itself which I could just add the 'hours', 'minutes', and 'seconds' onto in order to determine the final countdown timestamp:
+- https://day.js.org/docs/en/manipulate/add
+
+I used the following page to install the 'dayjs' package from NPM as a reference:
+- https://day.js.org/docs/en/installation/node-js
+
+I also used this exact NPM command accordingly:
+#+begin_src bash
+npm install dayjs
+#+end_src
+
+I also referred to this related Vue workaround to include 'dayjs' taken from this StackOverflow post:
+- https://stackoverflow.com/questions/66559331/how-to-properly-use-dayjs-inside-vue-3-app-and-component
+
+I basically imported the 'dayjs' package within the 'main.js' file itself, and then used '.provide' within the 'createApp' section at the bottom of the 'main.js' file to allow 'dayjs' to be known throughout the project accordingly.
+
+<2023-05-01 Mon 15:51>: I tried the methods listed in that StackOverflow post above (https://stackoverflow.com/questions/66559331/how-to-properly-use-dayjs-inside-vue-3-app-and-component), but none of them seemed to really work.
+
+I found a related GitHub repo post that basically shows you how to just add it as a new plugin in the 'plugins' folder with a few 'Object' related statements:
+- https://github.com/Juceztp/vue-dayjs
+
+With this in mind, I placed the following within the 'plugins/Dayjs.js' file:
+#+begin_src js
+import Vue from 'vue';
+import dayjs from 'dayjs';
+
+Object.defineProperties(Vue.prototype, {
+    $date: {
+        get() {
+            return dayjs
+        }
+    }
+});
+#+end_src
+
+<2023-05-01 Mon 16:01>: I tried implementing this idea, but received the '' error when doing so.
+
+I then found this StackOverflow post on this topic:
+- SyntaxError: ambiguous indirect export: default Error when importing my own class
+
+Judging from some of the posts present, especially even the 'vue3' based plugin for 'dayjs' itself's advice (https://github.com/DevAccess/vue3-dayjs), I will probably just opt to use the 'provide/inject' method instead, related quote:
+#+begin_src text
+This plugin allows you to easily include Day.js globally. This is not recommended with Vue 3, and they recommend using provide/inject instead.
+#+end_src
+
+<2023-05-01 Mon 16:18>: I am still struggling with plugin injection, so I looked around, and found 'vue-moment' instead, so this might be a more sane approach to the simple problem of dealing with date timestamp issues:
+- https://www.npmjs.com/package/vue-moment
+
+With this in mind, I installed 'vue-moment' via the following NPM command:
+#+begin_src bash
+npm install vue-moment
+#+end_src
+
+<2023-05-01 Mon 16:26>: I found the original 'moment' NPM package, and opted to use this instead:
+- https://www.npmjs.com/package/moment
+
+I then installed it with this npm command:
+#+begin_src bash
+npm install moment
+#+end_src
+
+I then found a corresponding StackOverflow post on how to incorporate it into a Vue project, more specifically, the 'In your package.json in the "dependencies" section add moment:' answer provided by Pawel Gościcki
+- https://stackoverflow.com/questions/34308004/moment-js-with-vuejs
+
+<2023-05-01 Mon 16:38>: I looked deeper into the Moment.js docs, and its just a matter of calling 'moment()' and just playing around with the methods present, so I opted for this approach. Not sure why so many solutions around this library or even 'Day.js' are so complicated when Moment just takes care of this in such easier steps. However, good docs are hard to find sometimes, so this could have been improved upon instead of all this separate research to be honest.
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:

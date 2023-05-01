@@ -55,6 +55,7 @@
 
 <script setup>
 import Logo from "../components/Logo.vue";
+import moment from "moment";
 </script>
 
 <script>
@@ -74,6 +75,18 @@ export default {
             console.log("hrinput: ", this.hrinput);
             console.log("mininput: ", this.mininput);
             console.log("secinput: ", this.secinput);
+
+            // Obtain the current date time:
+            let currentDate = moment()
+            console.log("currentDate: ", currentDate);
+
+            // Format what the user has provided to a normal timestamp by literally taking the current
+            // date timestamp, and adding the additional time to it to make it the 'end' time of the 
+            // countdown
+
+            // Determine the difference between the current date time stamp and the user's requested timestamp
+            // Create a function that counts down, and then as it is counting down, slice this resulting 
+            // date timestamp into 'hours', 'minutes', and 'seconds'
         }
     }
 }

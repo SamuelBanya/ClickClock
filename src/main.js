@@ -11,5 +11,6 @@ library.add(fas);
 
 createApp(App)
 .use(router)
+.use()
 .component("fa", FontAwesomeIcon)
 .mount('#app')
