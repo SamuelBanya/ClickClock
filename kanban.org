@@ -72,236 +72,16 @@ From the looks of it, it seems just like React where it is its own self containe
 
 <2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
 *** TODO Test the resulting app in different screen sizes
-*** TODO Create modified buttons using gold style pixel art
-<2023-04-17 Mon 15:27>: My goal for the overall look and design for this project is to emulate the Super Mario Advance 2 / Super Mario All-Stars 'peach gold' menu color scheme look. It has a really unique look, and would be really cool to apply for an app like this one.
 *** TODO Research flashy looking animations that appear when each component page is loaded
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Rig the individual buttons to related Vue functions and get it working with a basic console.log statement to prove they are useable
-<2023-04-26 Wed 11:20>: Now that the Figma design template is pretty much set, it is time to rig the buttons accordingly so that I can use actual JS for once in this project :)
+*** IN-PROGRESS Fix the countdown bug on the 'Timer' component in which it repeats the first second
+<2023-05-08 Mon 15:12>: I noticed a weird issue in which the countdown starts twice upon startup. This isn't a huge huge deal right now since it works, but it still should be resolved before this is deployed.
 
-Though I learned a lot from trying to match the wireframe, I learned that it is not easy to do this at all, but appreciate a good design that dictates everything going forward as it made the app look way better than I intended it to.
+This also affects the final second on the clock as well since the alarm sound starts too early.
 
-With this in mind, I will explore the buttons themselves.
-
-<2023-04-26 Wed 11:41>: I can easily do event handling with basic JavaScript but I am also debating if I should also explore it with how Vue does it.
-
-I checked their Docs page on the subject, and they are just as bad as the React docs page in the sense that all of these examples have zero context behind them, meaning they leave a TON of information out and only provide small snippets, when they should really provide small self contained examples in codeblocks but with 'html', 'js' etc tabs instead:
-- https://vuejs.org/guide/essentials/event-handling.html#method-handlers
-
-I will try to see if there are any actual guides on how to actually use the 'methods' keyword in this context since their example sucks at explaining if this should be in the 'template' block or even just the 'script' block at the bottom of a particular .Vue file.
-
-<2023-04-26 Wed 15:36>: I tried referring to this video for reference to how Vue handles the concept of 'event handling':
-- #07 - Event Handling - Vue 3 Tutorial (https://www.youtube.com/watch?v=o41UaWgkf_4)
-
-<2023-04-26 Wed 15:44>: I found this particular reference page to be helpful from the Vue docs:
-- https://vuejs.org/guide/essentials/forms.html
-
-Basically, the way Vue handles event handling is by simplifying it to the 'v-model' directive which negates any need for using ':value' or '@input' attributes on an input tag.
-
-What I can probably do in my scenario is then add 'v-model' directives to the input tags for the 'hours', 'minutes', and 'seconds' input tags to then easily and dynamically use before the user presses the 'Start' button.
-
-<2023-04-26 Wed 15:56>: I noticed in the Vue Docs page example's sandbox that the 'return' statement allows for the variable you are trying to create to be accessed:
-- https://play.vuejs.org/#eNo9jdEKwjAMRX8l9EV90L2POvAD/IO+lDVqoetCmw6h9N/NmBuEJPeSc1PVg+i2FFS90nlMnngwEb80JwaHL1sCQzURwFm258u2AyTkkuKuACbM2b6xh9Nps9o6pEnp7ggWwThRsIyiADQNz40En3uodQ+C1nRHK8HaRyoMy3WaHYa7Uf8To0CCRvzMwWESH51n4cXvBNTd8Um1H0FuTq0=
-
-With this in mind, I applied it to my project and it works to actively output it to a paragraph element as a test which is great.
-
-The problem I am having currently is that the 'startTimer' function I am creating does not have access to the 'hrinput', 'mininput', and 'secinput' variables for just basic console.log statements.
-
-<2023-04-26 Wed 16:28>: I did some further research on the topic of using 'v-model' directives in conjunction with the 'methods' section of the 'script' tag in a Vue application, and found this particular article, especially the '3. "Powerful" computed property' section to be pretty helpful:
-- https://dev.to/vcpablo/vuejs-2-different-ways-to-implement-v-model-1mjf
-
-This article linked to this particular page on the topic of using 'getters and setters' in terms of Vue:
-- https://vuejs.org/guide/essentials/computed.html#basic-example
-
-After looking at their example, it was clear why I wasn't getting any info back as I wasn't using the object orientated idea of using 'this.' to access the specific instance variable.
-
-With this in mind, I was able to use 'this.' within the custom 'startTimer' method I created, and I am now easily seeing the values appear in console as expected.
-
-<2023-05-01 Mon 13:59>: I did more research into this, and 'Moment' package derivatives seem like a better approach than having to deal with the 'Date' object itself as such approaches sometimes utilize Unix timestamps in weird ways to the point where you're better off just using a library that is built to handle situations like mine.
-
-Basically, I need a date timestamp library that finds the current date time stamp, and adds to it to determine a new date timestamp in the future, and I would basically be counting down from the current date timestamp up until the new one.
-
-'Day.js' seems to fit the bill in my opinion:
-- https://day.js.org/en/
-
-The docs pages seem pretty decent as well for the intent that I have as well, especially their '.add' method to the 'dayjs' object itself which I could just add the 'hours', 'minutes', and 'seconds' onto in order to determine the final countdown timestamp:
-- https://day.js.org/docs/en/manipulate/add
-
-I used the following page to install the 'dayjs' package from NPM as a reference:
-- https://day.js.org/docs/en/installation/node-js
-
-I also used this exact NPM command accordingly:
-#+begin_src bash
-npm install dayjs
-#+end_src
-
-I also referred to this related Vue workaround to include 'dayjs' taken from this StackOverflow post:
-- https://stackoverflow.com/questions/66559331/how-to-properly-use-dayjs-inside-vue-3-app-and-component
-
-I basically imported the 'dayjs' package within the 'main.js' file itself, and then used '.provide' within the 'createApp' section at the bottom of the 'main.js' file to allow 'dayjs' to be known throughout the project accordingly.
-
-<2023-05-01 Mon 15:51>: I tried the methods listed in that StackOverflow post above (https://stackoverflow.com/questions/66559331/how-to-properly-use-dayjs-inside-vue-3-app-and-component), but none of them seemed to really work.
-
-I found a related GitHub repo post that basically shows you how to just add it as a new plugin in the 'plugins' folder with a few 'Object' related statements:
-- https://github.com/Juceztp/vue-dayjs
-
-With this in mind, I placed the following within the 'plugins/Dayjs.js' file:
-#+begin_src js
-import Vue from 'vue';
-import dayjs from 'dayjs';
-
-Object.defineProperties(Vue.prototype, {
-    $date: {
-        get() {
-            return dayjs
-        }
-    }
-});
-#+end_src
-
-<2023-05-01 Mon 16:01>: I tried implementing this idea, but received the '' error when doing so.
-
-I then found this StackOverflow post on this topic:
-- SyntaxError: ambiguous indirect export: default Error when importing my own class
-
-Judging from some of the posts present, especially even the 'vue3' based plugin for 'dayjs' itself's advice (https://github.com/DevAccess/vue3-dayjs), I will probably just opt to use the 'provide/inject' method instead, related quote:
-#+begin_src text
-This plugin allows you to easily include Day.js globally. This is not recommended with Vue 3, and they recommend using provide/inject instead.
-#+end_src
-
-<2023-05-01 Mon 16:18>: I am still struggling with plugin injection, so I looked around, and found 'vue-moment' instead, so this might be a more sane approach to the simple problem of dealing with date timestamp issues:
-- https://www.npmjs.com/package/vue-moment
-
-With this in mind, I installed 'vue-moment' via the following NPM command:
-#+begin_src bash
-npm install vue-moment
-#+end_src
-
-<2023-05-01 Mon 16:26>: I found the original 'moment' NPM package, and opted to use this instead:
-- https://www.npmjs.com/package/moment
-
-I then installed it with this npm command:
-#+begin_src bash
-npm install moment
-#+end_src
-
-I then found a corresponding StackOverflow post on how to incorporate it into a Vue project, more specifically, the 'In your package.json in the "dependencies" section add moment:' answer provided by Pawel Gościcki
-- https://stackoverflow.com/questions/34308004/moment-js-with-vuejs
-
-<2023-05-01 Mon 16:38>: I looked deeper into the Moment.js docs, and its just a matter of calling 'moment()' and just playing around with the methods present, so I opted for this approach. Not sure why so many solutions around this library or even 'Day.js' are so complicated when Moment just takes care of this in such easier steps. However, good docs are hard to find sometimes, so this could have been improved upon instead of all this separate research to be honest.
-
-<2023-05-08 Mon 07:03>: I did some research into a few ways to convert the given time calculations.
-
-My general idea is to convert everything into seconds, countdown from that total amount, and just redisplay that amount as a loop goes on within the top display headers at the top of the application.
-
-Here's a StackOverflow post I used as a small reference:
-- https://stackoverflow.com/questions/37096367/how-to-convert-seconds-to-minutes-and-hours-in-javascript
-
-Here's my gameplan of how I plan on solving the calculations for the countdown timer my way:
-- Convert the 'hours', and 'minutes' that the user provides to seconds and add them to the 'seconds' amount
-- This can be done by the following conversions:
-#+begin_src js
-// Hour to sec conversion:
-let hrSecs = (hr / 1) * (3600 sec / 1 hr);
-
-// Min to sec conversion:
-let minSecs = (min / 1 ) * (60 sec / 1 min);
-
-// Sec conversion:
-let additionalSecs = secs;
-
-let totalSecs = hrSecs + minSecs + additionalSecs;
-#+end_src
-- Then, create a while loop with a condition variable that checks to see if the overall sum result is greater than 0
-- Within the while loop, decrease the 'counter' variable that is set to the 'sum' variable
-- Within this while loop, continuously convert the 'sum' total second results to 'hours' by using:
-#+begin_src js
-let displayHrs = Math.floor (totalSecs / 3600);
-#+end_src
-- Within this while loop, continuously convert the 'sum' total second results to 'mins' by multiplying by using:
-#+begin_src js
-let displayMins = Math.floor(totalSecs % 3600 / 60)
-#+end_src
-- Within this while loop, continuously convert the 'sum' total second results to 'mins' by multiplying by using:
-#+begin_src js
-let displaySecs = Math.floor(totalSecs % 3600 % 60)
-#+end_src
-- Then, output these results within the output sections at the top of the app
-
-<2023-05-08 Mon 08:12>: One major thing I forgot to accommodate for is the fact that this function needs to run once per second with 'setInterval'.
-
-I found this great example on the topic that calls a function once per second, or once every 1000 milliseconds:
-- https://vaidehijoshi.github.io/blog/2015/01/06/the-final-countdown-using-javascripts-setinterval-plus-clearinterval-methods/
-
-<2023-05-08 Mon 09:00>: The issue I am currently running into is that the 'display' related variables don't have the right unit conversion. I tried to use a spot fix for the 'displayHrs' conversion variable by dividing by 10. Though this works initially, it gets wonky a bit with various example times.
-
-I think I should look up some other examples that relate to this.
-
-For the most part, I think the root cause of this issue is probably the use of the '%' remainder operator though in this case. Something doesn't seem to be right. It's weird though because unit conversion for me as a topic overall isn't too hard to grasp though. The overall second calculation seems to be just fine, so at least that half of the problem is working just fine.
-
-<2023-05-08 Mon 09:09>: I did a small isolation of the problem itself by literally passing in '0' hours, '1' mins, and '0' secs which resulted in '600' totalSecs.
-
-This itself proved to me that it was doing wonky calculations due to the JavaScript function adding '0' as an additional string value to make '600' total.
-
-I then forced 'parseInt' to convert each of the 'Secs' related variables to become integers which seems to have fixed the issue.
-
-I used this MDN docs page on 'parseInt' as a reference:
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
-
-<2023-05-08 Mon 09:42>: I am currently trying to figure out why I am not able to pass values from variables created within the 'startTimer' method itself. I am assuming it's just a matter of using 'this.' plus the variable name or something like that with a ternary operator, but that does not seem to be the case.
-
-A lot of the examples I have found so far get close, but are using a Vue method to return one thing only unlike my example where I would need to return many variables as a result of the timer. I am assuming that I might have to just access the 'data' object directly but I'm not quite sure at this point.
-
-Here are the examples I found so far:
-- https://cumsum.wordpress.com/2020/08/08/vue3-property-xxx-was-accessed-during-render-but-is-not-defined-on-instance/
-- https://www.geeksforgeeks.org/vue-js-methods/#
-- https://javascript.plainenglish.io/vue-methods-5f5ebb6148aa
-- https://flaviocopes.com/vue-methods/
-- https://www.w3schools.com/vue/vue_methods.php
-
-<2023-05-08 Mon 10:15>: I did some further research, and found a Vue example in which the concept of 'emitting' from events was used:
-- https://www.telerik.com/blogs/how-to-emit-data-in-vue-beyond-the-vuejs-documentation
-
-I then tried to look at the Vue docs page on the subject, but that was more specific on passing events in general, and not necessarily outputting the exact variable value like in my actual project example:
-- https://vuejs.org/guide/components/events.html
-
-I also tried referring to the Vue docs page on 'Components' but this doesn't really cover what I'm trying to do as that docs page goes into how to create components and pass certain properties as props when reusing components:
-- https://vuejs.org/guide/essentials/component-basics.html
-
-<2023-05-08 Mon 10:28>: Judging from this StackOverflow post, the paradigm for Vue.js is really 'MVVM' which is 'Model View View Model':
-- https://stackoverflow.com/questions/40212883/how-to-replace-the-contents-of-an-element
-
-<2023-05-08 Mon 10:30>: Further research reveals that this whole concept really is just 'text interpolation' in terms of Vue, which is shown in the Vue docs themselves:
-- https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation
-
-<2023-05-08 Mon 10:36>: After doing a bit more digging, I realized that I might have hit an edge case apparently that is accommodated differently in Vue 3.
-
-This example explains it a bit better:
-- https://vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive-proxy-vs-original
-
-The fact that I'm assigning the returned object from the 'return' statement to a new value means it is actually pointing to a different object in memory.
-
-The main point of that link above is that in order to access the proper value I am after, I have to use 'this' to access the correct property.
-
-Apparently, Vue 3 handles reactive data by using the concept of 'proxies' which is shown here in the MDN docs:
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
-
-<2023-05-08 Mon 11:08>: I did more research, and this blog post was WAY better at explaining the difficulties with how Vue 3 handles destructuring the returned object's values:
-- https://blog.deepgram.com/diving-into-vue-3-reactivity-api/
-
-Basically, I maybe import 'ref' from Vue in order to properly output the value apparently.
-
-<2023-05-08 Mon 11:11>: After reading that same article (https://blog.deepgram.com/diving-into-vue-3-reactivity-api/) a little bit further, it seems I probably want to access the value directly with dot notation (.propertyValue) so I'll try that instead at the top of the page.
-
-<2023-05-08 Mon 11:40>: I realized that I actually would need an arrow function for the returned function inside the 'countdown' variable function.
-
-After making this change, I was successfully able to see 'displayHrs', 'displayMins' and 'displaySecs' displayed successfully!
-
-<2023-05-08 Mon 11:42>: The next obvious steps on the same component page include the following:
-- Once the timer hits zero, I would want to be able to display a message to the user that the timer is up as well as a timer sound
-- I then need to make the 'Reset' button actually work as well to stop the timer and set the values back to '00' for 'hours', 'mins', and 'secs'.
+Mostly likely, I could even counter balance the timer's sound to begin on '-1' anyway since 'setInterval()' will nuke the related variable function out of memory anyway once the timer is up.
 
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
@@ -733,6 +513,259 @@ I also referred to this Tailwind docs page for how to adjust the text sizing for
 <2023-04-26 Wed 11:16>: I believe most of the latest styling changes now reflect the initial design template dictated by the Figma design template.
 
 With this in mind, this task is complete.
+*** DONE Get the related 'Start' button on the 'Timer' component to actually start counting down the time accordingly and to end with a sound being played
+<2023-04-26 Wed 11:20>: Now that the Figma design template is pretty much set, it is time to rig the buttons accordingly so that I can use actual JS for once in this project :)
+
+Though I learned a lot from trying to match the wireframe, I learned that it is not easy to do this at all, but appreciate a good design that dictates everything going forward as it made the app look way better than I intended it to.
+
+With this in mind, I will explore the buttons themselves.
+
+<2023-04-26 Wed 11:41>: I can easily do event handling with basic JavaScript but I am also debating if I should also explore it with how Vue does it.
+
+I checked their Docs page on the subject, and they are just as bad as the React docs page in the sense that all of these examples have zero context behind them, meaning they leave a TON of information out and only provide small snippets, when they should really provide small self contained examples in codeblocks but with 'html', 'js' etc tabs instead:
+- https://vuejs.org/guide/essentials/event-handling.html#method-handlers
+
+I will try to see if there are any actual guides on how to actually use the 'methods' keyword in this context since their example sucks at explaining if this should be in the 'template' block or even just the 'script' block at the bottom of a particular .Vue file.
+
+<2023-04-26 Wed 15:36>: I tried referring to this video for reference to how Vue handles the concept of 'event handling':
+- #07 - Event Handling - Vue 3 Tutorial (https://www.youtube.com/watch?v=o41UaWgkf_4)
+
+<2023-04-26 Wed 15:44>: I found this particular reference page to be helpful from the Vue docs:
+- https://vuejs.org/guide/essentials/forms.html
+
+Basically, the way Vue handles event handling is by simplifying it to the 'v-model' directive which negates any need for using ':value' or '@input' attributes on an input tag.
+
+What I can probably do in my scenario is then add 'v-model' directives to the input tags for the 'hours', 'minutes', and 'seconds' input tags to then easily and dynamically use before the user presses the 'Start' button.
+
+<2023-04-26 Wed 15:56>: I noticed in the Vue Docs page example's sandbox that the 'return' statement allows for the variable you are trying to create to be accessed:
+- https://play.vuejs.org/#eNo9jdEKwjAMRX8l9EV90L2POvAD/IO+lDVqoetCmw6h9N/NmBuEJPeSc1PVg+i2FFS90nlMnngwEb80JwaHL1sCQzURwFm258u2AyTkkuKuACbM2b6xh9Nps9o6pEnp7ggWwThRsIyiADQNz40En3uodQ+C1nRHK8HaRyoMy3WaHYa7Uf8To0CCRvzMwWESH51n4cXvBNTd8Um1H0FuTq0=
+
+With this in mind, I applied it to my project and it works to actively output it to a paragraph element as a test which is great.
+
+The problem I am having currently is that the 'startTimer' function I am creating does not have access to the 'hrinput', 'mininput', and 'secinput' variables for just basic console.log statements.
+
+<2023-04-26 Wed 16:28>: I did some further research on the topic of using 'v-model' directives in conjunction with the 'methods' section of the 'script' tag in a Vue application, and found this particular article, especially the '3. "Powerful" computed property' section to be pretty helpful:
+- https://dev.to/vcpablo/vuejs-2-different-ways-to-implement-v-model-1mjf
+
+This article linked to this particular page on the topic of using 'getters and setters' in terms of Vue:
+- https://vuejs.org/guide/essentials/computed.html#basic-example
+
+After looking at their example, it was clear why I wasn't getting any info back as I wasn't using the object orientated idea of using 'this.' to access the specific instance variable.
+
+With this in mind, I was able to use 'this.' within the custom 'startTimer' method I created, and I am now easily seeing the values appear in console as expected.
+
+<2023-05-01 Mon 13:59>: I did more research into this, and 'Moment' package derivatives seem like a better approach than having to deal with the 'Date' object itself as such approaches sometimes utilize Unix timestamps in weird ways to the point where you're better off just using a library that is built to handle situations like mine.
+
+Basically, I need a date timestamp library that finds the current date time stamp, and adds to it to determine a new date timestamp in the future, and I would basically be counting down from the current date timestamp up until the new one.
+
+'Day.js' seems to fit the bill in my opinion:
+- https://day.js.org/en/
+
+The docs pages seem pretty decent as well for the intent that I have as well, especially their '.add' method to the 'dayjs' object itself which I could just add the 'hours', 'minutes', and 'seconds' onto in order to determine the final countdown timestamp:
+- https://day.js.org/docs/en/manipulate/add
+
+I used the following page to install the 'dayjs' package from NPM as a reference:
+- https://day.js.org/docs/en/installation/node-js
+
+I also used this exact NPM command accordingly:
+#+begin_src bash
+npm install dayjs
+#+end_src
+
+I also referred to this related Vue workaround to include 'dayjs' taken from this StackOverflow post:
+- https://stackoverflow.com/questions/66559331/how-to-properly-use-dayjs-inside-vue-3-app-and-component
+
+I basically imported the 'dayjs' package within the 'main.js' file itself, and then used '.provide' within the 'createApp' section at the bottom of the 'main.js' file to allow 'dayjs' to be known throughout the project accordingly.
+
+<2023-05-01 Mon 15:51>: I tried the methods listed in that StackOverflow post above (https://stackoverflow.com/questions/66559331/how-to-properly-use-dayjs-inside-vue-3-app-and-component), but none of them seemed to really work.
+
+I found a related GitHub repo post that basically shows you how to just add it as a new plugin in the 'plugins' folder with a few 'Object' related statements:
+- https://github.com/Juceztp/vue-dayjs
+
+With this in mind, I placed the following within the 'plugins/Dayjs.js' file:
+#+begin_src js
+import Vue from 'vue';
+import dayjs from 'dayjs';
+
+Object.defineProperties(Vue.prototype, {
+    $date: {
+        get() {
+            return dayjs
+        }
+    }
+});
+#+end_src
+
+<2023-05-01 Mon 16:01>: I tried implementing this idea, but received the '' error when doing so.
+
+I then found this StackOverflow post on this topic:
+- SyntaxError: ambiguous indirect export: default Error when importing my own class
+
+Judging from some of the posts present, especially even the 'vue3' based plugin for 'dayjs' itself's advice (https://github.com/DevAccess/vue3-dayjs), I will probably just opt to use the 'provide/inject' method instead, related quote:
+#+begin_src text
+This plugin allows you to easily include Day.js globally. This is not recommended with Vue 3, and they recommend using provide/inject instead.
+#+end_src
+
+<2023-05-01 Mon 16:18>: I am still struggling with plugin injection, so I looked around, and found 'vue-moment' instead, so this might be a more sane approach to the simple problem of dealing with date timestamp issues:
+- https://www.npmjs.com/package/vue-moment
+
+With this in mind, I installed 'vue-moment' via the following NPM command:
+#+begin_src bash
+npm install vue-moment
+#+end_src
+
+<2023-05-01 Mon 16:26>: I found the original 'moment' NPM package, and opted to use this instead:
+- https://www.npmjs.com/package/moment
+
+I then installed it with this npm command:
+#+begin_src bash
+npm install moment
+#+end_src
+
+I then found a corresponding StackOverflow post on how to incorporate it into a Vue project, more specifically, the 'In your package.json in the "dependencies" section add moment:' answer provided by Pawel Gościcki
+- https://stackoverflow.com/questions/34308004/moment-js-with-vuejs
+
+<2023-05-01 Mon 16:38>: I looked deeper into the Moment.js docs, and its just a matter of calling 'moment()' and just playing around with the methods present, so I opted for this approach. Not sure why so many solutions around this library or even 'Day.js' are so complicated when Moment just takes care of this in such easier steps. However, good docs are hard to find sometimes, so this could have been improved upon instead of all this separate research to be honest.
+
+<2023-05-08 Mon 07:03>: I did some research into a few ways to convert the given time calculations.
+
+My general idea is to convert everything into seconds, countdown from that total amount, and just redisplay that amount as a loop goes on within the top display headers at the top of the application.
+
+Here's a StackOverflow post I used as a small reference:
+- https://stackoverflow.com/questions/37096367/how-to-convert-seconds-to-minutes-and-hours-in-javascript
+
+Here's my gameplan of how I plan on solving the calculations for the countdown timer my way:
+- Convert the 'hours', and 'minutes' that the user provides to seconds and add them to the 'seconds' amount
+- This can be done by the following conversions:
+#+begin_src js
+// Hour to sec conversion:
+let hrSecs = (hr / 1) * (3600 sec / 1 hr);
+
+// Min to sec conversion:
+let minSecs = (min / 1 ) * (60 sec / 1 min);
+
+// Sec conversion:
+let additionalSecs = secs;
+
+let totalSecs = hrSecs + minSecs + additionalSecs;
+#+end_src
+- Then, create a while loop with a condition variable that checks to see if the overall sum result is greater than 0
+- Within the while loop, decrease the 'counter' variable that is set to the 'sum' variable
+- Within this while loop, continuously convert the 'sum' total second results to 'hours' by using:
+#+begin_src js
+let displayHrs = Math.floor (totalSecs / 3600);
+#+end_src
+- Within this while loop, continuously convert the 'sum' total second results to 'mins' by multiplying by using:
+#+begin_src js
+let displayMins = Math.floor(totalSecs % 3600 / 60)
+#+end_src
+- Within this while loop, continuously convert the 'sum' total second results to 'mins' by multiplying by using:
+#+begin_src js
+let displaySecs = Math.floor(totalSecs % 3600 % 60)
+#+end_src
+- Then, output these results within the output sections at the top of the app
+
+<2023-05-08 Mon 08:12>: One major thing I forgot to accommodate for is the fact that this function needs to run once per second with 'setInterval'.
+
+I found this great example on the topic that calls a function once per second, or once every 1000 milliseconds:
+- https://vaidehijoshi.github.io/blog/2015/01/06/the-final-countdown-using-javascripts-setinterval-plus-clearinterval-methods/
+
+<2023-05-08 Mon 09:00>: The issue I am currently running into is that the 'display' related variables don't have the right unit conversion. I tried to use a spot fix for the 'displayHrs' conversion variable by dividing by 10. Though this works initially, it gets wonky a bit with various example times.
+
+I think I should look up some other examples that relate to this.
+
+For the most part, I think the root cause of this issue is probably the use of the '%' remainder operator though in this case. Something doesn't seem to be right. It's weird though because unit conversion for me as a topic overall isn't too hard to grasp though. The overall second calculation seems to be just fine, so at least that half of the problem is working just fine.
+
+<2023-05-08 Mon 09:09>: I did a small isolation of the problem itself by literally passing in '0' hours, '1' mins, and '0' secs which resulted in '600' totalSecs.
+
+This itself proved to me that it was doing wonky calculations due to the JavaScript function adding '0' as an additional string value to make '600' total.
+
+I then forced 'parseInt' to convert each of the 'Secs' related variables to become integers which seems to have fixed the issue.
+
+I used this MDN docs page on 'parseInt' as a reference:
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+
+<2023-05-08 Mon 09:42>: I am currently trying to figure out why I am not able to pass values from variables created within the 'startTimer' method itself. I am assuming it's just a matter of using 'this.' plus the variable name or something like that with a ternary operator, but that does not seem to be the case.
+
+A lot of the examples I have found so far get close, but are using a Vue method to return one thing only unlike my example where I would need to return many variables as a result of the timer. I am assuming that I might have to just access the 'data' object directly but I'm not quite sure at this point.
+
+Here are the examples I found so far:
+- https://cumsum.wordpress.com/2020/08/08/vue3-property-xxx-was-accessed-during-render-but-is-not-defined-on-instance/
+- https://www.geeksforgeeks.org/vue-js-methods/#
+- https://javascript.plainenglish.io/vue-methods-5f5ebb6148aa
+- https://flaviocopes.com/vue-methods/
+- https://www.w3schools.com/vue/vue_methods.php
+
+<2023-05-08 Mon 10:15>: I did some further research, and found a Vue example in which the concept of 'emitting' from events was used:
+- https://www.telerik.com/blogs/how-to-emit-data-in-vue-beyond-the-vuejs-documentation
+
+I then tried to look at the Vue docs page on the subject, but that was more specific on passing events in general, and not necessarily outputting the exact variable value like in my actual project example:
+- https://vuejs.org/guide/components/events.html
+
+I also tried referring to the Vue docs page on 'Components' but this doesn't really cover what I'm trying to do as that docs page goes into how to create components and pass certain properties as props when reusing components:
+- https://vuejs.org/guide/essentials/component-basics.html
+
+<2023-05-08 Mon 10:28>: Judging from this StackOverflow post, the paradigm for Vue.js is really 'MVVM' which is 'Model View View Model':
+- https://stackoverflow.com/questions/40212883/how-to-replace-the-contents-of-an-element
+
+<2023-05-08 Mon 10:30>: Further research reveals that this whole concept really is just 'text interpolation' in terms of Vue, which is shown in the Vue docs themselves:
+- https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation
+
+<2023-05-08 Mon 10:36>: After doing a bit more digging, I realized that I might have hit an edge case apparently that is accommodated differently in Vue 3.
+
+This example explains it a bit better:
+- https://vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive-proxy-vs-original
+
+The fact that I'm assigning the returned object from the 'return' statement to a new value means it is actually pointing to a different object in memory.
+
+The main point of that link above is that in order to access the proper value I am after, I have to use 'this' to access the correct property.
+
+Apparently, Vue 3 handles reactive data by using the concept of 'proxies' which is shown here in the MDN docs:
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+
+<2023-05-08 Mon 11:08>: I did more research, and this blog post was WAY better at explaining the difficulties with how Vue 3 handles destructuring the returned object's values:
+- https://blog.deepgram.com/diving-into-vue-3-reactivity-api/
+
+Basically, I maybe import 'ref' from Vue in order to properly output the value apparently.
+
+<2023-05-08 Mon 11:11>: After reading that same article (https://blog.deepgram.com/diving-into-vue-3-reactivity-api/) a little bit further, it seems I probably want to access the value directly with dot notation (.propertyValue) so I'll try that instead at the top of the page.
+
+<2023-05-08 Mon 11:40>: I realized that I actually would need an arrow function for the returned function inside the 'countdown' variable function.
+
+After making this change, I was successfully able to see 'displayHrs', 'displayMins' and 'displaySecs' displayed successfully!
+
+<2023-05-08 Mon 11:42>: The next obvious steps on the same component page include the following:
+- Once the timer hits zero, I would want to be able to display a message to the user that the timer is up as well as a timer sound
+- I then need to make the 'Reset' button actually work as well to stop the timer and set the values back to '00' for 'hours', 'mins', and 'secs'.
+
+<2023-05-08 Mon 14:07>: I found a related sound package I could use called 'play-sound' which I installed via this NPM command:
+#+begin_src bash
+npm install play-sound
+#+end_src
+
+<2023-05-08 Mon 14:31>: After trying for a few mins, I just couldn't get it to work.
+
+I tried using this StackOverflow post as a reference, but it wasn't too helpful:
+- https://stackoverflow.com/questions/43265743/playing-a-sound-with-vue-js
+
+I then found the 'vueuse' package to use instead:
+- https://github.com/vueuse/sound
+
+I installed it via this command:
+#+begin_src bash
+npm install @vueuse/sound
+#+end_src
+
+<2023-05-08 Mon 15:00>: I could not get the '@vueuse/sound' package to work either, so I found this unrelated time counter example which uses the 'HTMLAudioElement: Audio()' constructor:
+- https://www.codehim.com/date-time/javascript-alarm-clock-with-sound/
+
+Upon further research, I found the related 'Audio()' MDN docs page as well:
+- https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement/Audio
+
+I also was able to use an unrelated video as a reference as well for the 'HTMLAudioElement: Audio()' constructor:
+- Vue.js Demos, Part 5: Working with Audio (https://www.youtube.com/watch?v=jjX0JhPrU9A)
+
+With these references above, I was successfully able to just use the vanilla 'Audio()' constructor to play the desired alarm sound.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
@@ -749,3 +782,5 @@ I might go ahead and just try with a basic Vue.js app going forward to be honest
 <2023-04-17 Mon 11:42>: I went ahead and nuked the idea of having to learn Vue and to hook it up with Rails. It's way better to just use the tools that were meant for that framework, so I decided to forgo this and to just use Vue on its own with Vite and to get a Minimum Viable Product (MVP) going with a framework + wireframe before ever proceeding on anything else.
 *** CANCELLED Create the individual buttons necessary for the bottom nav bar in GIMP or through CSS manipulation of the basic 'button' HTML tag itself
 <2023-04-26 Wed 11:18>: I opted for designing the buttons via CSS as this allows for easier and more modern animations later. Though it is super fun to make glossy buttons, I think it's better to start with just pure CSS these days as HTML5/CSS3 allows for such easier effects for this kind of thing as opposed to the old days where you had to do these animations by hand.
+*** CANCELLED Create modified buttons using gold style pixel art
+<2023-04-17 Mon 15:27>: My goal for the overall look and design for this project is to emulate the Super Mario Advance 2 / Super Mario All-Stars 'peach gold' menu color scheme look. It has a really unique look, and would be really cool to apply for an app like this one.

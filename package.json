@@ -17,7 +17,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.17",
-    "moment": "^2.29.4",
+    "@vueuse/sound": "^2.0.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },

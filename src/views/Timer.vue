@@ -55,7 +55,8 @@
 
 <script setup>
 import Logo from "../components/Logo.vue";
-import moment from "moment";
+// import { useSound } from "@vueuse/sound";
+// import alarmSound from "../sounds/alarm.mp3";
 </script>
 
 <script>
@@ -97,10 +98,6 @@ export default {
             console.log("totalSecs: ", totalSecs);
 
             var countdown = setInterval(() => {
-                // let displayHrs = Math.floor(totalSecs / 3600);
-                // let displayMins = Math.floor((totalSecs % 3600) / 60);
-                // let displaySecs = Math.floor((totalSecs % 3600) % 60);
-
                 this.displayHrs = Math.floor(totalSecs / 3600);
                 this.displayMins = Math.floor((totalSecs % 3600) / 60);
                 this.displaySecs = Math.floor((totalSecs % 3600) % 60);
@@ -111,6 +108,11 @@ export default {
                 console.log("displaySecs: ", this.displaySecs);
 
                 totalSecs--;
+
+                if (totalSecs === 1) {
+                    let alarmSound =  new Audio("src/sounds/alarm.mp3");
+                    alarmSound.play();
+                }
 
                 if (totalSecs === -1) {
                     console.log("totalSecs: ", this.totalSecs);
