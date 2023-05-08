@@ -76,17 +76,36 @@ export default {
             console.log("mininput: ", this.mininput);
             console.log("secinput: ", this.secinput);
 
-            // Obtain the current date time:
-            let currentDate = moment()
-            console.log("currentDate: ", currentDate);
+            // Convert all user inputs to secs:
+            let hrSecs = this.hrinput * 3600;
+            let minSecs = this.mininput * 60;
+            let additionalSecs = this.secinput;
+            let totalSecs = hrSecs + minSecs + additionalSecs;
 
-            // Format what the user has provided to a normal timestamp by literally taking the current
-            // date timestamp, and adding the additional time to it to make it the 'end' time of the 
-            // countdown
+            console.log("hrSecs: ", hrSecs);
+            console.log("minSecs: ", minSecs);
+            console.log("additionalSecs: ", additionalSecs);
+            console.log("totalSecs: ", totalSecs);
 
-            // Determine the difference between the current date time stamp and the user's requested timestamp
-            // Create a function that counts down, and then as it is counting down, slice this resulting 
-            // date timestamp into 'hours', 'minutes', and 'seconds'
+            var countdown = setInterval(function() {
+                // TODO:
+                // Fix the 'displayHrs' calculation:
+                let displayHrs = Math.floor(totalSecs / 3600);
+                // Fix the 'displayHrs' calculation:
+                let displayMins = Math.floor(totalSecs % 3600 / 60);
+                let displaySecs = Math.floor(totalSecs % 3600 % 60);
+
+                console.log("totalSecs: ", totalSecs);
+                console.log("displayHrs: ", displayHrs);
+                console.log("displayMins: ", displayMins);
+                console.log("displaySecs: ", displaySecs);
+
+                totalSecs--;
+
+                if (totalSecs === 0) {
+                    clearInterval(countdown);
+                }
+            }, 1000);
         }
     }
 }

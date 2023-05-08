@@ -192,6 +192,46 @@ I then found a corresponding StackOverflow post on how to incorporate it into a 
 
 <2023-05-01 Mon 16:38>: I looked deeper into the Moment.js docs, and its just a matter of calling 'moment()' and just playing around with the methods present, so I opted for this approach. Not sure why so many solutions around this library or even 'Day.js' are so complicated when Moment just takes care of this in such easier steps. However, good docs are hard to find sometimes, so this could have been improved upon instead of all this separate research to be honest.
 
+<2023-05-08 Mon 07:03>: I did some research into a few ways to convert the given time calculations.
+
+My general idea is to convert everything into seconds, countdown from that total amount, and just redisplay that amount as a loop goes on within the top display headers at the top of the application.
+
+Here's a StackOverflow post I used as a small reference:
+- https://stackoverflow.com/questions/37096367/how-to-convert-seconds-to-minutes-and-hours-in-javascript
+
+Here's my gameplan of how I plan on solving the calculations for the countdown timer my way:
+- Convert the 'hours', and 'minutes' that the user provides to seconds and add them to the 'seconds' amount
+- This can be done by the following conversions:
+#+begin_src js
+// Hour to sec conversion:
+let hrSecs = (hr / 1) * (3600 sec / 1 hr);
+
+// Min to sec conversion:
+let minSecs = (min / 1 ) * (60 sec / 1 min);
+
+// Sec conversion:
+let additionalSecs = secs;
+
+let totalSecs = hrSecs + minSecs + additionalSecs;
+#+end_src
+- Then, create a while loop with a condition variable that checks to see if the overall sum result is greater than 0
+- Within the while loop, decrease the 'counter' variable that is set to the 'sum' variable
+- Within this while loop, continuously convert the 'sum' total second results to 'hours' by using:
+#+begin_src js
+let displayHrs = Math.floor (totalSecs / 3600);
+#+end_src
+- Within this while loop, continuously convert the 'sum' total second results to 'mins' by multiplying by using:
+#+begin_src js
+let displayMins = Math.floor(totalSecs % 3600 / 60)
+#+end_src
+- Within this while loop, continuously convert the 'sum' total second results to 'mins' by multiplying by using:
+#+begin_src js
+let displaySecs = Math.floor(totalSecs % 3600 % 60)
+#+end_src
+- Then, output these results within the output sections at the top of the app
+
+<2023-05-08 Mon 08:12>: One major thing I forgot to accommodate for is the fact that this function needs to run once per second with 'setInterval'.
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
