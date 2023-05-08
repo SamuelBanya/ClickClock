@@ -77,9 +77,9 @@ export default {
             console.log("secinput: ", this.secinput);
 
             // Convert all user inputs to secs:
-            let hrSecs = this.hrinput * 3600;
-            let minSecs = this.mininput * 60;
-            let additionalSecs = this.secinput;
+            let hrSecs = parseInt(this.hrinput * 3600);
+            let minSecs = parseInt(this.mininput * 60);
+            let additionalSecs = parseInt(this.secinput);
             let totalSecs = hrSecs + minSecs + additionalSecs;
 
             console.log("hrSecs: ", hrSecs);
@@ -92,8 +92,8 @@ export default {
                 // Fix the 'displayHrs' calculation:
                 let displayHrs = Math.floor(totalSecs / 3600);
                 // Fix the 'displayHrs' calculation:
-                let displayMins = Math.floor(totalSecs % 3600 / 60);
-                let displaySecs = Math.floor(totalSecs % 3600 % 60);
+                let displayMins = Math.floor((totalSecs % 3600) / 60);
+                let displaySecs = Math.floor((totalSecs % 3600) % 60);
 
                 console.log("totalSecs: ", totalSecs);
                 console.log("displayHrs: ", displayHrs);
@@ -102,7 +102,11 @@ export default {
 
                 totalSecs--;
 
-                if (totalSecs === 0) {
+                if (totalSecs === -1) {
+                    console.log("totalSecs: ", totalSecs);
+                    console.log("displayHrs: ", displayHrs);
+                    console.log("displayMins: ", displayMins);
+                    console.log("displaySecs: ", displaySecs);
                     clearInterval(countdown);
                 }
             }, 1000);

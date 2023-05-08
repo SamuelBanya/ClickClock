@@ -232,6 +232,21 @@ let displaySecs = Math.floor(totalSecs % 3600 % 60)
 
 <2023-05-08 Mon 08:12>: One major thing I forgot to accommodate for is the fact that this function needs to run once per second with 'setInterval'.
 
+<2023-05-08 Mon 09:00>: The issue I am currently running into is that the 'display' related variables don't have the right unit conversion. I tried to use a spot fix for the 'displayHrs' conversion variable by dividing by 10. Though this works initially, it gets wonky a bit with various example times.
+
+I think I should look up some other examples that relate to this.
+
+For the most part, I think the root cause of this issue is probably the use of the '%' remainder operator though in this case. Something doesn't seem to be right. It's weird though because unit conversion for me as a topic overall isn't too hard to grasp though. The overall second calculation seems to be just fine, so at least that half of the problem is working just fine.
+
+<2023-05-08 Mon 09:09>: I did a small isolation of the problem itself by literally passing in '0' hours, '1' mins, and '0' secs which resulted in '600' totalSecs.
+
+This itself proved to me that it was doing wonky calculations due to the JavaScript function adding '0' as an additional string value to make '600' total.
+
+I then forced 'parseInt' to convert each of the 'Secs' related variables to become integers which seems to have fixed the issue.
+
+I used this MDN docs page on 'parseInt' as a reference:
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
