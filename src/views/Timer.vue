@@ -9,15 +9,15 @@
             <div class="text-black-100">
                 <div class="text-6xl text-center flex w-full items-center justify-center">
                     <div class="w-24 mx-1 p-2 bg-white text-black-500 rounded-lg">
-                        <div class="font-mono leading-none" x-text="minutes">00</div>
+                        <div class="font-mono leading-none">{{ displayHrs || '00' }}</div>
                         <div class="font-mono uppercase text-sm leading-none">Hours</div>
                     </div>
                     <div class="w-24 mx-1 p-2 bg-white text-black-500 rounded-lg">
-                        <div class="font-mono leading-none" x-text="minutes">00</div>
+                        <div class="font-mono leading-none">{{  displayMins || '00' }}</div>
                         <div class="font-mono uppercase text-sm leading-none">Minutes</div>
                     </div>
                     <div class="w-24 mx-1 p-2 bg-white text-black-500 rounded-lg">
-                        <div class="font-mono leading-none" x-text="seconds">00</div>
+                        <div class="font-mono leading-none">{{ displaySecs || '00' }}</div>
                         <div class="font-mono uppercase text-sm leading-none">Seconds</div>
                     </div>
                 </div>
@@ -64,13 +64,22 @@ export default {
         return {
             hrinput: "",
             mininput: "",
-            secinput: ""
+            secinput: "",
+            totalSecs: 0,
+            hrSecs: 0,
+            minSecs: 0,
+            additionalSecs: 0,
+            totalSecs: 0,
+            displayHrs: 0,
+            displayMins: 0,
+            displaySecs: 0
         }
     },
     methods: {
         startTimer() {
             // Show that the button works:
             console.log("Start button clicked!")
+
             // Grab the multiple inputs
             console.log("hrinput: ", this.hrinput);
             console.log("mininput: ", this.mininput);
@@ -87,26 +96,27 @@ export default {
             console.log("additionalSecs: ", additionalSecs);
             console.log("totalSecs: ", totalSecs);
 
-            var countdown = setInterval(function() {
-                // TODO:
-                // Fix the 'displayHrs' calculation:
-                let displayHrs = Math.floor(totalSecs / 3600);
-                // Fix the 'displayHrs' calculation:
-                let displayMins = Math.floor((totalSecs % 3600) / 60);
-                let displaySecs = Math.floor((totalSecs % 3600) % 60);
+            var countdown = setInterval(() => {
+                // let displayHrs = Math.floor(totalSecs / 3600);
+                // let displayMins = Math.floor((totalSecs % 3600) / 60);
+                // let displaySecs = Math.floor((totalSecs % 3600) % 60);
 
-                console.log("totalSecs: ", totalSecs);
-                console.log("displayHrs: ", displayHrs);
-                console.log("displayMins: ", displayMins);
-                console.log("displaySecs: ", displaySecs);
+                this.displayHrs = Math.floor(totalSecs / 3600);
+                this.displayMins = Math.floor((totalSecs % 3600) / 60);
+                this.displaySecs = Math.floor((totalSecs % 3600) % 60);
+
+                console.log("totalSecs: ", this.totalSecs);
+                console.log("displayHrs: ", this.displayHrs);
+                console.log("displayMins: ", this.displayMins);
+                console.log("displaySecs: ", this.displaySecs);
 
                 totalSecs--;
 
                 if (totalSecs === -1) {
-                    console.log("totalSecs: ", totalSecs);
-                    console.log("displayHrs: ", displayHrs);
-                    console.log("displayMins: ", displayMins);
-                    console.log("displaySecs: ", displaySecs);
+                    console.log("totalSecs: ", this.totalSecs);
+                    console.log("displayHrs: ", this.displayHrs);
+                    console.log("displayMins: ", this.displayMins);
+                    console.log("displaySecs: ", this.displaySecs);
                     clearInterval(countdown);
                 }
             }, 1000);

@@ -232,6 +232,9 @@ let displaySecs = Math.floor(totalSecs % 3600 % 60)
 
 <2023-05-08 Mon 08:12>: One major thing I forgot to accommodate for is the fact that this function needs to run once per second with 'setInterval'.
 
+I found this great example on the topic that calls a function once per second, or once every 1000 milliseconds:
+- https://vaidehijoshi.github.io/blog/2015/01/06/the-final-countdown-using-javascripts-setinterval-plus-clearinterval-methods/
+
 <2023-05-08 Mon 09:00>: The issue I am currently running into is that the 'display' related variables don't have the right unit conversion. I tried to use a spot fix for the 'displayHrs' conversion variable by dividing by 10. Though this works initially, it gets wonky a bit with various example times.
 
 I think I should look up some other examples that relate to this.
@@ -246,6 +249,59 @@ I then forced 'parseInt' to convert each of the 'Secs' related variables to beco
 
 I used this MDN docs page on 'parseInt' as a reference:
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+
+<2023-05-08 Mon 09:42>: I am currently trying to figure out why I am not able to pass values from variables created within the 'startTimer' method itself. I am assuming it's just a matter of using 'this.' plus the variable name or something like that with a ternary operator, but that does not seem to be the case.
+
+A lot of the examples I have found so far get close, but are using a Vue method to return one thing only unlike my example where I would need to return many variables as a result of the timer. I am assuming that I might have to just access the 'data' object directly but I'm not quite sure at this point.
+
+Here are the examples I found so far:
+- https://cumsum.wordpress.com/2020/08/08/vue3-property-xxx-was-accessed-during-render-but-is-not-defined-on-instance/
+- https://www.geeksforgeeks.org/vue-js-methods/#
+- https://javascript.plainenglish.io/vue-methods-5f5ebb6148aa
+- https://flaviocopes.com/vue-methods/
+- https://www.w3schools.com/vue/vue_methods.php
+
+<2023-05-08 Mon 10:15>: I did some further research, and found a Vue example in which the concept of 'emitting' from events was used:
+- https://www.telerik.com/blogs/how-to-emit-data-in-vue-beyond-the-vuejs-documentation
+
+I then tried to look at the Vue docs page on the subject, but that was more specific on passing events in general, and not necessarily outputting the exact variable value like in my actual project example:
+- https://vuejs.org/guide/components/events.html
+
+I also tried referring to the Vue docs page on 'Components' but this doesn't really cover what I'm trying to do as that docs page goes into how to create components and pass certain properties as props when reusing components:
+- https://vuejs.org/guide/essentials/component-basics.html
+
+<2023-05-08 Mon 10:28>: Judging from this StackOverflow post, the paradigm for Vue.js is really 'MVVM' which is 'Model View View Model':
+- https://stackoverflow.com/questions/40212883/how-to-replace-the-contents-of-an-element
+
+<2023-05-08 Mon 10:30>: Further research reveals that this whole concept really is just 'text interpolation' in terms of Vue, which is shown in the Vue docs themselves:
+- https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation
+
+<2023-05-08 Mon 10:36>: After doing a bit more digging, I realized that I might have hit an edge case apparently that is accommodated differently in Vue 3.
+
+This example explains it a bit better:
+- https://vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive-proxy-vs-original
+
+The fact that I'm assigning the returned object from the 'return' statement to a new value means it is actually pointing to a different object in memory.
+
+The main point of that link above is that in order to access the proper value I am after, I have to use 'this' to access the correct property.
+
+Apparently, Vue 3 handles reactive data by using the concept of 'proxies' which is shown here in the MDN docs:
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+
+<2023-05-08 Mon 11:08>: I did more research, and this blog post was WAY better at explaining the difficulties with how Vue 3 handles destructuring the returned object's values:
+- https://blog.deepgram.com/diving-into-vue-3-reactivity-api/
+
+Basically, I maybe import 'ref' from Vue in order to properly output the value apparently.
+
+<2023-05-08 Mon 11:11>: After reading that same article (https://blog.deepgram.com/diving-into-vue-3-reactivity-api/) a little bit further, it seems I probably want to access the value directly with dot notation (.propertyValue) so I'll try that instead at the top of the page.
+
+<2023-05-08 Mon 11:40>: I realized that I actually would need an arrow function for the returned function inside the 'countdown' variable function.
+
+After making this change, I was successfully able to see 'displayHrs', 'displayMins' and 'displaySecs' displayed successfully!
+
+<2023-05-08 Mon 11:42>: The next obvious steps on the same component page include the following:
+- Once the timer hits zero, I would want to be able to display a message to the user that the timer is up as well as a timer sound
+- I then need to make the 'Reset' button actually work as well to stop the timer and set the values back to '00' for 'hours', 'mins', and 'secs'.
 
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
