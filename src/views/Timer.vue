@@ -55,8 +55,6 @@
 
 <script setup>
 import Logo from "../components/Logo.vue";
-// import { useSound } from "@vueuse/sound";
-// import alarmSound from "../sounds/alarm.mp3";
 </script>
 
 <script>
@@ -70,7 +68,6 @@ export default {
             hrSecs: 0,
             minSecs: 0,
             additionalSecs: 0,
-            totalSecs: 0,
             displayHrs: 0,
             displayMins: 0,
             displaySecs: 0
@@ -92,12 +89,9 @@ export default {
             let additionalSecs = parseInt(this.secinput);
             let totalSecs = hrSecs + minSecs + additionalSecs;
 
-            console.log("hrSecs: ", hrSecs);
-            console.log("minSecs: ", minSecs);
-            console.log("additionalSecs: ", additionalSecs);
-            console.log("totalSecs: ", totalSecs);
-
             var countdown = setInterval(() => {
+                totalSecs--;
+
                 this.displayHrs = Math.floor(totalSecs / 3600);
                 this.displayMins = Math.floor((totalSecs % 3600) / 60);
                 this.displaySecs = Math.floor((totalSecs % 3600) % 60);
@@ -107,14 +101,10 @@ export default {
                 console.log("displayMins: ", this.displayMins);
                 console.log("displaySecs: ", this.displaySecs);
 
-                totalSecs--;
-
-                if (totalSecs === 1) {
+                if (totalSecs === 0) {
+                    console.log("TIMES UP!");
                     let alarmSound =  new Audio("src/sounds/alarm.mp3");
                     alarmSound.play();
-                }
-
-                if (totalSecs === -1) {
                     console.log("totalSecs: ", this.totalSecs);
                     console.log("displayHrs: ", this.displayHrs);
                     console.log("displayMins: ", this.displayMins);

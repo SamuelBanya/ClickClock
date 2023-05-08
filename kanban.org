@@ -61,8 +61,30 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Look into NPM packages that provide timer functionality (for counting up and down) as well as metronome and volume packages
-*** TODO Make the individual buttons actually work to provide changes on screen
+*** TODO Make the 'Reset' button work on the 'Timer' component page
+<2023-05-08 Mon 16:14>: I would like the 'Reset' button on the 'Timer' component page to work.
+
+Ideally, it should do the following:
+- It should stop the 'Countdown' timer function from keep on counting down
+- Reset the 'Hours', 'Minutes', and 'Seconds' output headers on the top screen to '00'
+- The input fields for the 'Hours', 'Mins', and 'Secs' fields at the bottom screen should then be blanked out
+
+How this could be accomplished:
+- Stop the 'Countdown' timer function
+- Set the 'displayHrs', 'displayMins', and 'displaySecs' variables to '00'
+- Grab the 'hr-input', 'min-input', and 'sec-input' input fields and set them to a blank empty string
+- Reset the 'Start' / 'Stop' button back to the green 'Start' button
+- Reset the 'totalSecs' variable to zero
+*** TODO Make the 'Start' button work on the 'Metronome' component page to start the metronome animation sequence
+<2023-05-08 Mon 16:18>: Ideally, the 'Start' button on the 'Metronome' component page should do the following:
+- It should start a sequence of counting in fours which should be visible as each red circle becomes green as the cycle continues until the 4 count is complete
+- When the 4 count is complete, the '1' count should remain green
+- For each '1' count, there should be a more distinct metronome click sound so that the person knows the first click has been made
+- For the '2' through '4' beats, there should be a less distinct metronome sound
+*** TODO Make the 'Mute' button work on the 'Metronome' component page to allow the metronome animation sequence to continue with no sound
+<2023-05-08 Mon 16:22>: The ideal 'Mute' button functionality depends upon the following ideas:
+- The metronome sequence should continue but with 'orange' instead of green
+- Also, the sound of the click itself should be mute
 *** TODO Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
 <2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
 
@@ -76,12 +98,12 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Fix the countdown bug on the 'Timer' component in which it repeats the first second
-<2023-05-08 Mon 15:12>: I noticed a weird issue in which the countdown starts twice upon startup. This isn't a huge huge deal right now since it works, but it still should be resolved before this is deployed.
-
-This also affects the final second on the clock as well since the alarm sound starts too early.
-
-Mostly likely, I could even counter balance the timer's sound to begin on '-1' anyway since 'setInterval()' will nuke the related variable function out of memory anyway once the timer is up.
+*** IN-PROGRESS Make the 'Start' button turn into the 'Stop' button to allow the user to then stop the entire timer on a whim
+<2023-05-08 Mon 16:40>: This would require a few things from the top of my head:
+- This needs to react to the 'Start' button click event itself
+- Then, the 'Start' button would change its text to 'Stop' as well as it's color scheme to red
+- The 'Stop' button's event action should freeze the 'totalSecs' counter completely until the user clicks 'Start' again
+- Regarding the 'Reset' button's influence on this chain of events, I will describe this in more detail within that other Jira ticket instead
 
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
@@ -766,6 +788,24 @@ I also was able to use an unrelated video as a reference as well for the 'HTMLAu
 - Vue.js Demos, Part 5: Working with Audio (https://www.youtube.com/watch?v=jjX0JhPrU9A)
 
 With these references above, I was successfully able to just use the vanilla 'Audio()' constructor to play the desired alarm sound.
+*** DONE Fix the countdown bug on the 'Timer' component in which it repeats the first second
+<2023-05-08 Mon 15:12>: I noticed a weird issue in which the countdown starts twice upon startup. This isn't a huge huge deal right now since it works, but it still should be resolved before this is deployed.
+
+This also affects the final second on the clock as well since the alarm sound starts too early.
+
+Mostly likely, I could even counter balance the timer's sound to begin on '-1' anyway since 'setInterval()' will nuke the related variable function out of memory anyway once the timer is up.
+
+<2023-05-08 Mon 15:51>: I have a strong feeling that this is because the value of the 'totalSecs' variable is reset to its amount twice because I can't seem to utilize the right usage of the 'this' keyword syntax in this scenario.
+
+I think once this is fixed, then the repeat of the first second of the countdown issue would be resolved.
+
+Also, I resolved the sound issue by just setting it to go off when the timer goes to '-1' due to the usage of 'setInterval' within the 'startTimer' function.
+
+<2023-05-08 Mon 16:00>: I took a look at the decrement operation with 'totalSecs', and realized that I was not only printing the value before it was decremented but assigning the values as well.
+
+After moving the decrement section to the very beginning of the loop, and setting the if statement to check to see if 'totalSecs' is equal to zero, this fixed the weird countdown bug described above.
+*** DONE Look into NPM packages that provide timer functionality (for counting up and down) as well as volume packages
+<2023-05-08 Mon 16:02>: This was already completed via the 'Get the related 'Start' button on the 'Timer' component to actually start counting down the time accordingly and to end with a sound being played' task
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
