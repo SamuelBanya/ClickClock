@@ -98,13 +98,12 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Make the 'Start' button turn into the 'Stop' button to allow the user to then stop the entire timer on a whim
+*** IN-PROGRESS Make the 'Start' button turn into the 'Stop' button to allow the user to then stop the entire 'Timer' component on a whim
 <2023-05-08 Mon 16:40>: This would require a few things from the top of my head:
 - This needs to react to the 'Start' button click event itself
 - Then, the 'Start' button would change its text to 'Stop' as well as it's color scheme to red
 - The 'Stop' button's event action should freeze the 'totalSecs' counter completely until the user clicks 'Start' again
 - Regarding the 'Reset' button's influence on this chain of events, I will describe this in more detail within that other Jira ticket instead
-
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -806,6 +805,23 @@ Also, I resolved the sound issue by just setting it to go off when the timer goe
 After moving the decrement section to the very beginning of the loop, and setting the if statement to check to see if 'totalSecs' is equal to zero, this fixed the weird countdown bug described above.
 *** DONE Look into NPM packages that provide timer functionality (for counting up and down) as well as volume packages
 <2023-05-08 Mon 16:02>: This was already completed via the 'Get the related 'Start' button on the 'Timer' component to actually start counting down the time accordingly and to end with a sound being played' task
+*** DONE When nothing is entered as input for the 'Timer' component page, display a message to the user accordingly
+<2023-05-09 Tue 11:26>: I am going to use the 'Sweet Alert' package that I used for other packages to just display a message to the user in a nice looking fashion. Reason being is that I need to accommodate for the fact for someone who just clicks buttons to try to test the overall functionality of the app without caring to enter input.
+
+With this in mind, I am going to just use an if statement to check for blank strings or '0' input for all fields, and if that is the case, then provide the user with a message to prompt them to actually enter a value.
+
+I installed the package by the following:
+#+begin_src text
+npm install vue-sweetalert2
+#+end_src
+
+<2023-05-09 Tue 11:41>: I was able to follow along with the related Docs page without a single issue to implement this:
+- https://www.npmjs.com/package/vue-sweetalert2
+
+One thing to note is that I called 'swal' directly with 'this.$(nameofpackage)' syntax similar to the following:
+#+begin_src js
+this.$swal('Hello Vue world!!!');
+#+end_src
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

@@ -75,43 +75,72 @@ export default {
     },
     methods: {
         startTimer() {
-            // Show that the button works:
-            console.log("Start button clicked!")
+            // Check to see if user entered blank input:
+            if (this.hrinput === "" && this.mininput === "" && this.secinput === "") {
+                console.log("Inputs are blank!");
+                this.$swal('Inputs are blank!\n\nPlease enter valid numerical values for hours, mins, and secs.');
+            }
 
-            // Grab the multiple inputs
-            console.log("hrinput: ", this.hrinput);
-            console.log("mininput: ", this.mininput);
-            console.log("secinput: ", this.secinput);
+            // Allow the user to proceed since they entered actual values:
+            else {
+                // Show that the button works:
+                console.log("Start button clicked!")
 
-            // Convert all user inputs to secs:
-            let hrSecs = parseInt(this.hrinput * 3600);
-            let minSecs = parseInt(this.mininput * 60);
-            let additionalSecs = parseInt(this.secinput);
-            let totalSecs = hrSecs + minSecs + additionalSecs;
+                // Grab the multiple inputs
+                console.log("hrinput: ", this.hrinput);
+                console.log("mininput: ", this.mininput);
+                console.log("secinput: ", this.secinput);
 
-            var countdown = setInterval(() => {
-                totalSecs--;
+                // Account for the any blank inputs
+                // ex: 1 hour is used, but mins and secs are kept blank
+                // aka in that scenario, set 'minSecs' and 'additionalSecs' to 0
 
-                this.displayHrs = Math.floor(totalSecs / 3600);
-                this.displayMins = Math.floor((totalSecs % 3600) / 60);
-                this.displaySecs = Math.floor((totalSecs % 3600) % 60);
+                // Edge cases:
+                // 'hrinput' is blank:
+                if (this.hrinput === "") {
+                    this.hrinput = 0;
+                }
 
-                console.log("totalSecs: ", this.totalSecs);
-                console.log("displayHrs: ", this.displayHrs);
-                console.log("displayMins: ", this.displayMins);
-                console.log("displaySecs: ", this.displaySecs);
+                // 'mininput' is blank:
+                if (this.mininput === "") {
+                    this.mininput = 0;
+                }
 
-                if (totalSecs === 0) {
-                    console.log("TIMES UP!");
-                    let alarmSound =  new Audio("src/sounds/alarm.mp3");
-                    alarmSound.play();
+                // 'secinput' is blank:
+                if (this.secinput === "") {
+                    this.secinput = 0;
+                }
+
+                // Convert all user inputs to secs:
+                let hrSecs = parseInt(this.hrinput * 3600);
+                let minSecs = parseInt(this.mininput * 60);
+                let additionalSecs = parseInt(this.secinput);
+                let totalSecs = hrSecs + minSecs + additionalSecs;
+
+                var countdown = setInterval(() => {
+                    totalSecs--;
+
+                    this.displayHrs = Math.floor(totalSecs / 3600);
+                    this.displayMins = Math.floor((totalSecs % 3600) / 60);
+                    this.displaySecs = Math.floor((totalSecs % 3600) % 60);
+
                     console.log("totalSecs: ", this.totalSecs);
                     console.log("displayHrs: ", this.displayHrs);
                     console.log("displayMins: ", this.displayMins);
                     console.log("displaySecs: ", this.displaySecs);
-                    clearInterval(countdown);
-                }
-            }, 1000);
+
+                    if (totalSecs === 0) {
+                        console.log("TIMES UP!");
+                        let alarmSound =  new Audio("src/sounds/alarm.mp3");
+                        alarmSound.play();
+                        console.log("totalSecs: ", this.totalSecs);
+                        console.log("displayHrs: ", this.displayHrs);
+                        console.log("displayMins: ", this.displayMins);
+                        console.log("displaySecs: ", this.displaySecs);
+                        clearInterval(countdown);
+                    }
+                }, 1000);
+            }
         }
     }
 }
