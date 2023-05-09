@@ -61,20 +61,6 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Make the 'Reset' button work on the 'Timer' component page
-<2023-05-08 Mon 16:14>: I would like the 'Reset' button on the 'Timer' component page to work.
-
-Ideally, it should do the following:
-- It should stop the 'Countdown' timer function from keep on counting down
-- Reset the 'Hours', 'Minutes', and 'Seconds' output headers on the top screen to '00'
-- The input fields for the 'Hours', 'Mins', and 'Secs' fields at the bottom screen should then be blanked out
-
-How this could be accomplished:
-- Stop the 'Countdown' timer function
-- Set the 'displayHrs', 'displayMins', and 'displaySecs' variables to '00'
-- Grab the 'hr-input', 'min-input', and 'sec-input' input fields and set them to a blank empty string
-- Reset the 'Start' / 'Stop' button back to the green 'Start' button
-- Reset the 'totalSecs' variable to zero
 *** TODO Make the 'Start' button work on the 'Metronome' component page to start the metronome animation sequence
 <2023-05-08 Mon 16:18>: Ideally, the 'Start' button on the 'Metronome' component page should do the following:
 - It should start a sequence of counting in fours which should be visible as each red circle becomes green as the cycle continues until the 4 count is complete
@@ -98,12 +84,14 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Make the 'Start' button turn into the 'Stop' button to allow the user to then stop the entire 'Timer' component on a whim
-<2023-05-08 Mon 16:40>: This would require a few things from the top of my head:
-- This needs to react to the 'Start' button click event itself
-- Then, the 'Start' button would change its text to 'Stop' as well as it's color scheme to red
-- The 'Stop' button's event action should freeze the 'totalSecs' counter completely until the user clicks 'Start' again
-- Regarding the 'Reset' button's influence on this chain of events, I will describe this in more detail within that other Jira ticket instead
+*** IN-PROGRESS Fix the 'Start' / 'Stop' button bug where if you press the start and stop button multiple times, it creates multiple timer sequences
+<2023-05-09 Tue 16:45>: Here is the related bug behavior I noticed:
+- When a user clicks the 'Start' / 'Stop' button multiple times in a row, it results in the following behavior:
+- The timer will cause new countdowns to begin so it goes quickly back between the current and pass countdown sequences
+
+What I will need to do:
+- I need to walk through what I have done within the 'countdown' variable function itself as that is mostly like the root of the problem since there are multiple 'setInterval' instances occurring
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -822,6 +810,92 @@ One thing to note is that I called 'swal' directly with 'this.$(nameofpackage)' 
 #+begin_src js
 this.$swal('Hello Vue world!!!');
 #+end_src
+*** DONE Make the 'Start' button turn into the 'Stop' button to allow the user to then stop the entire 'Timer' component on a whim
+<2023-05-08 Mon 16:40>: This would require a few things from the top of my head:
+- This needs to react to the 'Start' button click event itself
+- Then, the 'Start' button would change its text to 'Stop' as well as it's color scheme to red
+- This could be done by changing the CSS class of the button itself
+- When the 'Stop' button is clicked, the 'Stop' button's event action should freeze the 'totalSecs' counter completely until the user clicks 'Start' again
+- Since it slightly relates, the 'Reset' button's influence on this chain of events will behave slightly differently so I will describe this in more detail within that other Jira ticket instead
+
+<2023-05-09 Tue 11:46>: I did some related reserach on the idea of changing CSS classes with Vue, and found this StackOverflow:
+- https://stackoverflow.com/questions/33731939/vue-js-toggle-class-on-click
+
+Though I wouldn't use this idea directly, it seems like the 'v-class' attribute in Vue is probably what I want to use in this scenario.
+
+I then found this example where the ':style' attribute can be used to programmatically switch between various CSS class styles on the fly:
+- https://codingbeautydev.com/blog/vue-change-style-on-click/
+
+However, I would be more interested if you could do this for the 'class' attribute itself in the 'button' HTML tag in Vue though.
+
+I then found this example which utilizes the 'v-bind:class' attribute:
+- https://makitweb.com/how-to-toggle-css-classes-and-styles-with-vue-js/
+
+This example basically sets an 'isActive' boolean variable to true or false. If it's true, then set one particular CSS class. If not, set the other, etc.
+
+The only thing I need to make sure is if this is still valid for Vue 3 since so much has changed in Vue 3 that I wouldn't doubt if it's not antiquated by now for some reason.
+
+I then read into the Vue docs and found this exact related page to this topic:
+- https://vuejs.org/guide/essentials/class-and-style.html#binding-html-classes
+
+Basically, you can use ':class' which is an alias for 'v-bind:class' to dynamically change classes, which is exactly what I want!
+
+<2023-05-09 Tue 13:13>: After simply toggling the boolean variable, 'isActive' with a few related if statements, I was able to get the stying to work as intended which is exactly what I would want.
+
+The problem I see now is how to actually stop the countdown.
+
+This would involve using 'clearInterval'.
+
+In order to better understand when and how to place the stop to the countdown, I pretty much have to detail the sequence of events which includes the following:
+- 'isActive' is originally set to 'true'
+- User clicks on 'Start' button which then starts the countdown, and then toggles 'isActive' boolean variable to 'false'
+- The case I have to accommodate for is when the user then clicks the 'Stop' button that appeared
+- If the user clicks the 'Stop' button, this then toggles 'isActive' boolean variable back to 'true'
+- So, I need to accommodate for this edge case within the 'countdown' variable function itself by using an if statement that checks to see if 'isActive' is set to 'true' --> if so, use 'clearInterval'
+
+The problem with this is the current behavior:
+- Once I click the button, it then goes back to the original max time minus 1
+
+The reason for the weird edge case of the countdown starting again is this:
+- The very start of the function is literally looking for user input to begin with
+- If you click that 'Stop' button mid-countdown, it is then grabbing the inputs all over again
+
+The way I can probably handle this is this:
+- Check for the 'disabledInputs' boolean variable I will later create, and only set the related 'hours', 'mins', and 'secs' related variable values upon the first click of the 'Start' button
+- When the user clicks the 'Start' button --> Change the 'Start' button to the 'Stop' button
+- Then, clear the user's input field values, and disable the user's input fields with the 'disabled' property somehow and set a corresponding 'disabledInputs' boolean variable to 'true' --> This would prevent the 'double countdown' behavior that I am currently observing
+
+<2023-05-09 Tue 15:28>: After asking around on IRC and the Vue based Discord server, I was told that it is important to use 'this.' keyword when using the 'Options' API for Vue.
+
+I then asked what specific portion of the Vue docs goes over this in more detail, and was given this particular link to review:
+- https://vuejs.org/guide/essentials/reactivity-fundamentals.html
+
+<2023-05-09 Tue 15:48>: I was able to complete this idea successfully with a bit of rethinking the if statements for the 'countdown' variable function at the end of the 'Timer' component.
+
+*** DONE Make the 'Reset' button work on the 'Timer' component page
+<2023-05-08 Mon 16:14>: I would like the 'Reset' button on the 'Timer' component page to work.
+
+Ideally, it should do the following:
+- It should stop the 'Countdown' timer function from keep on counting down
+- Reset the 'Hours', 'Minutes', and 'Seconds' output headers on the top screen to '00'
+- The input fields for the 'Hours', 'Mins', and 'Secs' fields at the bottom screen should then be blanked out
+
+How this could be accomplished:
+- Stop the 'Countdown' timer function
+- Set the 'displayHrs', 'displayMins', and 'displaySecs' variables to '00'
+- Grab the 'hr-input', 'min-input', and 'sec-input' input fields and set them to a blank empty string
+- Reset the 'Start' / 'Stop' button back to the green 'Start' button
+- Reset the 'totalSecs' variable to zero
+
+<2023-05-09 Tue 15:50>: So far, I have utilized this StackOverflow post to find out about the ':disabled' property for Vue:
+- https://stackoverflow.com/questions/38085180/disable-input-conditionally-vue-js
+
+I then found this Vue docs page on the same topic:
+- https://vuejs.org/guide/essentials/template-syntax.html#attribute-bindings
+
+My current goal is to be able to just toggle the 'disabledInputs' boolean variable for now to start with.
+
+<2023-05-09 Tue 16:44>: The 'reset' button works as intended to reset the 'countdown' variable function accordingly.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

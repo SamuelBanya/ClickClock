@@ -35,20 +35,20 @@
                 <div class="text-6xl text-center flex w-full items-center justify-center">
                     <div class="box-border p-4">
                         <label for="hr-input" class="block mb-2 text-xl font-medium text-black-900 dark:text-white">Hours</label>
-                        <input id="hr-input" class="h-16 w-16 text-black-600 text-xl" v-model="hrinput"/>
+                        <input id="hr-input" :disabled="disabledInputs ? 1 : 0" class="h-16 w-16 text-black-600 text-xl" v-model="hrinput"/>
                     </div>
                     <div class="box-border p-4">
                         <label for="min-input" class="block mb-2 text-xl font-medium text-black-900 dark:text-white">Mins</label>
-                        <input id="min-input" class="h-16 w-16 text-black-600 text-lg" v-model="mininput"/>
+                        <input id="min-input" :disabled="disabledInputs ? 1 : 0" class="h-16 w-16 text-black-600 text-lg" v-model="mininput"/>
                     </div>
                     <div class="box-border p-4">
                         <label for="sec-input" class="block mb-2 text-xl font-medium text-black-900 dark:text-white">Secs</label>
-                        <input id="sec-input" class="h-16 w-16 text-black-600 text-lg" v-model="secinput"/>
+                        <input id="sec-input" :disabled="disabledInputs ? 1 : 0" class="h-16 w-16 text-black-600 text-lg" v-model="secinput"/>
                     </div>
                 </div>
             </div>
-            <button class="start-button" @click="startTimer">Start</button>
-            <button class="reset-mute-button">Reset</button>
+            <button :class="[isActive ? 'start-button' : 'stop-button']" @click="startTimer">{{ buttonMessage }}</button>
+            <button class="reset-mute-button" @click="resetTimer">Reset</button>
         </div>
     </div>
 </template>
@@ -68,9 +68,16 @@ export default {
             hrSecs: 0,
             minSecs: 0,
             additionalSecs: 0,
+            totalSecs: 0,
             displayHrs: 0,
             displayMins: 0,
-            displaySecs: 0
+            displaySecs: 0,
+            // Adding 'isActive' boolean toggle for 'Start' vs 'Stop' button CSS class change:
+            isActive: true,
+            // set 'buttonMessage' to 'Start' to begin with so that we can later change it to 'Stop':
+            buttonMessage: "Start",
+            // set 'disabledInputs' to 'false' to start with:
+            disabledInputs: false
         }
     },
     methods: {
@@ -84,18 +91,25 @@ export default {
             // Allow the user to proceed since they entered actual values:
             else {
                 // Show that the button works:
-                console.log("Start button clicked!")
+                console.log("Start / Stop button clicked!")
 
-                // Grab the multiple inputs
-                console.log("hrinput: ", this.hrinput);
-                console.log("mininput: ", this.mininput);
-                console.log("secinput: ", this.secinput);
+                // Switch 'isActive' boolean variable value:
+                this.isActive = !(this.isActive);
 
-                // Account for the any blank inputs
-                // ex: 1 hour is used, but mins and secs are kept blank
-                // aka in that scenario, set 'minSecs' and 'additionalSecs' to 0
+                // 'isActive' is set to 'False' --> Display 'Stop' button:
+                // User clicked 'Start' button with valid inputs:
+                if(this.isActive === false) {
+                    // Set the 'buttonMessage' to 'Stop':
+                    this.buttonMessage = "Stop";
+                }
 
-                // Edge cases:
+                // 'isActive' is set to 'True' --> Display 'Start' button:
+                // User clicked 'Stop' button with valid inputs:
+                if (this.isActive === true) { 
+                    this.buttonMessage = "Start";
+                }
+
+                // Account for the any blank inputs aka 2 inputs that are blank but 1 is still valid:
                 // 'hrinput' is blank:
                 if (this.hrinput === "") {
                     this.hrinput = 0;
@@ -111,35 +125,80 @@ export default {
                     this.secinput = 0;
                 }
 
-                // Convert all user inputs to secs:
-                let hrSecs = parseInt(this.hrinput * 3600);
-                let minSecs = parseInt(this.mininput * 60);
-                let additionalSecs = parseInt(this.secinput);
-                let totalSecs = hrSecs + minSecs + additionalSecs;
+                // Grab the inputs only for the run of the 'Start' button aka when 'disabledInputs'
+                // is set to 'false' --> This is to prevent the 'double countdown' edge case:
+                if (this.disabledInputs === false) {
+                    console.log("this.disabledInputs: ", this.disabledInputs);
+                    // Convert all user inputs to secs:
+                    this.hrSecs = parseInt(this.hrinput * 3600);
+                    this.minSecs = parseInt(this.mininput * 60);
+                    this.additionalSecs = parseInt(this.secinput);
+                    // Adding 1 to total so that it acts like a real countdown to show the beginning
+                    // of the countdown:
+                    this.totalSecs = this.hrSecs + this.minSecs + this.additionalSecs + 1;
+                    console.log("this.totalSecs = ", this.totalSecs);
+                }
 
-                var countdown = setInterval(() => {
-                    totalSecs--;
+                // Switch 'disabledInputs' boolean variable value to 'false' which can only
+                // be reset with the 'Reset' button later on:
+                this.disabledInputs = true;
 
-                    this.displayHrs = Math.floor(totalSecs / 3600);
-                    this.displayMins = Math.floor((totalSecs % 3600) / 60);
-                    this.displaySecs = Math.floor((totalSecs % 3600) % 60);
+                // Allow the user to proceed with the timer because they didn't click the 'Stop' button:
+                this.countdown = setInterval(() => {
+                    console.log("Inside countdown");
+                    // Check the status of 'isActive' 
+                    // If it is set to 'True', then stop the countdown completely since the user
+                    // just clicked the 'Stop' button:
+                    if (this.isActive === true) {
+                        // Stop the countdown interval:
+                        clearInterval(this.countdown);
+                    }
+                    else {
+                        if (this.totalSecs <= 1) {
+                            console.log("TIMES UP!");
+                            this.displaySecs = 0;
+                            let alarmSound =  new Audio("src/sounds/alarm.mp3");
+                            alarmSound.play();
+                            console.log("totalSecs: ", this.totalSecs);
+                            console.log("displayHrs: ", this.displayHrs);
+                            console.log("displayMins: ", this.displayMins);
+                            console.log("displaySecs: ", this.displaySecs);
+                            clearInterval(this.countdown);
+                        }
 
-                    console.log("totalSecs: ", this.totalSecs);
-                    console.log("displayHrs: ", this.displayHrs);
-                    console.log("displayMins: ", this.displayMins);
-                    console.log("displaySecs: ", this.displaySecs);
+                        // Prevent 'totalSecs' from being negative after countdown
+                        // is completed:
+                        else {
+                            this.totalSecs--;
 
-                    if (totalSecs === 0) {
-                        console.log("TIMES UP!");
-                        let alarmSound =  new Audio("src/sounds/alarm.mp3");
-                        alarmSound.play();
-                        console.log("totalSecs: ", this.totalSecs);
-                        console.log("displayHrs: ", this.displayHrs);
-                        console.log("displayMins: ", this.displayMins);
-                        console.log("displaySecs: ", this.displaySecs);
-                        clearInterval(countdown);
+                            this.displayHrs = Math.floor(this.totalSecs / 3600);
+                            this.displayMins = Math.floor((this.totalSecs % 3600) / 60);
+                            this.displaySecs = Math.floor((this.totalSecs % 3600) % 60);
+
+                            console.log("totalSecs: ", this.totalSecs);
+                            console.log("displayHrs: ", this.displayHrs);
+                            console.log("displayMins: ", this.displayMins);
+                            console.log("displaySecs: ", this.displaySecs);
+                        }
                     }
                 }, 1000);
+            }
+        },
+        resetTimer() {
+            console.log("resetTimer function called!");
+            // Re-enable the inputs using hte 'disabledInputs' boolean variable:
+            this.disabledInputs = false;
+            this.displayHrs = 0;
+            this.displayMins = 0;
+            this.displaySecs = 0;
+            this.totalSecs = 0;
+            // Use 'clearInterval' on the 'countdown' variable function:
+            clearInterval(this.countdown);
+            // If the 'Stop' button is present, and the 'Reset' button is clicked,
+            // change the 'Stop' button back to 'Start'
+            if (this.isActive === false) {
+                this.isActive = !(this.isActive);
+                this.buttonMessage = "Start";
             }
         }
     }
