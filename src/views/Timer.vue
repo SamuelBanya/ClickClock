@@ -174,6 +174,19 @@ export default {
                                 this.isActive = !(this.isActive);
                                 this.buttonMessage = "Start";
                             }
+                            // Grab and set the input fields to be blank to reset the timer:
+                            let hrInput = document.querySelector("#hr-input");
+                            let minInput = document.querySelector("#min-input");
+                            let secInput = document.querySelector("#sec-input");
+
+                            console.log("hrInput: ", hrInput);
+                            console.log("minInput: ", minInput);
+                            console.log("secInput: ", secInput);
+
+                            hrInput.value = "";
+                            minInput.innerHTML = "";
+                            secInput.innerHTML = "";
+
                             clearInterval(this.countdown);
                         }
 
