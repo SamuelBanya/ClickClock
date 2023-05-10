@@ -84,13 +84,11 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Fix the 'Start' / 'Stop' button bug where if you press the start and stop button multiple times, it creates multiple timer sequences
-<2023-05-09 Tue 16:45>: Here is the related bug behavior I noticed:
-- When a user clicks the 'Start' / 'Stop' button multiple times in a row, it results in the following behavior:
-- The timer will cause new countdowns to begin so it goes quickly back between the current and pass countdown sequences
+*** IN-PROGRESS Clear the 'hours', 'mins', and 'secs' inputs when the countdown is complete or when the 'Reset' button is clicked
+<2023-05-10 Wed 11:57>: I need to add the following behavior:
 
-What I will need to do:
-- I need to walk through what I have done within the 'countdown' variable function itself as that is mostly like the root of the problem since there are multiple 'setInterval' instances occurring
+When the countdown is complete or when the 'Reset' button is clicked, the following action needs to occur:
+- The 'hr-input', 'min-input', and 'sec-input' fields need to be cleared to an empty string
 
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
@@ -896,6 +894,23 @@ I then found this Vue docs page on the same topic:
 My current goal is to be able to just toggle the 'disabledInputs' boolean variable for now to start with.
 
 <2023-05-09 Tue 16:44>: The 'reset' button works as intended to reset the 'countdown' variable function accordingly.
+*** DONE Fix the 'Start' / 'Stop' button bug where if you press the start and stop button multiple times, it creates multiple timer sequences
+<2023-05-09 Tue 16:45>: Here is the related bug behavior I noticed:
+- When a user clicks the 'Start' / 'Stop' button multiple times in a row, it results in the following behavior:
+- The timer will cause new countdowns to begin so it goes quickly back between the current and pass countdown sequences
+
+What I will need to do:
+- I need to walk through what I have done within the 'countdown' variable function itself as that is mostly like the root of the problem since there are multiple 'setInterval' instances occurring
+
+<2023-05-10 Wed 11:11>: Current behavior:
+- If I click start and stop for the timer, the timer "appears to" rapidly increases in speed for its countdown
+- When I allow these multiple countdowns to finish, I noticed that unless I click the 'Stop' button, there will be multiple countdown sounds that appear to sound off at the end
+- What this means to me is that my suspicion that there are multiple intervals being started is most likely correct
+- However, I do find it strange that clearing the interval of the related 'countdown' variable function doesn't work to just start and stop it
+- Maybe it keeps creating multiple instances of it since it only knows how to stop the previous interval instance but starts or creates a new one in tandem
+- Another thing I noticed is that the 'Inside countdown' print statement keeps repeating even when the 'Stop' button is pressed --> This means that the loop never exits at the end either
+
+<2023-05-10 Wed 11:55>: After a bit of research, I was able to resolve the issue by adding an additional if statement right before the 'countdown' variable function that clears the interval beforehand. This prevents the issue of creating multiple 'setInterval' instances, and fixed the issue.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

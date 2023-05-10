@@ -143,14 +143,20 @@ export default {
                 // be reset with the 'Reset' button later on:
                 this.disabledInputs = true;
 
+                // Clear the 'countdown' variable function's interval to prevent multiple new instances 
+                // from being made:
+                if(this.countdown >= 0) clearInterval(this.countdown)
+
                 // Allow the user to proceed with the timer because they didn't click the 'Stop' button:
                 this.countdown = setInterval(() => {
                     console.log("Inside countdown");
+                    console.log("this.isActive: ", this.isActive);
                     // Check the status of 'isActive' 
                     // If it is set to 'True', then stop the countdown completely since the user
                     // just clicked the 'Stop' button:
                     if (this.isActive === true) {
                         // Stop the countdown interval:
+                        console.log("Clearing interval because 'this.isActive' is set to true");
                         clearInterval(this.countdown);
                     }
                     else {
@@ -163,6 +169,11 @@ export default {
                             console.log("displayHrs: ", this.displayHrs);
                             console.log("displayMins: ", this.displayMins);
                             console.log("displaySecs: ", this.displaySecs);
+                            this.disabledInputs = false;
+                            if (this.isActive === false) {
+                                this.isActive = !(this.isActive);
+                                this.buttonMessage = "Start";
+                            }
                             clearInterval(this.countdown);
                         }
 
@@ -182,6 +193,10 @@ export default {
                         }
                     }
                 }, 1000);
+
+            // Checking 'this.countdown' within 'startTimer' function:
+            console.log("Checking this.countdown in startTimer function: ");
+            console.log("this.countdown: ", this.countdown);
             }
         },
         resetTimer() {
