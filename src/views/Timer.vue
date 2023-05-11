@@ -208,7 +208,7 @@ export default {
         },
         resetTimer() {
             console.log("resetTimer function called!");
-            // Re-enable the inputs using hte 'disabledInputs' boolean variable:
+            // Re-enable the inputs using this 'disabledInputs' boolean variable:
             this.disabledInputs = false;
             this.displayHrs = 0;
             this.displayMins = 0;
@@ -221,7 +221,8 @@ export default {
             if (this.isActive === false) {
                 this.isActive = !(this.isActive);
                 this.buttonMessage = "Start";
-            }                            // Grab and set the input fields to be blank to reset the timer:
+            }                            
+            // Grab and set the input fields to be blank to reset the timer:
             this.hrinput = "";
             this.mininput = "";
             this.secinput = "";

@@ -61,16 +61,6 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Make the 'Stop' button on the 'Stopwatch' component page stop the counting up sequence
-<2023-05-11 Thu 12:55>: I basically just need to use similar code to the 'Timer' component page's 'Stop' button behavior.
-*** TODO Make the 'Reset' button on the 'Stopwatch' component page reset the entire sequence
-<2023-05-11 Thu 12:56>: I would need to model the behavior off of the existing 'Reset' button on the 'Timer' component page.
-*** TODO Make the 'Start' button start a sequence of 4 consecutive beat sounds in a row using a '4/4' time signature
-<2023-05-11 Thu 12:52>: I think it would be good to simply get a sequence of 4 beat sounds to occur in a row.
-
-I don't even think I need to find an NPM package for this really, and can probably just use 'Audio()' constructor in this scenario.
-
-I will probably just have to set the BPM using the 'BPM' value.
 *** TODO Make the 'Start' button work on the 'Metronome' component page to start the metronome animation sequence
 <2023-05-08 Mon 16:18>: Ideally, the 'Start' button on the 'Metronome' component page should do the following:
 - It should start a sequence of counting in fours which should be visible as each red circle becomes green as the cycle continues until the 4 count is complete
@@ -81,6 +71,10 @@ I will probably just have to set the BPM using the 'BPM' value.
 <2023-05-08 Mon 16:22>: The ideal 'Mute' button functionality depends upon the following ideas:
 - The metronome sequence should continue but with 'orange' instead of green
 - Also, the sound of the click itself should be mute
+*** TODO Add sounds when "Start / Stop", "Reset", and "Mute" buttons are clicked
+<2023-05-11 Thu 14:44>: This shouldn't be too hard to do. Probably will just use 'Pixabay' like last time:
+- https://pixabay.com/sound-effects/
+
 *** TODO Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
 <2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
 
@@ -94,10 +88,12 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Make the 'Start' button on the 'Stopwatch' component page start the counting up sequence
-<2023-05-11 Thu 12:54>: I need to create a counting up sequence that is the basically the reverse of the 'Timer' component page.
+*** IN-PROGRESS Make the 'Start' button start a sequence of 4 consecutive beat sounds in a row using a '4/4' time signature
+<2023-05-11 Thu 12:52>: I think it would be good to simply get a sequence of 4 beat sounds to occur in a row.
 
-I just need to review the code, and pretty much increment a variable that counts up.
+I don't even think I need to find an NPM package for this really, and can probably just use 'Audio()' constructor in this scenario.
+
+I will probably just have to set the BPM using the 'BPM' value.
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -950,6 +946,20 @@ this.hrinput = "";
 this.mininput = "";
 this.secinput = "";
 #+end_src
+*** DONE Make the 'Start' button on the 'Stopwatch' component page start the counting up sequence
+<2023-05-11 Thu 12:54>: I need to create a counting up sequence that is the basically the reverse of the 'Timer' component page.
+
+I just need to review the code, and pretty much increment a variable that counts up.
+
+<2023-05-11 Thu 14:42>: I was able to adapt the code successfully from the 'Timer' component to the 'Stopwatch' component page successfully.
+*** DONE Make the 'Stop' button on the 'Stopwatch' component page stop the counting up sequence
+<2023-05-11 Thu 12:55>: I basically just need to use similar code to the 'Timer' component page's 'Stop' button behavior.
+
+<2023-05-11 Thu 14:42>: I was able to adapt the code successfully from the 'Timer' component to the 'Stopwatch' component page successfully.
+*** DONE Make the 'Reset' button on the 'Stopwatch' component page reset the entire sequence
+<2023-05-11 Thu 12:56>: I would need to model the behavior off of the existing 'Reset' button on the 'Timer' component page.
+
+<2023-05-11 Thu 14:42>: I was able to adapt the code successfully from the 'Timer' component to the 'Stopwatch' component page successfully.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
