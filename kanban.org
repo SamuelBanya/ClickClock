@@ -61,16 +61,21 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Make the 'Start' button work on the 'Metronome' component page to start the metronome animation sequence
-<2023-05-08 Mon 16:18>: Ideally, the 'Start' button on the 'Metronome' component page should do the following:
-- It should start a sequence of counting in fours which should be visible as each red circle becomes green as the cycle continues until the 4 count is complete
-- When the 4 count is complete, the '1' count should remain green
-- For each '1' count, there should be a more distinct metronome click sound so that the person knows the first click has been made
-- For the '2' through '4' beats, there should be a less distinct metronome sound
-*** TODO Make the 'Mute' button work on the 'Metronome' component page to allow the metronome animation sequence to continue with no sound
-<2023-05-08 Mon 16:22>: The ideal 'Mute' button functionality depends upon the following ideas:
-- The metronome sequence should continue but with 'orange' instead of green
-- Also, the sound of the click itself should be mute
+*** TODO Make the 'Stop' button work on the 'Metronome' component page to stop the metronome animation sequence and related sounds
+<2023-05-11 Thu 15:10>: Ideally, the 'Stop' button on the 'Metronome' component page should do the following:
+- The overall sequence of metronome events should be paused but NOT reset, meaning if it was in the middle of a sequence, ex: on the 3rd beat, then it should be able to proceed to the 4th beat after 'Start' is pressed again.
+- Also, the sounds of the sequence should be stopped as well
+
+*** TODO Make the 'Reset' button work on the 'Metronome' component page to reset the BPM back to '1' BPM and to 're-enable' inputs
+<2023-05-11 Thu 15:07>: In order to help facilitate the overall user experience, I have decided to just opt to disable inputs until the 'Reset' button is clicked.
+
+This would allow the completion of this app to be slightly faster, and also to prevent weird edge cases from occurring.
+
+Therefore, the 'Reset' button's functionality should include the following behavior:
+- The BPM is reset to '1' BPM
+- The '-' and '+' buttons are 're-nabled' after previously being disabled from the 'Start' button
+- The bpm text input field is also 're-enabled' after previously being disabled from the 'Start' button
+
 *** TODO Add sounds when "Start / Stop", "Reset", and "Mute" buttons are clicked
 <2023-05-11 Thu 14:44>: This shouldn't be too hard to do. Probably will just use 'Pixabay' like last time:
 - https://pixabay.com/sound-effects/
@@ -88,12 +93,12 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Make the 'Start' button start a sequence of 4 consecutive beat sounds in a row using a '4/4' time signature
-<2023-05-11 Thu 12:52>: I think it would be good to simply get a sequence of 4 beat sounds to occur in a row.
-
-I don't even think I need to find an NPM package for this really, and can probably just use 'Audio()' constructor in this scenario.
-
-I will probably just have to set the BPM using the 'BPM' value.
+*** IN-PROGRESS Make the 'Start' button work on the 'Metronome' component page to start the metronome animation sequence
+<2023-05-08 Mon 16:18>: Ideally, the 'Start' button on the 'Metronome' component page should do the following:
+- It should start a sequence of counting in fours which should be visible as each red circle becomes green as the cycle continues until the 4 count is complete
+- When the 4 count is complete, the '1' count should remain green
+- For each '1' count, there should be a more distinct metronome click sound so that the person knows the first click has been made
+- For the '2' through '4' beats, there should be a less distinct metronome sound
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -960,6 +965,38 @@ I just need to review the code, and pretty much increment a variable that counts
 <2023-05-11 Thu 12:56>: I would need to model the behavior off of the existing 'Reset' button on the 'Timer' component page.
 
 <2023-05-11 Thu 14:42>: I was able to adapt the code successfully from the 'Timer' component to the 'Stopwatch' component page successfully.
+*** DONE Make the 'Start' button start a sequence of 4 consecutive beat sounds in a row using a '4/4' time signature
+<2023-05-11 Thu 12:52>: I think it would be good to simply get a sequence of 4 beat sounds to occur in a row.
+
+I don't even think I need to find an NPM package for this really, and can probably just use 'Audio()' constructor in this scenario.
+
+I will probably just have to set the BPM using the 'BPM' value.
+
+<2023-05-11 Thu 15:55>: After a bit of research, I got the 'v-model' directive to work just fine with the existing BPM based input tag.
+
+I used this as a reference to basically set the 'currentBPM' variable to the desired value within the 'return' statement of the 'data()' object:
+- https://www.programmingbasic.com/set-a-default-value-to-input-with-a-v-model-in-vue
+
+<2023-05-11 Thu 16:04>: There is some slight math involved here because I have to convert for some units in this scenario.
+
+Reason being is that even though the colloquial term of 'BPM' is used, JavaScript does not know or care for this. All it needs is a millisecond amount to be used for the 'setInterval()' function.
+
+With this in mind, the goal is to convert a user's BPM into milliseconds:
+- (1 beat / 1 minute) * (1 minute / 60 beats) * (60000 milliseconds / 1 minute)
+- Top: 1 beat * 1 minute * 60000 millseconds --> 60000
+- Bottom: 1 minute * 60 beats * 1 minute --> 60
+- Calculation: 1000
+
+<2023-05-11 Thu 16:11>: Yeah... my previous calculation is way off lol.
+
+Here is a more refined example page that details this conversion:
+- https://tuneform.com/tools/time-tempo-bpm-to-milliseconds-ms
+
+Basically, it is 60,000 milliseconds / beats per minute.
+
+<2023-05-11 Thu 17:22>: After a bit of playing around with it, I am able to get the desired metronome sounds to work without an issue.
+
+Onto the next tasks :)
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
@@ -978,3 +1015,13 @@ I might go ahead and just try with a basic Vue.js app going forward to be honest
 <2023-04-26 Wed 11:18>: I opted for designing the buttons via CSS as this allows for easier and more modern animations later. Though it is super fun to make glossy buttons, I think it's better to start with just pure CSS these days as HTML5/CSS3 allows for such easier effects for this kind of thing as opposed to the old days where you had to do these animations by hand.
 *** CANCELLED Create modified buttons using gold style pixel art
 <2023-04-17 Mon 15:27>: My goal for the overall look and design for this project is to emulate the Super Mario Advance 2 / Super Mario All-Stars 'peach gold' menu color scheme look. It has a really unique look, and would be really cool to apply for an app like this one.
+*** CANCELLED Make the 'Mute' button work on the 'Metronome' component page to allow the metronome animation sequence to continue with no sound
+<2023-05-08 Mon 16:22>: The ideal 'Mute' button functionality depends upon the following ideas:
+- The metronome sequence should continue but with 'orange' instead of green
+- Also, the sound of the click itself should be mute
+
+<2023-05-11 Thu 15:05>: I thought about this for a bit, and thought this is a bit overkill. Also, it kind of defeats the purpose of sound altogether.
+
+The user can control the volume on their device using the overall volume to lower or raise the volume or even mute it, so there's no need to have to do this in this scenario.
+
+With this in mind, I moved my focus to also just add another 'Reset' button to reset it to '1' BPM and to 're-enable' inputs that are disabled to prevent weird edge cases.

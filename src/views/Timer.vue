@@ -147,7 +147,7 @@ export default {
 
                 // Clear the 'countdown' variable function's interval to prevent multiple new instances 
                 // from being made:
-                if(this.countdown >= 0) clearInterval(this.countdown)
+                if(this.countdown >= 0) clearInterval(this.countdown);
 
                 // Allow the user to proceed with the timer because they didn't click the 'Stop' button:
                 this.countdown = setInterval(() => {
