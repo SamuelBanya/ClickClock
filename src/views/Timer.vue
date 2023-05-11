@@ -53,10 +53,12 @@
     </div>
 </template>
 
+<!-- Utilizing Composition API: -->
 <script setup>
 import Logo from "../components/Logo.vue";
 </script>
 
+<!-- Utilizing Options API: -->
 <script>
 export default {
     data() {
@@ -175,17 +177,9 @@ export default {
                                 this.buttonMessage = "Start";
                             }
                             // Grab and set the input fields to be blank to reset the timer:
-                            let hrInput = document.querySelector("#hr-input");
-                            let minInput = document.querySelector("#min-input");
-                            let secInput = document.querySelector("#sec-input");
-
-                            console.log("hrInput: ", hrInput);
-                            console.log("minInput: ", minInput);
-                            console.log("secInput: ", secInput);
-
-                            hrInput.value = "";
-                            minInput.innerHTML = "";
-                            secInput.innerHTML = "";
+                            this.hrinput = "";
+                            this.mininput = "";
+                            this.secinput = "";
 
                             clearInterval(this.countdown);
                         }
@@ -227,7 +221,10 @@ export default {
             if (this.isActive === false) {
                 this.isActive = !(this.isActive);
                 this.buttonMessage = "Start";
-            }
+            }                            // Grab and set the input fields to be blank to reset the timer:
+            this.hrinput = "";
+            this.mininput = "";
+            this.secinput = "";
         }
     }
 }
