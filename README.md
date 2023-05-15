@@ -1,17 +1,19 @@
 # ClickClock
 A Vue.js (Version 3) + Vite app that combines a kitchen timer, stopwatch, and metronome in a beautiful and easy-to-use package!
 
-* System dependencies
-Make sure you have 'libvips-dev' installed via the related package manager on your OS.
+# Deployed Version Of Project
+The deployed version of this project can be found here:
+- https://click-clock.onrender.com
 
-* Configuration
+# How To Install And Run Locally
+Use the following command to install related dependencies by opening a terminal in the root directory of the project after 'git cloning' the project accordingly:
+```
+npm install
+```
 
-* Database creation
+Run the 'dev' build by using the following command:
+```
+npm run dev
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+This will then run on 'localhost' for the specific '5173' port which can be viewed in a normal modern browser at 'localhost:5173/'

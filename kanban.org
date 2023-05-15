@@ -62,7 +62,6 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 * Jira Tickets
 ** Todo
 ** In Progress
-*** IN-PROGRESS Test the resulting app in different screen sizes
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -1130,6 +1129,10 @@ router.push({path: '/about'});
 #+end_src
 
 This change successfully forces the '/' route upon loading to re-direct to the '/about' route for the 'About' component page :).
+*** DONE Test the resulting app in different screen sizes
+<2023-05-15 Mon 18:43>: I tested this app on mobile, and it is actually pretty perfect on that screen size, so that's pretty awesome in that regards.
+
+Job well done :)
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
