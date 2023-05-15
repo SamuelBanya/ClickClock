@@ -61,21 +61,8 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Test the resulting app in different screen sizes
 ** In Progress
-*** IN-PROGRESS Force default '/' root page to point to the 'About' component page
-<2023-05-15 Mon 14:20>: It's a little jenky that the default load of the app doesn't point to the 'About' component page by default, so let's change that.
-
-<2023-05-15 Mon 15:31>: I tried looking around the 'Vue Router' docs, and it's not too easy to figure out how to even really re-direct this accordingly to just the '/about' component page by default.
-
-However, this is what I found so far:
-- https://v3.router.vuejs.org/api/#router-link-props
-
-<2023-05-15 Mon 15:45>: Even within their API docs, there's really only the ':to' property that I can utilize for the 'router-link' itself:
-- https://v3.router.vuejs.org/api/#to
-
-<2023-05-15 Mon 15:58>: I might have to use 'router.push' to force the Vue app to push to the 'About' component page instead of the '/' default root route:
-- https://stackoverflow.com/questions/35664550/vue-js-redirection-to-another-page
+*** IN-PROGRESS Test the resulting app in different screen sizes
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -1110,6 +1097,39 @@ I believe the issue might be that I didn't use './' before any of the sound file
 Pushing git changes to see if this fixes the Render build.
 
 <2023-05-15 Mon 15:59>: That seemed to do the trick. Good to know that 'public' is more suited for sounds for Vue 3 based apps.
+*** DONE Force default '/' root page to point to the 'About' component page
+<2023-05-15 Mon 14:20>: It's a little jenky that the default load of the app doesn't point to the 'About' component page by default, so let's change that.
+
+<2023-05-15 Mon 15:31>: I tried looking around the 'Vue Router' docs, and it's not too easy to figure out how to even really re-direct this accordingly to just the '/about' component page by default.
+
+However, this is what I found so far:
+- https://v3.router.vuejs.org/api/#router-link-props
+
+<2023-05-15 Mon 15:45>: Even within their API docs, there's really only the ':to' property that I can utilize for the 'router-link' itself:
+- https://v3.router.vuejs.org/api/#to
+
+<2023-05-15 Mon 15:58>: I might have to use 'router.push' to force the Vue app to push to the 'About' component page instead of the '/' default root route:
+- https://stackoverflow.com/questions/35664550/vue-js-redirection-to-another-page
+
+<2023-05-15 Mon 16:04>: I think the 'Alias' idea for this portion of the 'Vue Router' docs is pertinent for this scenario:
+- https://router.vuejs.org/guide/essentials/redirect-and-alias.html
+
+The only difficulty I have is whether I need to stick this within the 'router-link' section within the 'App.vue' file itself, or if this is just something to place inside of the 'main.js' file instead.
+
+<2023-05-15 Mon 16:14>: I re-read that StackOverflow post (https://stackoverflow.com/questions/35664550/vue-js-redirection-to-another-page), and utilized the following answer:
+#+begin_src text
+if you want to route to another page use this
+
+this.$router.push({path: '/pagename'});
+#+end_src
+
+With this in mind, I called 'router.push' directly via the following change in 'main.js':
+#+begin_src js
+// Force the application to start on the 'about' page:
+router.push({path: '/about'});
+#+end_src
+
+This change successfully forces the '/' route upon loading to re-direct to the '/about' route for the 'About' component page :).
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

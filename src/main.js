@@ -17,3 +17,6 @@ createApp(App)
 .use(VueSweetalert2)
 .component("fa", FontAwesomeIcon)
 .mount('#app')
+
+// Force the application to start on the 'about' page:
+router.push({path: '/about'});
