@@ -62,7 +62,8 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 * Jira Tickets
 ** Todo
 *** TODO Test the resulting app in different screen sizes
-*** TODO Force default '/' root page to point to the 'About' component page
+** In Progress
+*** IN-PROGRESS Force default '/' root page to point to the 'About' component page
 <2023-05-15 Mon 14:20>: It's a little jenky that the default load of the app doesn't point to the 'About' component page by default, so let's change that.
 
 <2023-05-15 Mon 15:31>: I tried looking around the 'Vue Router' docs, and it's not too easy to figure out how to even really re-direct this accordingly to just the '/about' component page by default.
@@ -73,31 +74,8 @@ However, this is what I found so far:
 <2023-05-15 Mon 15:45>: Even within their API docs, there's really only the ':to' property that I can utilize for the 'router-link' itself:
 - https://v3.router.vuejs.org/api/#to
 
-** In Progress
-*** IN-PROGRESS Fix sound issue on deployed version of application on Render.com
-<2023-05-15 Mon 14:40>: For some reason, the sound is not working for the button clicks or the finished sequence events for the app.
-
-Most likely, this is due to the path itself needing to be modified accordingly.
-
-<2023-05-15 Mon 14:46>: I took a look at the Web Developer console, and noticed the following error:
-#+begin_src text
-Uncaught (in promise) DOMException: The media resource indicated by the src attribute or assigned media provider object was not suitable.
-#+end_src
-
-More specifically, there is a stop sign icon for the 'GET' request for the following:
-- https://click-clock.onrender.com/src/sounds/alarm.mp3
-
-To me, this means that the paths for the sounds are messed up when the project is built within the 'dist' folder.
-
-<2023-05-15 Mon 15:39>: I dug a bit further, and found this specific page, specifically the 'Relative Path Imports' section:
-- https://cli.vuejs.org/guide/html-and-static-assets.html#relative-path-imports
-
-I believe the issue might be that I didn't use './' before any of the sound file paths themselves which means that Vite won't bundle the related static assets accordingly without doing this properly. I will try pushing these changes to see if this helps loads sounds successfully.
-
-<2023-05-15 Mon 15:55>: I moved the 'sounds' directory to the 'public' directory, and then referred to them as '/sounds/(filename.mp3)' instead.
-
-Pushing git changes to see if this fixes the Render build.
-
+<2023-05-15 Mon 15:58>: I might have to use 'router.push' to force the Vue app to push to the 'About' component page instead of the '/' default root route:
+- https://stackoverflow.com/questions/35664550/vue-js-redirection-to-another-page
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -1107,6 +1085,31 @@ dist
 However, the sounds for the app itself are not working, so I'm guessing this is more of a directory issue that I need to resolve.
 
 Either way, it is deployed so that is a success for this ticket.
+*** DONE Fix sound issue on deployed version of application on Render.com
+<2023-05-15 Mon 14:40>: For some reason, the sound is not working for the button clicks or the finished sequence events for the app.
+
+Most likely, this is due to the path itself needing to be modified accordingly.
+
+<2023-05-15 Mon 14:46>: I took a look at the Web Developer console, and noticed the following error:
+#+begin_src text
+Uncaught (in promise) DOMException: The media resource indicated by the src attribute or assigned media provider object was not suitable.
+#+end_src
+
+More specifically, there is a stop sign icon for the 'GET' request for the following:
+- https://click-clock.onrender.com/src/sounds/alarm.mp3
+
+To me, this means that the paths for the sounds are messed up when the project is built within the 'dist' folder.
+
+<2023-05-15 Mon 15:39>: I dug a bit further, and found this specific page, specifically the 'Relative Path Imports' section:
+- https://cli.vuejs.org/guide/html-and-static-assets.html#relative-path-imports
+
+I believe the issue might be that I didn't use './' before any of the sound file paths themselves which means that Vite won't bundle the related static assets accordingly without doing this properly. I will try pushing these changes to see if this helps loads sounds successfully.
+
+<2023-05-15 Mon 15:55>: I moved the 'sounds' directory to the 'public' directory, and then referred to them as '/sounds/(filename.mp3)' instead.
+
+Pushing git changes to see if this fixes the Render build.
+
+<2023-05-15 Mon 15:59>: That seemed to do the trick. Good to know that 'public' is more suited for sounds for Vue 3 based apps.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
