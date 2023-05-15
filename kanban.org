@@ -62,9 +62,15 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 * Jira Tickets
 ** Todo
 *** TODO Test the resulting app in different screen sizes
+*** TODO Force default '/' root page to point to the 'About' component page
+<2023-05-15 Mon 14:20>: It's a little jenky that the default load of the app doesn't point to the 'About' component page by default, so let's change that.
+
 ** In Progress
-*** IN-PROGRESS Deploy the app on Render.com
-<2023-05-15 Mon 13:50>: I need to deploy the app on Render.com so that I can test it on various devices later on.
+*** TODO Fix sound issue on deployed version of application on Render.com
+<2023-05-15 Mon 14:40>: For some reason, the sound is not working for the button clicks or the finished sequence events for the app.
+
+Most likely, this is due to the path itself needing to be modified accordingly.
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -1050,6 +1056,30 @@ Reason being is that I can easily just use the existing CSS button styling I cur
 <2023-05-15 Mon 13:45>: Overall, I am okay with the medium minimal design because this is more of an app that was meant to be prototyped from a wireframe, and was a fun experience as a result.
 *** DONE Remove extraneous log statements throughout all of the project component pages
 <2023-05-15 Mon 13:47>: I need to remove extraneous log statements throughout all of the project component pages.
+*** DONE Deploy the app on Render.com
+<2023-05-15 Mon 13:50>: I need to deploy the app on Render.com so that I can test it on various devices later on.
+
+<2023-05-15 Mon 14:19>: Related Vue deployment guide from Vite themselves, specifically under the 'Render' section:
+- https://vitejs.dev/guide/static-deploy.html
+
+All I would need to do is to add the following commands:
+
+Build command:
+#+begin_src bash
+npm run build
+#+end_src
+
+Publish directory:
+#+begin_src bash
+dist
+#+end_src
+
+<2023-05-15 Mon 14:38>: I was able to deploy the app successfully on Render.com:
+- https://click-clock.onrender.com
+
+However, the sounds for the app itself are not working, so I'm guessing this is more of a directory issue that I need to resolve.
+
+Either way, it is deployed so that is a success for this ticket.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
