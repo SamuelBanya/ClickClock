@@ -100,7 +100,7 @@ export default {
                     // Set the 'buttonMessage' to 'Stop':
                     this.buttonMessage = "Stop";
                     // Play default 'StartSound' button sound:
-                    let startSound =  new Audio("src/sounds/StartSound.mp3");
+                    let startSound =  new Audio("./src/sounds/StartSound.mp3");
                     startSound.play();
                 }
 
@@ -109,7 +109,7 @@ export default {
                 if (this.isActive === true) { 
                     this.buttonMessage = "Start";
                     // Play default 'StartSound' button sound:
-                    let startSound =  new Audio("src/sounds/StartSound.mp3");
+                    let startSound =  new Audio("./src/sounds/StartSound.mp3");
                     startSound.play();
                 }
 
@@ -161,7 +161,7 @@ export default {
                     else {
                         if (this.totalSecs <= 1) {
                             this.displaySecs = 0;
-                            let alarmSound =  new Audio("src/sounds/alarm.mp3");
+                            let alarmSound =  new Audio("./src/sounds/alarm.mp3");
                             alarmSound.play();
                             this.disabledInputs = false;
                             if (this.isActive === false) {
@@ -192,7 +192,7 @@ export default {
         },
         resetTimer() {
             // Play default 'StartSound' button sound:
-            let startSound =  new Audio("src/sounds/StartSound.mp3");
+            let startSound =  new Audio("./src/sounds/StartSound.mp3");
             startSound.play();
             // Re-enable the inputs using this 'disabledInputs' boolean variable:
             this.disabledInputs = false;

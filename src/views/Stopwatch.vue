@@ -64,7 +64,7 @@ export default {
                 // Set the 'buttonMessage' to 'Stop':
                 this.buttonMessage = "Stop";
                 // Play default 'StartSound' button sound:
-                let startSound =  new Audio("src/sounds/StartSound.mp3");
+                let startSound =  new Audio("./src/sounds/StartSound.mp3");
                 startSound.play();
             }
 
@@ -73,7 +73,7 @@ export default {
             if (this.isActive === true) { 
                 this.buttonMessage = "Start";
                 // Play default 'StartSound' button sound:
-                let startSound =  new Audio("src/sounds/StartSound.mp3");
+                let startSound =  new Audio("./src/sounds/StartSound.mp3");
                 startSound.play();
             }
 
@@ -106,7 +106,7 @@ export default {
         },
         resetStopwatch() {
             // Play default 'StartSound' button sound:
-            let startSound =  new Audio("src/sounds/StartSound.mp3");
+            let startSound =  new Audio("./src/sounds/StartSound.mp3");
             startSound.play();
             this.displayHrs = 0;
             this.displayMins = 0;

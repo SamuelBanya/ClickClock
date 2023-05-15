@@ -65,11 +65,31 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 *** TODO Force default '/' root page to point to the 'About' component page
 <2023-05-15 Mon 14:20>: It's a little jenky that the default load of the app doesn't point to the 'About' component page by default, so let's change that.
 
+<2023-05-15 Mon 15:31>: I tried looking around the 'Vue Router' docs, and it's not too easy to figure out how to even really re-direct this accordingly to just the '/about' component page by default.
+
+However, this is what I found so far:
+- https://v3.router.vuejs.org/api/#router-link-props
+
 ** In Progress
-*** TODO Fix sound issue on deployed version of application on Render.com
+*** IN-PROGRESS Fix sound issue on deployed version of application on Render.com
 <2023-05-15 Mon 14:40>: For some reason, the sound is not working for the button clicks or the finished sequence events for the app.
 
 Most likely, this is due to the path itself needing to be modified accordingly.
+
+<2023-05-15 Mon 14:46>: I took a look at the Web Developer console, and noticed the following error:
+#+begin_src text
+Uncaught (in promise) DOMException: The media resource indicated by the src attribute or assigned media provider object was not suitable.
+#+end_src
+
+More specifically, there is a stop sign icon for the 'GET' request for the following:
+- https://click-clock.onrender.com/src/sounds/alarm.mp3
+
+To me, this means that the paths for the sounds are messed up when the project is built within the 'dist' folder.
+
+<2023-05-15 Mon 15:39>: I dug a bit further, and found this specific page, specifically the 'Relative Path Imports' section:
+- https://cli.vuejs.org/guide/html-and-static-assets.html#relative-path-imports
+
+I believe the issue might be that I didn't use './' before any of the sound file paths themselves which means that Vite won't bundle the related static assets accordingly without doing this properly. I will try pushing these changes to see if this helps loads sounds successfully.
 
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
