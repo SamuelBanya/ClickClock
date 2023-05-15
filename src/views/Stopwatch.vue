@@ -32,7 +32,7 @@
             <Logo />
             <!-- Middle Screen Buttons -->
             <button :class="[isActive ? 'start-button' : 'stop-button']" @click="startStopwatch">{{ buttonMessage }}</button>
-            <button class="reset-mute-button" @click="resetStopwatch">Reset</button>
+            <button class="reset-button" @click="resetStopwatch">Reset</button>
         </div>
     </div>
 </template>

@@ -37,7 +37,7 @@
                 </div>
             </div>
             <button :class="[isActive ? 'start-button' : 'stop-button']" @click="startMetronome">{{ buttonMessage }}</button>
-            <button class="reset-mute-button" @click="resetMetronome">Reset</button>
+            <button class="reset-button" @click="resetMetronome">Reset</button>
         </div>
     </div>
 </template>

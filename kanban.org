@@ -61,19 +61,9 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
-<2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
-
-<2023-04-12 Wed 21:12>: I'm in the process of watching a few Vue.js tutorials just to get a feel for it so far.
-
-From the looks of it, it seems just like React where it is its own self contained framework where you can build out repeatable components easily. The interpolation aspect seems very similar to React, and also the whole idea of binding to a div tag for the entire application itself is just like React as well.
-
-<2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
-*** TODO Test the resulting app in different screen sizes
 *** TODO Deploy the app on Render.com
+*** TODO Test the resulting app in different screen sizes
 ** In Progress
-*** IN-PROGRESS Research flashy looking animations that appear when each component page is loaded
-<2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -1020,6 +1010,43 @@ This is a good reference on the topic of using the ':disabled' property for futu
 - https://pixabay.com/users/irinairinafomicheva-25140203/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=13691
 
 I simply created a new 'Audio()' constructor, and used the related '.play()' method accordingly, and everything works just fine :).
+*** DONE Research flashy looking animations that appear when each component page is loaded
+<2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
+
+<2023-05-15 Mon 11:57>: I did some related research on this topic, and found this article to be pretty helpful to gauge different animation libraries that are out there to produce some really nice flashy effects:
+- https://www.codeinwp.com/blog/best-javascript-animation-libraries/
+
+Some very impressive ones I found include the following:
+- Anime.js (https://animejs.com/):
+- This is an animation library that can be used to animate many different things on-screen and the provided examples are super impressive
+- ThreeJS (https://threejs.org/):
+- This is fantastic stuff simply put, basically you can render 3D animations within a browser
+- AniJS (https://anijs.github.io/):
+- This looked like the most useable and most relatable library in this context since the other two above have decent Docs, but don't relate to web page basics and just useable animations as the other two go all out to showcase what you "can" do, but not what you probably "should" do
+- vivus (https://maxwellito.github.io/vivus/):
+- This is just a simple library that draws an SVG icon in real time, neat but I'm not sure if it's appropriate for my project as I'm just looking for flashy button animations really at this point
+- Typed.js (https://mattboldt.com/demos/typed-js/):
+- This is just a library that types out code that you want to reveal on screen, probably is more suitable for a developer based application though
+
+Separate research on mouse related animations:
+- This is a great example of using a circle to follow the cursor:
+- https://codepen.io/karlovidek/pen/KQzJoP
+- Another great example of using a circle to follow the cursor:
+- https://codepen.io/grayghostvisuals/pen/AJQgeB
+- Yet another example of using a circle to follow the cursor:
+- https://codepen.io/espidesigns/pen/dGNPLo
+- This is a super cool example of creating waves upon a mouse click:
+- https://codepen.io/benjyu/pen/QvRXXa
+
+<2023-05-15 Mon 12:26>: After a bit more research, I think the best thing I can use is the idea of using 'transition' for CSS style effects:
+- https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+
+Reason being is that I can easily just use the existing CSS button styling I currently but slowly morph the colors accordingly with a slight delay using 'transition'.
+
+<2023-05-15 Mon 13:18>: I found a few more good examples of gradient transition effects here:
+- https://codepen.io/JavaScriptJunkie/pen/pPRooV
+
+<2023-05-15 Mon 13:45>: Overall, I am okay with the medium minimal design because this is more of an app that was meant to be prototyped from a wireframe, and was a fun experience as a result.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.
@@ -1048,3 +1075,13 @@ I might go ahead and just try with a basic Vue.js app going forward to be honest
 The user can control the volume on their device using the overall volume to lower or raise the volume or even mute it, so there's no need to have to do this in this scenario.
 
 With this in mind, I moved my focus to also just add another 'Reset' button to reset it to '1' BPM and to 're-enable' inputs that are disabled to prevent weird edge cases.
+*** CANCELLED Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
+<2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
+
+<2023-04-12 Wed 21:12>: I'm in the process of watching a few Vue.js tutorials just to get a feel for it so far.
+
+From the looks of it, it seems just like React where it is its own self contained framework where you can build out repeatable components easily. The interpolation aspect seems very similar to React, and also the whole idea of binding to a div tag for the entire application itself is just like React as well.
+
+<2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
+
+<2023-05-15 Mon 13:45>: I think the overall functionality for this app is complete, so adding more unnecessary functionality isn't needed at this point.

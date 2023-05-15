@@ -48,7 +48,7 @@
                 </div>
             </div>
             <button :class="[isActive ? 'start-button' : 'stop-button']" @click="startTimer">{{ buttonMessage }}</button>
-            <button class="reset-mute-button" @click="resetTimer">Reset</button>
+            <button class="reset-button" @click="resetTimer">Reset</button>
         </div>
     </div>
 </template>
