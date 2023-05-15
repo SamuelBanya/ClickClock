@@ -61,9 +61,10 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Deploy the app on Render.com
 *** TODO Test the resulting app in different screen sizes
 ** In Progress
+*** IN-PROGRESS Deploy the app on Render.com
+<2023-05-15 Mon 13:50>: I need to deploy the app on Render.com so that I can test it on various devices later on.
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -1047,6 +1048,8 @@ Reason being is that I can easily just use the existing CSS button styling I cur
 - https://codepen.io/JavaScriptJunkie/pen/pPRooV
 
 <2023-05-15 Mon 13:45>: Overall, I am okay with the medium minimal design because this is more of an app that was meant to be prototyped from a wireframe, and was a fun experience as a result.
+*** DONE Remove extraneous log statements throughout all of the project component pages
+<2023-05-15 Mon 13:47>: I need to remove extraneous log statements throughout all of the project component pages.
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

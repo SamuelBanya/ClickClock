@@ -128,7 +128,6 @@ export default {
             }
         },
         startMetronome() {
-            console.log("startMetronome function called!");
             // Switch 'isActive' boolean variable value:
             this.isActive = !(this.isActive);
 
@@ -153,9 +152,6 @@ export default {
                 clearInterval(this.metronomeSequence);
             }
 
-            // Check the 'currentBPM' value that was provided:
-            console.log("this.currentBPM: ", this.currentBPM);
-
             // Clear any existing instance of the metronomeSequence interval function:
             if (this.metronomeSequence)
             clearInterval(this.metronomeSequence);
@@ -167,18 +163,15 @@ export default {
             this.metronomeSequence = setInterval(() => {
                 if (this.isActive === true) {
                     // Stop the metronomeSequence interval function:
-                    console.log("Clearing interval because 'this.isActive' is set to true");
                     // Re-enable the inputs:
                     this.disabledInputs = false;
                     clearInterval(this.metronomeSequence);
                 }
                 else {
                     this.beatNumber++;
-                    console.log("Testing metronome sequence");
                     // Cycle through 4 beats with a for loop
                     // Beat 1: Make 'MetronomeClick.mp3' sound play:
                     if (this.beatNumber === 1) {
-                        console.log("this.beatNumber: ", this.beatNumber);
                         let metronomeClick =  new Audio("src/sounds/MetronomeClick.mp3");
                         metronomeClick.play();
                         let metronomeCirclesList = document.getElementById("metronome-circles-list")
@@ -192,33 +185,25 @@ export default {
                         // Now, make the first circle green:
                         metronomeCirclesListItems[this.beatNumber - 1].classList.add("metronome-circle-green");
                         metronomeCirclesListItems[this.beatNumber - 1].classList.remove("metronome-circle");
-                        console.log("metronomeCirclesListItems[" + (this.beatNumber - 1) + "].className: " + metronomeCirclesListItems[this.beatNumber - 1].className);
                     }
                     // Beats 2 through 4: Make 'Drumsticks.mp3' sound play:
                     if (this.beatNumber > 1 && this.beatNumber < 6) {
-                        console.log("this.beatNumber: ", this.beatNumber);
                         let drumstickSound =  new Audio("src/sounds/Drumsticks.mp3");
                         drumstickSound.play();
                         let metronomeCirclesList = document.getElementById("metronome-circles-list")
                         let metronomeCirclesListItems = metronomeCirclesList.childNodes;
                         switch(this.beatNumber) {
                             case 2:
-                                console.log("Beat 2!");
                                 metronomeCirclesListItems[this.beatNumber - 1].classList.add("metronome-circle-green");
                                 metronomeCirclesListItems[this.beatNumber - 1].classList.remove("metronome-circle");
-                                console.log("metronomeCirclesListItems[" + (this.beatNumber - 1) + "].className: " + metronomeCirclesListItems[this.beatNumber - 1].className);
                                 break;
                             case 3:
-                                console.log("Beat 3!");
                                 metronomeCirclesListItems[this.beatNumber - 1].classList.add("metronome-circle-green");
                                 metronomeCirclesListItems[this.beatNumber - 1].classList.remove("metronome-circle");
-                                console.log("metronomeCirclesListItems[" + (this.beatNumber - 1) + "].className: " + metronomeCirclesListItems[this.beatNumber - 1].className);
                                 break;
                             case 4:
-                                console.log("Beat 4!");
                                 metronomeCirclesListItems[this.beatNumber - 1].classList.add("metronome-circle-green");
                                 metronomeCirclesListItems[this.beatNumber - 1].classList.remove("metronome-circle");
-                                console.log("metronomeCirclesListItems[" + (this.beatNumber - 1) + "].className: " + metronomeCirclesListItems[this.beatNumber - 1].className);
                                 break;
                         }
                     }
@@ -231,12 +216,10 @@ export default {
             }, (60000 / this.currentBPM));
         },
         resetMetronome() {
-            console.log("resetMetronome function called!");
             // Play default 'StartSound' button sound:
             let startSound =  new Audio("src/sounds/StartSound.mp3");
             startSound.play();
             // Stop the metronomeSequence interval function:
-            console.log("Clearing interval because 'this.isActive' is set to true");
             // Reset the BPM back to 60 BPM by default:
             this.currentBPM = 60;
             // Switch 'isActive' boolean variable value back to 'true':

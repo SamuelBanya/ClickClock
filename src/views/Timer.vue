@@ -86,15 +86,11 @@ export default {
         startTimer() {
             // Check to see if user entered blank input:
             if (this.hrinput === "" && this.mininput === "" && this.secinput === "") {
-                console.log("Inputs are blank!");
                 this.$swal('Inputs are blank!\n\nPlease enter valid numerical values for hours, mins, and secs.');
             }
 
             // Allow the user to proceed since they entered actual values:
             else {
-                // Show that the button works:
-                console.log("Start / Stop button clicked!")
-
                 // Switch 'isActive' boolean variable value:
                 this.isActive = !(this.isActive);
 
@@ -136,7 +132,6 @@ export default {
                 // Grab the inputs only for the run of the 'Start' button aka when 'disabledInputs'
                 // is set to 'false' --> This is to prevent the 'double countdown' edge case:
                 if (this.disabledInputs === false) {
-                    console.log("this.disabledInputs: ", this.disabledInputs);
                     // Convert all user inputs to secs:
                     this.hrSecs = parseInt(this.hrinput * 3600);
                     this.minSecs = parseInt(this.mininput * 60);
@@ -144,7 +139,6 @@ export default {
                     // Adding 1 to total so that it acts like a real countdown to show the beginning
                     // of the countdown:
                     this.totalSecs = this.hrSecs + this.minSecs + this.additionalSecs + 1;
-                    console.log("this.totalSecs = ", this.totalSecs);
                 }
 
                 // Switch 'disabledInputs' boolean variable value to 'false' which can only
@@ -157,26 +151,18 @@ export default {
 
                 // Allow the user to proceed with the timer because they didn't click the 'Stop' button:
                 this.countdown = setInterval(() => {
-                    console.log("Inside countdown");
-                    console.log("this.isActive: ", this.isActive);
                     // Check the status of 'isActive' 
                     // If it is set to 'True', then stop the countdown completely since the user
                     // just clicked the 'Stop' button:
                     if (this.isActive === true) {
                         // Stop the countdown interval:
-                        console.log("Clearing interval because 'this.isActive' is set to true");
                         clearInterval(this.countdown);
                     }
                     else {
                         if (this.totalSecs <= 1) {
-                            console.log("TIMES UP!");
                             this.displaySecs = 0;
                             let alarmSound =  new Audio("src/sounds/alarm.mp3");
                             alarmSound.play();
-                            console.log("totalSecs: ", this.totalSecs);
-                            console.log("displayHrs: ", this.displayHrs);
-                            console.log("displayMins: ", this.displayMins);
-                            console.log("displaySecs: ", this.displaySecs);
                             this.disabledInputs = false;
                             if (this.isActive === false) {
                                 this.isActive = !(this.isActive);
@@ -198,22 +184,13 @@ export default {
                             this.displayHrs = Math.floor(this.totalSecs / 3600);
                             this.displayMins = Math.floor((this.totalSecs % 3600) / 60);
                             this.displaySecs = Math.floor((this.totalSecs % 3600) % 60);
-
-                            console.log("totalSecs: ", this.totalSecs);
-                            console.log("displayHrs: ", this.displayHrs);
-                            console.log("displayMins: ", this.displayMins);
-                            console.log("displaySecs: ", this.displaySecs);
                         }
                     }
                 }, 1000);
 
-            // Checking 'this.countdown' within 'startTimer' function:
-            console.log("Checking this.countdown in startTimer function: ");
-            console.log("this.countdown: ", this.countdown);
             }
         },
         resetTimer() {
-            console.log("resetTimer function called!");
             // Play default 'StartSound' button sound:
             let startSound =  new Audio("src/sounds/StartSound.mp3");
             startSound.play();

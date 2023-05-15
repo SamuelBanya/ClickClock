@@ -55,8 +55,6 @@ export default {
     },
     methods: {
         startStopwatch() {
-            console.log("startStopwatch method called!");
-
             // Switch 'isActive' boolean variable value:
             this.isActive = !(this.isActive)
 
@@ -90,7 +88,6 @@ export default {
                 // just clicked the 'Stop' button:
                 if (this.isActive === true) {
                     // Stop the countdown interval:
-                    console.log("Clearing interval because 'this.isActive' is set to true");
                     clearInterval(this.countup);
                 }
                 else {
@@ -99,7 +96,6 @@ export default {
                     if (this.totalSecs >= 362439) {
                         this.$swal("Cannot exceed 99 hours, 99 mins, and 99 secs! Please reset stopwatch!");
                     } else {
-                        console.log("totalSecs: ", this.totalSecs);
                         this.totalSecs++;
                         this.displayHrs = Math.floor(this.totalSecs / 3600);
                         this.displayMins = Math.floor((this.totalSecs % 3600) / 60);
@@ -109,7 +105,6 @@ export default {
             }, 1000);
         },
         resetStopwatch() {
-            console.log("resetStopwatch function called!");
             // Play default 'StartSound' button sound:
             let startSound =  new Audio("src/sounds/StartSound.mp3");
             startSound.play();
