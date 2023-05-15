@@ -137,6 +137,9 @@ export default {
             if(this.isActive === false) {
                 // Set the 'buttonMessage' to 'Stop':
                 this.buttonMessage = "Stop";
+                // Play default 'StartSound' button sound:
+                let startSound =  new Audio("src/sounds/StartSound.mp3");
+                startSound.play();
             }
 
             // 'isActive' is set to 'True' --> Display 'Start' button:
@@ -144,6 +147,9 @@ export default {
             if (this.isActive === true) { 
                 this.buttonMessage = "Start";
                 this.disabledInputs = false;
+                // Play default 'StartSound' button sound:
+                let startSound =  new Audio("src/sounds/StartSound.mp3");
+                startSound.play();
                 clearInterval(this.metronomeSequence);
             }
 
@@ -226,6 +232,9 @@ export default {
         },
         resetMetronome() {
             console.log("resetMetronome function called!");
+            // Play default 'StartSound' button sound:
+            let startSound =  new Audio("src/sounds/StartSound.mp3");
+            startSound.play();
             // Stop the metronomeSequence interval function:
             console.log("Clearing interval because 'this.isActive' is set to true");
             // Reset the BPM back to 60 BPM by default:

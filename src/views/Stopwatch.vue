@@ -65,12 +65,18 @@ export default {
             if(this.isActive === false) {
                 // Set the 'buttonMessage' to 'Stop':
                 this.buttonMessage = "Stop";
+                // Play default 'StartSound' button sound:
+                let startSound =  new Audio("src/sounds/StartSound.mp3");
+                startSound.play();
             }
 
             // 'isActive' is set to 'True' --> Display 'Start' button:
             // User clicked 'Stop' button with valid inputs:
             if (this.isActive === true) { 
                 this.buttonMessage = "Start";
+                // Play default 'StartSound' button sound:
+                let startSound =  new Audio("src/sounds/StartSound.mp3");
+                startSound.play();
             }
 
             // Allow the countup sequence to continue after the 'Stop' button has been clicked and the total limit has not been reached:
@@ -104,6 +110,9 @@ export default {
         },
         resetStopwatch() {
             console.log("resetStopwatch function called!");
+            // Play default 'StartSound' button sound:
+            let startSound =  new Audio("src/sounds/StartSound.mp3");
+            startSound.play();
             this.displayHrs = 0;
             this.displayMins = 0;
             this.displaySecs = 0;

@@ -70,13 +70,10 @@ From the looks of it, it seems just like React where it is its own self containe
 
 <2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
 *** TODO Test the resulting app in different screen sizes
-*** TODO Research flashy looking animations that appear when each component page is loaded
-<2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Add sounds when "Start / Stop", "Reset", and "Mute" buttons are clicked
-<2023-05-11 Thu 14:44>: This shouldn't be too hard to do. Probably will just use 'Pixabay' like last time:
-- https://pixabay.com/sound-effects/
+*** IN-PROGRESS Research flashy looking animations that appear when each component page is loaded
+<2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -1015,6 +1012,14 @@ Therefore, the 'Reset' button's functionality should include the following behav
 
 This is a good reference on the topic of using the ':disabled' property for future reference:
 - https://stackoverflow.com/questions/38085180/disable-input-conditionally-vue-js
+*** DONE Add sounds when "Start / Stop", "Reset", and "Mute" buttons are clicked
+<2023-05-11 Thu 14:44>: This shouldn't be too hard to do. Probably will just use 'Pixabay' like last time:
+- https://pixabay.com/sound-effects/
+
+<2023-05-15 Mon 11:51>: I added a related 'Start' sound to the related buttons from Pixabay:
+- https://pixabay.com/users/irinairinafomicheva-25140203/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=13691
+
+I simply created a new 'Audio()' constructor, and used the related '.play()' method accordingly, and everything works just fine :).
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

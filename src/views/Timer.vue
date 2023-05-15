@@ -103,12 +103,18 @@ export default {
                 if(this.isActive === false) {
                     // Set the 'buttonMessage' to 'Stop':
                     this.buttonMessage = "Stop";
+                    // Play default 'StartSound' button sound:
+                    let startSound =  new Audio("src/sounds/StartSound.mp3");
+                    startSound.play();
                 }
 
                 // 'isActive' is set to 'True' --> Display 'Start' button:
                 // User clicked 'Stop' button with valid inputs:
                 if (this.isActive === true) { 
                     this.buttonMessage = "Start";
+                    // Play default 'StartSound' button sound:
+                    let startSound =  new Audio("src/sounds/StartSound.mp3");
+                    startSound.play();
                 }
 
                 // Account for the any blank inputs aka 2 inputs that are blank but 1 is still valid:
@@ -208,6 +214,9 @@ export default {
         },
         resetTimer() {
             console.log("resetTimer function called!");
+            // Play default 'StartSound' button sound:
+            let startSound =  new Audio("src/sounds/StartSound.mp3");
+            startSound.play();
             // Re-enable the inputs using this 'disabledInputs' boolean variable:
             this.disabledInputs = false;
             this.displayHrs = 0;
