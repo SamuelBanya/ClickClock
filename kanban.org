@@ -61,20 +61,6 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Make the 'Reset' button work on the 'Metronome' component page to reset the BPM back to '1' BPM and to 're-enable' inputs
-<2023-05-11 Thu 15:07>: In order to help facilitate the overall user experience, I have decided to just opt to disable inputs until the 'Reset' button is clicked.
-
-This would allow the completion of this app to be slightly faster, and also to prevent weird edge cases from occurring.
-
-Therefore, the 'Reset' button's functionality should include the following behavior:
-- The BPM is reset to '1' BPM
-- The '-' and '+' buttons are 're-nabled' after previously being disabled from the 'Start' button
-- The bpm text input field is also 're-enabled' after previously being disabled from the 'Start' button
-
-*** TODO Add sounds when "Start / Stop", "Reset", and "Mute" buttons are clicked
-<2023-05-11 Thu 14:44>: This shouldn't be too hard to do. Probably will just use 'Pixabay' like last time:
-- https://pixabay.com/sound-effects/
-
 *** TODO Review related Vue basics and other Docs to see if there is anything advanced I can add to the application itself
 <2023-04-11 Tue 19:39>: I need to check Vue.js docs page for some refreshers on its use so that I can figure out how to implement the basic page I want for this application.
 
@@ -88,11 +74,9 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Make the 'Stop' button work on the 'Metronome' component page to stop the metronome animation sequence and related sounds
-<2023-05-11 Thu 15:10>: Ideally, the 'Stop' button on the 'Metronome' component page should do the following:
-- The overall sequence of metronome events should be paused but NOT reset, meaning if it was in the middle of a sequence, ex: on the 3rd beat, then it should be able to proceed to the 4th beat after 'Start' is pressed again.
-- Also, the sounds of the sequence should be stopped as well
-
+*** IN-PROGRESS Add sounds when "Start / Stop", "Reset", and "Mute" buttons are clicked
+<2023-05-11 Thu 14:44>: This shouldn't be too hard to do. Probably will just use 'Pixabay' like last time:
+- https://pixabay.com/sound-effects/
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -1009,6 +993,28 @@ Onto the next tasks :)
 - I first cleared all classes of the default 'metronome-circle-green' class I later added to each beat to just clear everything out for the first beat
 - After that, I pretty much just used '.classList.add' within the context of the first beat, and then within the context of a related Switch statement for Beats 2 through 4:
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+*** DONE Make the 'Stop' button work on the 'Metronome' component page to stop the metronome animation sequence and related sounds
+<2023-05-11 Thu 15:10>: Ideally, the 'Stop' button on the 'Metronome' component page should do the following:
+- The overall sequence of metronome events should be paused but NOT reset, meaning if it was in the middle of a sequence, ex: on the 3rd beat, then it should be able to proceed to the 4th beat after 'Start' is pressed again.
+- Also, the sounds of the sequence should be stopped as well
+
+<2023-05-15 Mon 11:03>: I was able to easily apply the existing logic from the 'Timer' component to simply check for the 'isActive' boolean variable to then piggyback off of that and use 'clearInterval' to stop the interval for the reltaed 'metronomeSequence' interval function.
+*** DONE Make the 'Reset' button work on the 'Metronome' component page to reset the BPM back to '60' BPM and to 're-enable' inputs
+<2023-05-11 Thu 15:07>: In order to help facilitate the overall user experience, I have decided to just opt to disable inputs until the 'Reset' button is clicked.
+
+This would allow the completion of this app to be slightly faster, and also to prevent weird edge cases from occurring.
+
+Therefore, the 'Reset' button's functionality should include the following behavior:
+- The BPM is reset to '60' BPM
+- The '-' and '+' buttons are 're-nabled' after previously being disabled from the 'Start' button
+- The bpm text input field is also 're-enabled' after previously being disabled from the 'Start' button
+
+<2023-05-15 Mon 11:05>: I was able to reset the BPM back to the default 60 BPM, and re-use the existing code for resetting the class of metronome circles back to the default red 'metronome-circle' CSS class.
+
+<2023-05-15 Mon 11:17>: I was also able to use the same ideas to use the ':disabled' property to setup a ternary expression for the related inputs accordingly to enable the '-' button, '+' button, and BPM input whenever appropriate.
+
+This is a good reference on the topic of using the ':disabled' property for future reference:
+- https://stackoverflow.com/questions/38085180/disable-input-conditionally-vue-js
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

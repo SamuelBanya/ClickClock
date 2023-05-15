@@ -27,11 +27,11 @@
                 <label for="custom-input-number" class="w-full text-black-700 text-lg font-semibold">BPM
                 </label>
                 <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-                    <button id="decrement-button" @click="decrement" class=" bg-gray-300 text-black-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                    <button id="decrement-button" :disabled="disabledInputs ? 1 : 0" @click="decrement" class=" bg-gray-300 text-black-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
                         <span class="m-auto text-2xl font-thin">−</span>
                     </button>
-                    <input id="bpm-value" v-model="currentBPM" type="number" class="outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-lg hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-black-700  outline-none" name="custom-input-number"/>
-                    <button id="increment-button" @click="increment" class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                    <input id="bpm-value" :disabled="disabledInputs ? 1 : 0" v-model="currentBPM" type="number" class="outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-lg hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-black-700  outline-none" name="custom-input-number"/>
+                    <button id="increment-button" :disabled="disabledInputs ? 1 : 0" @click="increment" class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
                         <span class="m-auto text-2xl font-thin">+</span>
                     </button>
                 </div>
@@ -72,8 +72,9 @@ export default {
         return {
             isActive: true,
             buttonMessage: "Start",
-            currentBPM: 1,
-            beatNumber: 0
+            currentBPM: 60,
+            beatNumber: 0,
+            disabledInputs: false
         }
     },
     methods: {
@@ -142,20 +143,28 @@ export default {
             // User clicked 'Stop' button with valid inputs:
             if (this.isActive === true) { 
                 this.buttonMessage = "Start";
+                this.disabledInputs = false;
+                clearInterval(this.metronomeSequence);
             }
 
             // Check the 'currentBPM' value that was provided:
             console.log("this.currentBPM: ", this.currentBPM);
 
+            // Clear any existing instance of the metronomeSequence interval function:
             if (this.metronomeSequence)
             clearInterval(this.metronomeSequence);
+
+            // Now that the metronome sequence has started, disable the inputs:
+            this.disabledInputs = true;
 
             // Start the metronome sequence:
             this.metronomeSequence = setInterval(() => {
                 if (this.isActive === true) {
-                    // Stop the countdown interval:
+                    // Stop the metronomeSequence interval function:
                     console.log("Clearing interval because 'this.isActive' is set to true");
-                    clearInterval(this.countdown);
+                    // Re-enable the inputs:
+                    this.disabledInputs = false;
+                    clearInterval(this.metronomeSequence);
                 }
                 else {
                     this.beatNumber++;
@@ -217,6 +226,28 @@ export default {
         },
         resetMetronome() {
             console.log("resetMetronome function called!");
+            // Stop the metronomeSequence interval function:
+            console.log("Clearing interval because 'this.isActive' is set to true");
+            // Reset the BPM back to 60 BPM by default:
+            this.currentBPM = 60;
+            // Switch 'isActive' boolean variable value back to 'true':
+            this.isActive = true;
+            // Change the 'Start' button message back to 'Start' to reset the button's behavior:
+            this.buttonMessage = "Start";
+            // We are back at Beat 1, so clear all the green circles, and replace them 
+            // with default red circles on beat 1:
+            let metronomeCirclesList = document.getElementById("metronome-circles-list")
+            let metronomeCirclesListItems = metronomeCirclesList.childNodes;
+
+            for (let i = 0; i < metronomeCirclesListItems.length; i++) {
+                metronomeCirclesListItems[i].classList.remove("metronome-circle-green");
+                metronomeCirclesListItems[i].classList.add("metronome-circle");
+            }
+            // Set the 'beatNumber' back to 0 to reset the sequence:
+            this.beatNumber = 0;
+            // Re-enable the inputs:
+            this.disabledInputs = false;
+            clearInterval(this.metronomeSequence);
         }  
     }
 }
