@@ -61,11 +61,6 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 
 * Jira Tickets
 ** Todo
-*** TODO Make the 'Stop' button work on the 'Metronome' component page to stop the metronome animation sequence and related sounds
-<2023-05-11 Thu 15:10>: Ideally, the 'Stop' button on the 'Metronome' component page should do the following:
-- The overall sequence of metronome events should be paused but NOT reset, meaning if it was in the middle of a sequence, ex: on the 3rd beat, then it should be able to proceed to the 4th beat after 'Start' is pressed again.
-- Also, the sounds of the sequence should be stopped as well
-
 *** TODO Make the 'Reset' button work on the 'Metronome' component page to reset the BPM back to '1' BPM and to 're-enable' inputs
 <2023-05-11 Thu 15:07>: In order to help facilitate the overall user experience, I have decided to just opt to disable inputs until the 'Reset' button is clicked.
 
@@ -93,12 +88,11 @@ From the looks of it, it seems just like React where it is its own self containe
 <2023-04-17 Mon 15:26>: I would like to make this app look flashy when picking the various component pages, so this is an element I believe that is necessary for this project.
 *** TODO Deploy the app on Render.com
 ** In Progress
-*** IN-PROGRESS Make the 'Start' button work on the 'Metronome' component page to start the metronome animation sequence
-<2023-05-08 Mon 16:18>: Ideally, the 'Start' button on the 'Metronome' component page should do the following:
-- It should start a sequence of counting in fours which should be visible as each red circle becomes green as the cycle continues until the 4 count is complete
-- When the 4 count is complete, the '1' count should remain green
-- For each '1' count, there should be a more distinct metronome click sound so that the person knows the first click has been made
-- For the '2' through '4' beats, there should be a less distinct metronome sound
+*** IN-PROGRESS Make the 'Stop' button work on the 'Metronome' component page to stop the metronome animation sequence and related sounds
+<2023-05-11 Thu 15:10>: Ideally, the 'Stop' button on the 'Metronome' component page should do the following:
+- The overall sequence of metronome events should be paused but NOT reset, meaning if it was in the middle of a sequence, ex: on the 3rd beat, then it should be able to proceed to the 4th beat after 'Start' is pressed again.
+- Also, the sounds of the sequence should be stopped as well
+
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
 <2023-04-10 Mon 19:35>: I need to follow the instructions present within the related GitHub page:
@@ -997,6 +991,24 @@ Basically, it is 60,000 milliseconds / beats per minute.
 <2023-05-11 Thu 17:22>: After a bit of playing around with it, I am able to get the desired metronome sounds to work without an issue.
 
 Onto the next tasks :)
+*** DONE Make the 'Start' button work on the 'Metronome' component page to start the metronome animation sequence
+<2023-05-08 Mon 16:18>: Ideally, the 'Start' button on the 'Metronome' component page should do the following:
+- It should start a sequence of counting in fours which should be visible as each red circle becomes green as the cycle continues until the 4 count is complete
+- When the 4 count is complete, the '1' count should remain green
+- For each '1' count, there should be a more distinct metronome click sound so that the person knows the first click has been made
+- For the '2' through '4' beats, there should be a less distinct metronome sound
+
+<2023-05-15 Mon 10:46>: I was able to accomplish this by using the following ideas:
+- I added the 'metronome-circles-list' id to the existing 'ul' element that holds all of the list items for the metronome circles
+- I grabbed the 'metronome-circles-list' using 'document.getElementById()':
+- https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
+- I then created a list that contained the related child nodes using the '.childNodes' property:
+- https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes
+- I then referred to the '.classList' property to determine that there are associated '.classList.add' and '.classList.remove' methods that allow you to easily add or remove classes:
+- https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+- I first cleared all classes of the default 'metronome-circle-green' class I later added to each beat to just clear everything out for the first beat
+- After that, I pretty much just used '.classList.add' within the context of the first beat, and then within the context of a related Switch statement for Beats 2 through 4:
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
 ** Cancelled
 *** CANCELLED Ensure that the actual Vue.js related template actually installed Vue.js components
 <2023-04-12 Wed 22:02>: Based on watching a few refresher videos on Vue.js, I realized that the template I'm using might not even be installing Vue.js correctly.

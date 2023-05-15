@@ -243,6 +243,15 @@
   margin-left: 25px;
 }
 
+.metronome-circle-green {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  background: #27ff24;
+  margin-left: 25px;
+}
+
 /* From Tailwind CSS example: */
 .output-header {
   font-size: 60px;

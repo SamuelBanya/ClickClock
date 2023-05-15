@@ -7,7 +7,7 @@
             <!-- Page Title -->
             <h1 class="title">Metronome</h1>
             <div class="menu">
-                <ul>
+                <ul id="metronome-circles-list">
                     <li class="metronome-circle"></li>
                     <li class="metronome-circle"></li>
                     <li class="metronome-circle"></li>
@@ -153,29 +153,65 @@ export default {
             // Start the metronome sequence:
             this.metronomeSequence = setInterval(() => {
                 if (this.isActive === true) {
-                // Stop the countdown interval:
-                console.log("Clearing interval because 'this.isActive' is set to true");
-                clearInterval(this.countdown);
+                    // Stop the countdown interval:
+                    console.log("Clearing interval because 'this.isActive' is set to true");
+                    clearInterval(this.countdown);
                 }
-                this.beatNumber++;
-                console.log("Testing metronome sequence");
-                // Cycle through 4 beats with a for loop
-                // Beat 1: Make 'MetronomeClick.mp3' sound play:
-                if (this.beatNumber === 1) {
-                    console.log("this.beatNumber: ", this.beatNumber);
-                    let metronomeClick =  new Audio("src/sounds/MetronomeClick.mp3");
-                    metronomeClick.play();
-                }
-                // Beats 2 through 4: Make 'Drumsticks.mp3' sound play:
-                if (this.beatNumber > 1 && this.beatNumber < 6) {
-                    console.log("this.beatNumber: ", this.beatNumber);
-                    let drumstickSound =  new Audio("src/sounds/Drumsticks.mp3");
-                    drumstickSound.play();
-                }
+                else {
+                    this.beatNumber++;
+                    console.log("Testing metronome sequence");
+                    // Cycle through 4 beats with a for loop
+                    // Beat 1: Make 'MetronomeClick.mp3' sound play:
+                    if (this.beatNumber === 1) {
+                        console.log("this.beatNumber: ", this.beatNumber);
+                        let metronomeClick =  new Audio("src/sounds/MetronomeClick.mp3");
+                        metronomeClick.play();
+                        let metronomeCirclesList = document.getElementById("metronome-circles-list")
+                        let metronomeCirclesListItems = metronomeCirclesList.childNodes;
+                        // We are back at Beat 1, so clear all the green circles, and replace them 
+                        // with default red circles on beat 1:
+                        for (let i = 0; i < metronomeCirclesListItems.length; i++) {
+                            metronomeCirclesListItems[i].classList.remove("metronome-circle-green");
+                            metronomeCirclesListItems[i].classList.add("metronome-circle");
+                        }
+                        // Now, make the first circle green:
+                        metronomeCirclesListItems[this.beatNumber - 1].classList.add("metronome-circle-green");
+                        metronomeCirclesListItems[this.beatNumber - 1].classList.remove("metronome-circle");
+                        console.log("metronomeCirclesListItems[" + (this.beatNumber - 1) + "].className: " + metronomeCirclesListItems[this.beatNumber - 1].className);
+                    }
+                    // Beats 2 through 4: Make 'Drumsticks.mp3' sound play:
+                    if (this.beatNumber > 1 && this.beatNumber < 6) {
+                        console.log("this.beatNumber: ", this.beatNumber);
+                        let drumstickSound =  new Audio("src/sounds/Drumsticks.mp3");
+                        drumstickSound.play();
+                        let metronomeCirclesList = document.getElementById("metronome-circles-list")
+                        let metronomeCirclesListItems = metronomeCirclesList.childNodes;
+                        switch(this.beatNumber) {
+                            case 2:
+                                console.log("Beat 2!");
+                                metronomeCirclesListItems[this.beatNumber - 1].classList.add("metronome-circle-green");
+                                metronomeCirclesListItems[this.beatNumber - 1].classList.remove("metronome-circle");
+                                console.log("metronomeCirclesListItems[" + (this.beatNumber - 1) + "].className: " + metronomeCirclesListItems[this.beatNumber - 1].className);
+                                break;
+                            case 3:
+                                console.log("Beat 3!");
+                                metronomeCirclesListItems[this.beatNumber - 1].classList.add("metronome-circle-green");
+                                metronomeCirclesListItems[this.beatNumber - 1].classList.remove("metronome-circle");
+                                console.log("metronomeCirclesListItems[" + (this.beatNumber - 1) + "].className: " + metronomeCirclesListItems[this.beatNumber - 1].className);
+                                break;
+                            case 4:
+                                console.log("Beat 4!");
+                                metronomeCirclesListItems[this.beatNumber - 1].classList.add("metronome-circle-green");
+                                metronomeCirclesListItems[this.beatNumber - 1].classList.remove("metronome-circle");
+                                console.log("metronomeCirclesListItems[" + (this.beatNumber - 1) + "].className: " + metronomeCirclesListItems[this.beatNumber - 1].className);
+                                break;
+                        }
+                    }
 
-                // Reset 'beatNumber' back to '1':
-                if (this.beatNumber === 4) {
-                    this.beatNumber = 0;
+                    // Reset 'beatNumber' back to '1':
+                    if (this.beatNumber === 4) {
+                        this.beatNumber = 0;
+                    }
                 }
             }, (60000 / this.currentBPM));
         },
