@@ -137,7 +137,7 @@ export default {
                 // Set the 'buttonMessage' to 'Stop':
                 this.buttonMessage = "Stop";
                 // Play default 'StartSound' button sound:
-                let startSound =  new Audio("./src/sounds/StartSound.mp3");
+                let startSound =  new Audio("/sounds/StartSound.mp3");
                 startSound.play();
             }
 
@@ -147,7 +147,7 @@ export default {
                 this.buttonMessage = "Start";
                 this.disabledInputs = false;
                 // Play default 'StartSound' button sound:
-                let startSound =  new Audio("./src/sounds/StartSound.mp3");
+                let startSound =  new Audio("/sounds/StartSound.mp3");
                 startSound.play();
                 clearInterval(this.metronomeSequence);
             }
@@ -172,7 +172,7 @@ export default {
                     // Cycle through 4 beats with a for loop
                     // Beat 1: Make 'MetronomeClick.mp3' sound play:
                     if (this.beatNumber === 1) {
-                        let metronomeClick =  new Audio("./src/sounds/MetronomeClick.mp3");
+                        let metronomeClick =  new Audio("/sounds/MetronomeClick.mp3");
                         metronomeClick.play();
                         let metronomeCirclesList = document.getElementById("metronome-circles-list")
                         let metronomeCirclesListItems = metronomeCirclesList.childNodes;
@@ -188,7 +188,7 @@ export default {
                     }
                     // Beats 2 through 4: Make 'Drumsticks.mp3' sound play:
                     if (this.beatNumber > 1 && this.beatNumber < 6) {
-                        let drumstickSound =  new Audio("./src/sounds/Drumsticks.mp3");
+                        let drumstickSound =  new Audio("/sounds/Drumsticks.mp3");
                         drumstickSound.play();
                         let metronomeCirclesList = document.getElementById("metronome-circles-list")
                         let metronomeCirclesListItems = metronomeCirclesList.childNodes;
@@ -217,7 +217,7 @@ export default {
         },
         resetMetronome() {
             // Play default 'StartSound' button sound:
-            let startSound =  new Audio("./src/sounds/StartSound.mp3");
+            let startSound =  new Audio("/sounds/StartSound.mp3");
             startSound.play();
             // Stop the metronomeSequence interval function:
             // Reset the BPM back to 60 BPM by default:

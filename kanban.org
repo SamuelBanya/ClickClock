@@ -70,6 +70,9 @@ rails new my_app --skip-webpack-install --skip-javascript -d <database_you_want>
 However, this is what I found so far:
 - https://v3.router.vuejs.org/api/#router-link-props
 
+<2023-05-15 Mon 15:45>: Even within their API docs, there's really only the ':to' property that I can utilize for the 'router-link' itself:
+- https://v3.router.vuejs.org/api/#to
+
 ** In Progress
 *** IN-PROGRESS Fix sound issue on deployed version of application on Render.com
 <2023-05-15 Mon 14:40>: For some reason, the sound is not working for the button clicks or the finished sequence events for the app.
@@ -90,6 +93,10 @@ To me, this means that the paths for the sounds are messed up when the project i
 - https://cli.vuejs.org/guide/html-and-static-assets.html#relative-path-imports
 
 I believe the issue might be that I didn't use './' before any of the sound file paths themselves which means that Vite won't bundle the related static assets accordingly without doing this properly. I will try pushing these changes to see if this helps loads sounds successfully.
+
+<2023-05-15 Mon 15:55>: I moved the 'sounds' directory to the 'public' directory, and then referred to them as '/sounds/(filename.mp3)' instead.
+
+Pushing git changes to see if this fixes the Render build.
 
 ** Completed
 *** DONE Git clone related 'Rails + Vue + Vite' template from GitHub and get it running locally
