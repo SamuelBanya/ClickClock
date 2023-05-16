@@ -16,7 +16,7 @@
             <Logo />
             <p>ClickClock is a timer, stopwatch, and metronome!</p>
             <br />
-            <p>Developed with Vue 3 + Vite + Vue-Router by Samuel Banya</p> 
+            <p>Developed with Vue 3 + Vite + Vue-Router + Tailwind CSS by Samuel Banya</p> 
             <!-- Middle Screen Buttons -->
         </div>
     </div>

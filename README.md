@@ -1,5 +1,9 @@
 # ClickClock
-A Vue.js (Version 3) + Vite app that combines a kitchen timer, stopwatch, and metronome in a beautiful and easy-to-use package!
+A Vue 3 + Vite + Vue Router + Tailwind CSS app that combines a kitchen timer, stopwatch, and metronome in a beautiful and easy-to-use package!
+
+# Figma Template
+Here is the Figma template I created and used as a basis for the overall design of this app:
+- https://www.figma.com/file/45qGh4g17WCbewzEaZX70s/ClickClock-Figma-Template
 
 # Deployed Version Of Project
 The deployed version of this project can be found here:
